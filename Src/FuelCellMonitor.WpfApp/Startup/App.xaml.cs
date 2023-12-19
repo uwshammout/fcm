@@ -15,7 +15,7 @@ public partial class App : Application
         AppHost = Host.CreateDefaultBuilder()
             .ConfigureServices(services =>
             {
-                services.ConfigureAppServices();
+                services.ConfigureAppServices(this);
             })
             .Build();
     }
