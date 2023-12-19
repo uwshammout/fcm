@@ -1,11 +1,10 @@
-﻿namespace CronBlocks.SerialPortInterface.Interfaces
-{
-    public interface IPortsDiscoveryService
-    {
-        event Action<string>? NewPortFound;
-        event Action<string>? ExistingPortRemoved;
+﻿namespace CronBlocks.SerialPortInterface.Interfaces;
 
-        void StartPortsDiscovery();
-        void StopPortsDiscovery();
-    }
+public interface IPortsDiscoveryService
+{
+    event Action<string>? NewPortFound;
+    event Action<string>? ExistingPortRemoved;
+
+    void StartPortsDiscovery();
+    void StopPortsDiscovery();
 }
