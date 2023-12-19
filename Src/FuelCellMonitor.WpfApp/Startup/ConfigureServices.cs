@@ -6,8 +6,8 @@ internal static class ConfigureServices
 {
     public static void ConfigureAppServices(this IServiceCollection services, App app)
     {
-        services.AddSingleton<App>((_) => app);
-        services.AddSingleton<IServiceCollection>((_) => services);
+        services.AddSingleton((_) => app);
+        services.AddSingleton((_) => services);
         services.AddSingleton<Windows.MainWindow>();
     }
 }
