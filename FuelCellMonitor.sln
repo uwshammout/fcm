@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelCellMonitor.WpfApp", "Src\FuelCellMonitor.WpfApp\FuelCellMonitor.WpfApp.csproj", "{785DE8AB-F763-4A66-8804-EC8FC16FB5E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuelCellMonitor.WpfApp", "Src\FuelCellMonitor.WpfApp\FuelCellMonitor.WpfApp.csproj", "{785DE8AB-F763-4A66-8804-EC8FC16FB5E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CronBlocks.UserControls.Wpf", "Src\CronBlocks.UserControls.Wpf\CronBlocks.UserControls.Wpf.csproj", "{DE1D53FA-34C5-4946-97A8-182F03FA6E55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{785DE8AB-F763-4A66-8804-EC8FC16FB5E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{785DE8AB-F763-4A66-8804-EC8FC16FB5E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{785DE8AB-F763-4A66-8804-EC8FC16FB5E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE1D53FA-34C5-4946-97A8-182F03FA6E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE1D53FA-34C5-4946-97A8-182F03FA6E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE1D53FA-34C5-4946-97A8-182F03FA6E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE1D53FA-34C5-4946-97A8-182F03FA6E55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
