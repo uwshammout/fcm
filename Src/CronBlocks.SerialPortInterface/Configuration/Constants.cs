@@ -1,9 +1,8 @@
-﻿namespace CronBlocks.SerialPortInterface.Configuration
+﻿namespace CronBlocks.SerialPortInterface.Configuration;
+
+internal class Constants
 {
-    internal class Constants
-    {
-        // Time Constants
-        public static readonly double PortDiscoveryIntervalMS = 100;
-        public static readonly double DataAcquisitionIntervalMS = 250;
-    }
+    // Time Constants
+    public static readonly double PortDiscoveryIntervalMS = 100;
+    public static readonly double DataAcquisitionIntervalMS = 250;
 }
