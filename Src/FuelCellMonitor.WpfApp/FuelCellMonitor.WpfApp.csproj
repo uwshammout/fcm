@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CronBlocks.Helpers\CronBlocks.Helpers.csproj" />
     <ProjectReference Include="..\CronBlocks.SerialPortInterface\CronBlocks.SerialPortInterface.csproj" />
     <ProjectReference Include="..\CronBlocks.UserControls.Wpf\CronBlocks.UserControls.Wpf.csproj" />
   </ItemGroup>

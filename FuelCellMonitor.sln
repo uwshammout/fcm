@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CronBlocks.UserControls.Wpf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CronBlocks.SerialPortInterface", "Src\CronBlocks.SerialPortInterface\CronBlocks.SerialPortInterface.csproj", "{2C9287B4-8C03-4803-9F7C-0F3B3976588F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CronBlocks.Helpers", "Src\CronBlocks.Helpers\CronBlocks.Helpers.csproj", "{03147E06-C868-44DD-B6FF-6C29288B3450}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{2C9287B4-8C03-4803-9F7C-0F3B3976588F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C9287B4-8C03-4803-9F7C-0F3B3976588F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C9287B4-8C03-4803-9F7C-0F3B3976588F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03147E06-C868-44DD-B6FF-6C29288B3450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03147E06-C868-44DD-B6FF-6C29288B3450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03147E06-C868-44DD-B6FF-6C29288B3450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03147E06-C868-44DD-B6FF-6C29288B3450}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
