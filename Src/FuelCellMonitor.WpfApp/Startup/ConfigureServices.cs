@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CronBlocks.SerialPortInterface.Interfaces;
+using CronBlocks.SerialPortInterface.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CronBlocks.FuelCellMonitor.Startup;
 
@@ -8,6 +10,7 @@ internal static class ConfigureServices
     {
         services.AddSingleton((_) => app);
         services.AddSingleton((_) => services);
+        services.AddSingleton<IPortsDiscoveryService, PortsDiscoveryService>();
         services.AddSingleton<Windows.MainWindow>();
     }
 }
