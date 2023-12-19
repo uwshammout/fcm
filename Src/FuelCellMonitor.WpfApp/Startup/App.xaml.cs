@@ -24,7 +24,7 @@ public partial class App : Application
     {
         await AppHost.StartAsync();
 
-        var startupWindow = GetService<Windows.MainWindow>();
+        var startupWindow = GetInstance<Windows.MainWindow>();
         startupWindow.Show();
 
         base.OnStartup(e);
@@ -36,7 +36,7 @@ public partial class App : Application
         base.OnExit(e);
     }
 
-    public T GetService<T>() where T : class
+    public T GetInstance<T>() where T : class
     {
         return AppHost.Services.GetRequiredService<T>();
     }
