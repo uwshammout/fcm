@@ -11,6 +11,7 @@ internal static class ConfigureServices
         services.AddSingleton((_) => app);
         services.AddSingleton((_) => services);
         services.AddSingleton<IPortsDiscoveryService, PortsDiscoveryService>();
+        services.AddSingleton<IModbusAcquisitionService, ModbusAcquisitionService>();
         services.AddSingleton<Windows.MainWindow>();
     }
 }
