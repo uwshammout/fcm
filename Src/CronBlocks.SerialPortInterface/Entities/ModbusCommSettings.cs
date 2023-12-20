@@ -3,7 +3,7 @@
 namespace CronBlocks.SerialPortInterface.Entities;
 
 /// <summary>
-/// Class <c>PortSettings</c> represents overall port settings.
+/// Class <c>ModbusCommSettings</c> represents overall port settings.
 /// Including the COM port and the device registers.
 /// </summary>
 public class ModbusCommSettings
