@@ -22,83 +22,127 @@ public class ModbusAcquisitionService : IModbusAcquisitionService
     private int _startAddress;
     private List<double> _valuesReceivedList;
 
-    public ModbusAcquisitionService(
-        ModbusComSettings portSettings,
-        ILogger<ModbusAcquisitionService> logger)
+    public ModbusAcquisitionService(ILogger<ModbusAcquisitionService> logger)
     {
         _isRunning = false;
         _timer = new Timer(AcquireData, null, TimeSpan.FromMilliseconds(-1), TimeSpan.FromMilliseconds(-1));
 
-        this._portSettings = portSettings;
-        this._logger = logger;
+        _logger = logger;
 
-        System.IO.Ports.Parity parity = System.IO.Ports.Parity.None;
-        System.IO.Ports.StopBits stopBits = System.IO.Ports.StopBits.None;
-
-        switch (portSettings.Parity)
-        {
-            case Entities.Parity.None:
-                parity = System.IO.Ports.Parity.None;
-                break;
-
-            case Entities.Parity.Odd:
-                parity = System.IO.Ports.Parity.Odd;
-                break;
-
-            case Entities.Parity.Even:
-                parity = System.IO.Ports.Parity.Even;
-                break;
-        }
-
-        switch (portSettings.StopBits)
-        {
-            case Entities.StopBits.One:
-                stopBits = System.IO.Ports.StopBits.One;
-                break;
-
-            case Entities.StopBits.Two:
-                stopBits = System.IO.Ports.StopBits.Two;
-                break;
-
-            case Entities.StopBits.OnePointFive:
-                stopBits = System.IO.Ports.StopBits.OnePointFive;
-                break;
-        }
-
-        _client = new ModbusRtuClient()
-        {
-            BaudRate = (int)portSettings.BaudRate,
-            Parity = parity,
-            StopBits = stopBits
-        };
-
-        _deviceAddress = portSettings.DeviceAddress;
-        _startAddress = Convert.ToInt32(portSettings.RegistersStartAddress, 16);
+        _portSettings = null!;
+        _client = null!;
 
         _valuesReceivedList = new List<double>(Constants.TotalRegisters);
+    }
+
+    public void SetComSettings(ModbusComSettings portSettings)
+    {
+        lock (this)
+        {
+            if (_isRunning || _client != null)
+            {
+                throw new InvalidOperationException(
+                    $"MODBUS communication settings cannot be updated while running");
+            }
+            else
+            {
+                _portSettings = portSettings;
+            }
+        }
     }
 
     #region Start / Stop Acquisition
     public void StartAcquisition()
     {
-        _logger.LogInformation(
-            $"Starting data acquisition from {_portSettings.ComPort}" +
-            $" @{Constants.DataAcquisitionIntervalMS}ms interval");
+        lock (this)
+        {
+            if (_isRunning || _client != null)
+            {
+                throw new InvalidOperationException(
+                    $"{nameof(StartAcquisition)} cannot be invoked while operation" +
+                    $" is in progress.");
+            }
+            else
+            {
+                _logger.LogInformation(
+                    $"Starting data acquisition from {_portSettings.ComPort}" +
+                    $" @{Constants.DataAcquisitionIntervalMS}ms interval");
 
-        _client.Connect(_portSettings.ComPort, Constants.ModbusEndianness);
+                InitializeComObject();
 
-        _isRunning = true;
-        _timer.Change(
-            TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS),
-            TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS));
+                _client?.Connect(_portSettings.ComPort, Constants.ModbusEndianness);
+
+                _isRunning = true;
+
+                _timer.Change(
+                    TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS),
+                    TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS));
+            }
+        }
     }
 
     public void StopAcquisition()
     {
-        _logger.LogInformation($"Stopping data acquisition from {_portSettings.ComPort}");
+        if (_isRunning)
+        {
+            _logger.LogInformation($"Stopping data acquisition from {_portSettings.ComPort}");
 
-        _isRunning = false;
-        _timer.Change(TimeSpan.FromMilliseconds(-1), TimeSpan.FromMilliseconds(-1));
+            _isRunning = false;
+        }
+    }
+
+    private void InitializeComObject()
+    {
+        if (_portSettings == null)
+        {
+            throw new InvalidOperationException(
+                "MODBUS cannot be initialized without providing settings");
+        }
+        else
+        {
+            System.IO.Ports.Parity parity = System.IO.Ports.Parity.None;
+            System.IO.Ports.StopBits stopBits = System.IO.Ports.StopBits.None;
+
+            switch (_portSettings.Parity)
+            {
+                case Entities.Parity.None:
+                    parity = System.IO.Ports.Parity.None;
+                    break;
+
+                case Entities.Parity.Odd:
+                    parity = System.IO.Ports.Parity.Odd;
+                    break;
+
+                case Entities.Parity.Even:
+                    parity = System.IO.Ports.Parity.Even;
+                    break;
+            }
+
+            switch (_portSettings.StopBits)
+            {
+                case Entities.StopBits.One:
+                    stopBits = System.IO.Ports.StopBits.One;
+                    break;
+
+                case Entities.StopBits.Two:
+                    stopBits = System.IO.Ports.StopBits.Two;
+                    break;
+
+                case Entities.StopBits.OnePointFive:
+                    stopBits = System.IO.Ports.StopBits.OnePointFive;
+                    break;
+            }
+
+            _client = new ModbusRtuClient()
+            {
+                BaudRate = (int)_portSettings.BaudRate,
+                Parity = parity,
+                StopBits = stopBits
+            };
+
+            _deviceAddress = _portSettings.DeviceAddress;
+            _startAddress = Convert.ToInt32(_portSettings.RegistersStartAddress, 16);
+        }
     }
     #endregion
 
@@ -125,13 +169,6 @@ public class ModbusAcquisitionService : IModbusAcquisitionService
             shortData.Length <= Constants.TotalRegisters &&
             shortData.Length >= 1)
         {
-            ModbusComSettings ps;
-
-            lock (this)
-            {
-                ps = _portSettings;
-            }
-
             for (int i = 0; i < shortData.Length; i++)
             {
                 _valuesReceivedList[i] = ((double)shortData[i]) / 1000.0;
@@ -146,11 +183,18 @@ public class ModbusAcquisitionService : IModbusAcquisitionService
                 TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS),
                 TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS));
         }
+        else
+        {
+            _client.Dispose();
+            _client = null!;
+
+            _logger.LogInformation($"Stopped data acquisition from {_portSettings.ComPort}");
+        }
     }
 
     public void Dispose()
     {
-        _client.Dispose();
+        _client?.Dispose();
     }
     #endregion
 }
