@@ -1,11 +1,20 @@
-﻿using System.Windows;
+﻿using CronBlocks.SerialPortInterface.Interfaces;
+using System.Windows;
 
 namespace CronBlocks.FuelCellMonitor.Windows;
 
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    private readonly IPortsDiscoveryService portsDiscovery;
+    private readonly IModbusAcquisitionService modbus;
+
+    public MainWindow(
+        IPortsDiscoveryService portsDiscovery,
+        IModbusAcquisitionService modbus)
     {
         InitializeComponent();
+
+        this.portsDiscovery = portsDiscovery;
+        this.modbus = modbus;
     }
 }
