@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace CronBlocks.UserControls.Wpf.ThreePointerDial;
 
@@ -11,6 +12,78 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
         InitializeComponent();
     }
 
+    #region Colors
+    private Brush _backgroundColor = new SolidColorBrush(Color.FromArgb(255, 14, 14, 14));
+    private Brush _borderColor = new SolidColorBrush(Color.FromArgb(255, 200, 80, 80));
+    private Brush _gauge1Color = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+    private Brush _gauge2Color = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+    private Brush _gauge3Color = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+    
+    public Brush BackgroundColor
+    {
+        get => _backgroundColor;
+        set
+        {
+            if (value != _backgroundColor)
+            {
+                _backgroundColor = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
+    public Brush BorderColor
+    {
+        get => _borderColor;
+        set
+        {
+            if (value != _borderColor)
+            {
+                _borderColor = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
+    public Brush Gauge1Color
+    {
+        get => _gauge1Color;
+        set
+        {
+            if (_gauge1Color != value)
+            {
+                _gauge1Color = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
+    public Brush Gauge2Color
+    {
+        get => _gauge2Color;
+        set
+        {
+            if (_gauge2Color != value)
+            {
+                _gauge2Color = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
+    public Brush Gauge3Color
+    {
+        get => _gauge3Color;
+        set
+        {
+            if (_gauge3Color != value)
+            {
+                _gauge3Color = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+    #endregion
     #region Dial Enable / Disable Control
     private bool _dial1Enabled = true;
     private bool _dial2Enabled = true;
@@ -18,7 +91,7 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
 
     public bool Dial1Enabled
     {
-        get { return _dial1Enabled; }
+        get => _dial1Enabled;
         set
         {
             if (_dial1Enabled != value)
@@ -31,7 +104,7 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
 
     public bool Dial2Enabled
     {
-        get { return _dial2Enabled; }
+        get => _dial2Enabled;
         set
         {
             if (_dial2Enabled != value)
@@ -44,7 +117,7 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
 
     public bool Dial3Enabled
     {
-        get { return _dial3Enabled; }
+        get => _dial3Enabled;
         set
         {
             if (_dial3Enabled != value)
@@ -62,7 +135,7 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
 
     public double Dial1Value
     {
-        get { return _dial1Value; }
+        get => _dial1Value;
         set
         {
             if (_dial1Value != value)
@@ -75,7 +148,7 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
 
     public double Dial2Value
     {
-        get { return _dial2Value; }
+        get => _dial2Value;
         set
         {
             if (_dial2Value != value)
@@ -88,7 +161,7 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
 
     public double Dial3Value
     {
-        get { return _dial3Value; }
+        get => _dial3Value;
         set
         {
             if (_dial3Value != value)
@@ -105,7 +178,7 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
 
     public double GaugeMinValue
     {
-        get { return _gaugeMinValue; }
+        get => _gaugeMinValue;
         set
         {
             if (_gaugeMinValue != value)
@@ -118,7 +191,7 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
 
     public double GaugeMaxValue
     {
-        get { return _gaugeMaxValue; }
+        get => _gaugeMaxValue;
         set
         {
             if (_gaugeMaxValue != value)
