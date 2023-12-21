@@ -9,12 +9,16 @@ namespace CronBlocks.SerialPortInterface.Services;
 public class SerialModbusClientService : ISerialModbusClientService
 {
     public event Action<List<double>>? NewValuesReceived;
+    public event Action<OperationState>? OperationStateChanged;
+
+    public OperationState OperationState { get { return _operationState; } }
 
     private readonly ILogger<SerialModbusClientService> _logger;
 
     //- Timer
 
     private bool _isRunning = false;
+    private OperationState _operationState;
     private Timer _timer;
 
     //- Com Settings
@@ -42,6 +46,7 @@ public class SerialModbusClientService : ISerialModbusClientService
     public SerialModbusClientService(ILogger<SerialModbusClientService> logger)
     {
         _isRunning = false;
+        _operationState = OperationState.Stopped;
         _timer = new Timer(AcquireData, null, TimeSpan.FromMilliseconds(-1), TimeSpan.FromMilliseconds(-1));
 
         _logger = logger;
@@ -110,11 +115,14 @@ public class SerialModbusClientService : ISerialModbusClientService
 
     public void StopAcquisition()
     {
-        if (_isRunning)
+        lock (this)
         {
-            _logger.LogInformation($"Stopping data acquisition from {_comPort}");
+            if (_isRunning)
+            {
+                _logger.LogInformation($"Stopping data acquisition from {_comPort}");
 
-            _isRunning = false;
+                _isRunning = false;
+            }
         }
     }
 
@@ -175,6 +183,12 @@ public class SerialModbusClientService : ISerialModbusClientService
     {
         _timer.Change(TimeSpan.FromMilliseconds(-1), TimeSpan.FromMilliseconds(-1));
 
+        if (_operationState == OperationState.Stopped)
+        {
+            _operationState = OperationState.Running;
+            OperationStateChanged?.Invoke(_operationState);
+        }
+
         short[] shortData = null!;
 
         try
@@ -186,7 +200,7 @@ public class SerialModbusClientService : ISerialModbusClientService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Reading error at {_comPort}", ex.Message);
+            _logger.LogError($"Error occurred while reading at {_comPort}: {ex.Message}");
         }
 
         if (shortData != null &&
@@ -201,18 +215,31 @@ public class SerialModbusClientService : ISerialModbusClientService
             NewValuesReceived?.Invoke(_valuesReceivedList);
         }
 
-        if (_isRunning)
-        {
-            _timer.Change(
-                TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS),
-                TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS));
-        }
-        else
-        {
-            _client.Dispose();
-            _client = null!;
+        bool stillRunning = false;
 
+        lock (this)
+        {
+            stillRunning = _isRunning;
+
+            if (_isRunning)
+            {
+                _timer.Change(
+                    TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS),
+                    TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS));
+            }
+            else
+            {
+                _client.Dispose();
+                _client = null!;
+            }
+        }
+
+        if (!stillRunning)
+        {
             _logger.LogInformation($"Stopped data acquisition from {_comPort}");
+
+            _operationState = OperationState.Stopped;
+            OperationStateChanged?.Invoke(_operationState);
         }
     }
 
