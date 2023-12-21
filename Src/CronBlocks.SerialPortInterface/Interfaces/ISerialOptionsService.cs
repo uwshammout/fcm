@@ -1,5 +1,9 @@
 ﻿namespace CronBlocks.SerialPortInterface.Interfaces;
 
+/// <summary>
+/// Provides an easy interface for working with Serial port's
+/// type conversions.
+/// </summary>
 public interface ISerialOptionsService
 {
     /// <summary>
