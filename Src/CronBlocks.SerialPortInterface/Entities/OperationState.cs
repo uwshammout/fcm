@@ -3,6 +3,5 @@
 public enum OperationState
 {
 	Stopped,
-	Ready,
-	Started
+	Running
 }
