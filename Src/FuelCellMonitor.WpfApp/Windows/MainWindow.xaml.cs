@@ -1,5 +1,4 @@
-﻿using CronBlocks.SerialPortInterface.Entities;
-using CronBlocks.SerialPortInterface.Interfaces;
+﻿using CronBlocks.SerialPortInterface.Interfaces;
 using System.Windows;
 
 namespace CronBlocks.FuelCellMonitor.Windows;
