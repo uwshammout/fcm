@@ -15,10 +15,15 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
     #region Colors
     private Brush _backgroundColor = new SolidColorBrush(Color.FromArgb(255, 14, 14, 14));
     private Brush _borderColor = new SolidColorBrush(Color.FromArgb(255, 200, 80, 80));
+
     private Brush _gauge1Color = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
-    private Brush _gauge2Color = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
-    private Brush _gauge3Color = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
-    
+    private Brush _gauge2Color = new SolidColorBrush(Color.FromArgb(255, 0, 255, 0));
+    private Brush _gauge3Color = new SolidColorBrush(Color.FromArgb(255, 0, 0, 255));
+
+    private Brush _gauge1BorderColor = new SolidColorBrush(Color.FromArgb(255, 100, 0, 0));
+    private Brush _gauge2BorderColor = new SolidColorBrush(Color.FromArgb(255, 0, 100, 0));
+    private Brush _gauge3BorderColor = new SolidColorBrush(Color.FromArgb(255, 0, 0, 100));
+
     public Brush BackgroundColor
     {
         get => _backgroundColor;
@@ -79,6 +84,45 @@ public partial class ThreePointerDial : UserControl, INotifyPropertyChanged
             if (_gauge3Color != value)
             {
                 _gauge3Color = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
+    public Brush Gauge1BorderColor
+    {
+        get => _gauge1BorderColor;
+        set
+        {
+            if (_gauge1BorderColor != value)
+            {
+                _gauge1BorderColor = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
+    public Brush Gauge2BorderColor
+    {
+        get => _gauge2BorderColor;
+        set
+        {
+            if (_gauge2BorderColor != value)
+            {
+                _gauge2BorderColor = value;
+                NotifyPropertyChanged();
+            }
+        }
+    }
+
+    public Brush Gauge3BorderColor
+    {
+        get => _gauge3BorderColor;
+        set
+        {
+            if (_gauge3BorderColor != value)
+            {
+                _gauge3BorderColor = value;
                 NotifyPropertyChanged();
             }
         }
