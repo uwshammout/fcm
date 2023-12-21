@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace CronBlocks.UserControls.Wpf.ThreePointerDial;
@@ -31,11 +32,11 @@ public partial class ThreePointerDial : UserControl
     }
 
     #region Dial Visibility
-    private bool dial1Visible;
-    private bool dial2Visible;
-    private bool dial3Visible;
+    private Visibility dial1Visible;
+    private Visibility dial2Visible;
+    private Visibility dial3Visible;
 
-    public bool Dial1Visible
+    public Visibility Dial1Visible
     {
         get => dial1Visible;
         set
@@ -48,7 +49,7 @@ public partial class ThreePointerDial : UserControl
         }
     }
 
-    public bool Dial2Visible
+    public Visibility Dial2Visible
     {
         get => dial2Visible;
         set
@@ -61,7 +62,7 @@ public partial class ThreePointerDial : UserControl
         }
     }
 
-    public bool Dial3Visible
+    public Visibility Dial3Visible
     {
         get => dial3Visible;
         set

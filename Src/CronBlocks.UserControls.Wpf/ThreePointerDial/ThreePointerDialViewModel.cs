@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
 
 namespace CronBlocks.UserControls.Wpf.ThreePointerDial;
@@ -11,11 +12,11 @@ internal partial class ThreePointerDialViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    private bool dial1Visible = true;
+    private Visibility dial1Visible = Visibility.Visible;
     [ObservableProperty]
-    private bool dial2Visible = true;
+    private Visibility dial2Visible = Visibility.Visible;
     [ObservableProperty]
-    private bool dial3Visible = true;
+    private Visibility dial3Visible = Visibility.Visible;
 
     [ObservableProperty]
     private Brush backgroundColor = new SolidColorBrush(Color.FromArgb(255, 114, 114, 114));
