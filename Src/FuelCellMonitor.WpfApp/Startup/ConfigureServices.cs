@@ -12,6 +12,7 @@ internal static class ConfigureServices
         services.AddSingleton((_) => services);
         services.AddSingleton<ISerialPortsDiscoveryService, SerialPortsDiscoveryService>();
         services.AddSingleton<ISerialModbusClientService, SerialModbusClientService>();
+        services.AddSingleton<ISerialOptionsService, SerialOptionsService>();
         services.AddSingleton<Windows.MainWindow>();
     }
 }
