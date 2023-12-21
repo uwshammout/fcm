@@ -8,6 +8,7 @@
              d:DataContext="{x:Type local:ThreePointerDialViewModel}"
              d:DesignHeight="220" d:DesignWidth="320">
     <Grid>
-        <Rectangle Fill="{Binding BackgroundColor}" Stroke="{Binding BorderColor}"  />
+        <Rectangle Fill="{Binding BackgroundColor}" d:Fill="Gray"
+                   Stroke="{Binding BorderColor}" d:Stroke="White"  />
     </Grid>
 </UserControl>
