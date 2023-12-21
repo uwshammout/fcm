@@ -15,7 +15,7 @@ internal class Constants
 
     // Defaults
     public const int DefaultDeviceAddress = 1;
-    public const string DefaultRegistersStartAddress = "0x0020";
+    public const string DefaultRegistersStartAddressHexStr = "0x0020";
 
     public const BaudRate DefaultBaudRate = BaudRate._115200;
     public const DataBits DefaultDataBits = DataBits._8;

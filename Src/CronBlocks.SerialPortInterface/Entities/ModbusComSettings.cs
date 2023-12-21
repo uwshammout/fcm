@@ -16,5 +16,5 @@ public class ModbusComSettings
     public Parity Parity { get; set; } = Constants.DefaultParity;
     public StopBits StopBits { get; set; } = Constants.DefaultStopBits;
 
-    public string RegistersStartAddress { get; set; } = Constants.DefaultRegistersStartAddress;
+    public string RegistersStartAddressHexStr { get; set; } = Constants.DefaultRegistersStartAddressHexStr;
 }

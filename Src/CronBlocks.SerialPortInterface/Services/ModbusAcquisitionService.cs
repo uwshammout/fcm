@@ -68,7 +68,7 @@ public class ModbusAcquisitionService : IModbusAcquisitionService
                 _comPort = portSettings.ComPort;
 
                 _deviceAddress = portSettings.DeviceAddress;
-                _registersStartAddress = Convert.ToInt32(portSettings.RegistersStartAddress, 16);
+                _registersStartAddress = Convert.ToInt32(portSettings.RegistersStartAddressHexStr, 16);
 
                 _baudRate = portSettings.BaudRate;
                 _dataBits = portSettings.DataBits;
