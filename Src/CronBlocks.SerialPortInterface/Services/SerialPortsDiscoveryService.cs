@@ -1,4 +1,5 @@
 ﻿using CronBlocks.SerialPortInterface.Configuration;
+using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
 using System.IO.Ports;
 
@@ -12,12 +13,20 @@ public class SerialPortsDiscoveryService : ISerialPortsDiscoveryService
 
     public event Action<string>? NewPortFound;
     public event Action<string>? ExistingPortRemoved;
+    public event Action<OperationState>? OperationStateChanged;
+
+    public OperationState OperationState { get { return _operationState; } }
+
+    private OperationState _operationState;
 
     public SerialPortsDiscoveryService()
     {
         _foundPortsList = new List<string>();
 
+        _operationState = OperationState.Stopped;
+
         _isRunning = false;
+
         _timer = new Timer(
             UpdatePorts, null,
             TimeSpan.FromMilliseconds(-1),
@@ -27,18 +36,29 @@ public class SerialPortsDiscoveryService : ISerialPortsDiscoveryService
     #region Starting and Stopping the Ports' Discovery
     public void StartPortsDiscovery()
     {
-        _foundPortsList.Clear();
+        lock (this)
+        {
+            if (_isRunning == false)
+            {
+                _foundPortsList.Clear();
 
-        _isRunning = true;
-        _timer.Change(
-            TimeSpan.FromMilliseconds(Constants.PortDiscoveryIntervalMS),
-            TimeSpan.FromMilliseconds(Constants.PortDiscoveryIntervalMS));
+                _isRunning = true;
+
+                _timer.Change(
+                    TimeSpan.FromMilliseconds(Constants.PortDiscoveryIntervalMS),
+                    TimeSpan.FromMilliseconds(Constants.PortDiscoveryIntervalMS));
+            }
+        }
     }
 
     public void StopPortsDiscovery()
     {
-        _isRunning = false;
-        _timer.Change(TimeSpan.FromMilliseconds(-1), TimeSpan.FromMilliseconds(-1));
+        lock (this)
+        {
+            _isRunning = false;
+
+            _timer.Change(TimeSpan.FromMilliseconds(-1), TimeSpan.FromMilliseconds(-1));
+        }
     }
     #endregion
 
@@ -46,6 +66,12 @@ public class SerialPortsDiscoveryService : ISerialPortsDiscoveryService
     private void UpdatePorts(object? _)
     {
         _timer.Change(TimeSpan.FromMilliseconds(-1), TimeSpan.FromMilliseconds(-1));
+
+        if (_operationState != OperationState.Running)
+        {
+            _operationState = OperationState.Running;
+            OperationStateChanged?.Invoke(_operationState);
+        }
 
         lock (this)
         {
@@ -78,11 +104,24 @@ public class SerialPortsDiscoveryService : ISerialPortsDiscoveryService
             }
         }
 
-        if (_isRunning)
+        bool stillRunning = false;
+
+        lock (this)
         {
-            _timer.Change(
-                TimeSpan.FromMilliseconds(Constants.PortDiscoveryIntervalMS),
-                TimeSpan.FromMilliseconds(Constants.PortDiscoveryIntervalMS));
+            stillRunning = _isRunning;
+
+            if (_isRunning)
+            {
+                _timer.Change(
+                    TimeSpan.FromMilliseconds(Constants.PortDiscoveryIntervalMS),
+                    TimeSpan.FromMilliseconds(Constants.PortDiscoveryIntervalMS));
+            }
+        }
+
+        if (!stillRunning)
+        {
+            _operationState = OperationState.Stopped;
+            OperationStateChanged?.Invoke(_operationState);
         }
     }
     #endregion
