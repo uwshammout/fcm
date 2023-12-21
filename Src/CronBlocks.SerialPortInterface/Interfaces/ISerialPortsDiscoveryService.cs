@@ -1,6 +1,6 @@
 ﻿namespace CronBlocks.SerialPortInterface.Interfaces;
 
-public interface IPortsDiscoveryService
+public interface ISerialPortsDiscoveryService
 {
     event Action<string>? NewPortFound;
     event Action<string>? ExistingPortRemoved;

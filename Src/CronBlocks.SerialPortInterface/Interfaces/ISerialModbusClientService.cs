@@ -2,11 +2,11 @@
 
 namespace CronBlocks.SerialPortInterface.Interfaces;
 
-public interface IModbusAcquisitionService : IDisposable
+public interface ISerialModbusClientService : IDisposable
 {
     event Action<List<double>>? NewValuesReceived;
 
-    void SetComSettings(ModbusComSettings portSettings);
+    void SetComSettings(SerialModbusClientSettings portSettings);
     void StartAcquisition();
     void StopAcquisition();
 }

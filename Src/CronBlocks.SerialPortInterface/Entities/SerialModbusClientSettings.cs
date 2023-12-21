@@ -3,10 +3,10 @@
 namespace CronBlocks.SerialPortInterface.Entities;
 
 /// <summary>
-/// Class <c>ModbusComSettings</c> represents overall port settings.
+/// Class <c>SerialModbusClientSettings</c> represents overall port settings.
 /// Including the COM port and the device registers.
 /// </summary>
-public class ModbusComSettings
+public class SerialModbusClientSettings
 {
     public string ComPort { get; set; } = "";
     public int DeviceAddress { get; set; } = Constants.DefaultDeviceAddress;

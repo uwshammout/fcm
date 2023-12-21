@@ -5,12 +5,12 @@ namespace CronBlocks.FuelCellMonitor.Windows;
 
 public partial class MainWindow : Window
 {
-    private readonly IPortsDiscoveryService portsDiscovery;
-    private readonly IModbusAcquisitionService modbus;
+    private readonly ISerialPortsDiscoveryService portsDiscovery;
+    private readonly ISerialModbusClientService modbus;
 
     public MainWindow(
-        IPortsDiscoveryService portsDiscovery,
-        IModbusAcquisitionService modbus)
+        ISerialPortsDiscoveryService portsDiscovery,
+        ISerialModbusClientService modbus)
     {
         InitializeComponent();
 

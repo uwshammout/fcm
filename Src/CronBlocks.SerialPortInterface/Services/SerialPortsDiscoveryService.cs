@@ -4,7 +4,7 @@ using System.IO.Ports;
 
 namespace CronBlocks.SerialPortInterface.Services;
 
-public class PortsDiscoveryService : IPortsDiscoveryService
+public class SerialPortsDiscoveryService : ISerialPortsDiscoveryService
 {
     private bool _isRunning = false;
     private Timer _timer;
@@ -13,7 +13,7 @@ public class PortsDiscoveryService : IPortsDiscoveryService
     public event Action<string>? NewPortFound;
     public event Action<string>? ExistingPortRemoved;
 
-    public PortsDiscoveryService()
+    public SerialPortsDiscoveryService()
     {
         _foundPortsList = new List<string>();
 

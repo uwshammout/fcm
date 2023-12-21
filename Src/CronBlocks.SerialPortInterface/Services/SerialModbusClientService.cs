@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace CronBlocks.SerialPortInterface.Services;
 
-public class ModbusAcquisitionService : IModbusAcquisitionService
+public class SerialModbusClientService : ISerialModbusClientService
 {
     public event Action<List<double>>? NewValuesReceived;
 
-    private readonly ILogger<ModbusAcquisitionService> _logger;
+    private readonly ILogger<SerialModbusClientService> _logger;
 
     //- Timer
 
@@ -39,7 +39,7 @@ public class ModbusAcquisitionService : IModbusAcquisitionService
 
     private List<double> _valuesReceivedList;
 
-    public ModbusAcquisitionService(ILogger<ModbusAcquisitionService> logger)
+    public SerialModbusClientService(ILogger<SerialModbusClientService> logger)
     {
         _isRunning = false;
         _timer = new Timer(AcquireData, null, TimeSpan.FromMilliseconds(-1), TimeSpan.FromMilliseconds(-1));
@@ -52,7 +52,7 @@ public class ModbusAcquisitionService : IModbusAcquisitionService
         _valuesReceivedList = new List<double>(Constants.TotalRegisters);
     }
 
-    public void SetComSettings(ModbusComSettings portSettings)
+    public void SetComSettings(SerialModbusClientSettings portSettings)
     {
         lock (this)
         {

@@ -10,8 +10,8 @@ internal static class ConfigureServices
     {
         services.AddSingleton((_) => app);
         services.AddSingleton((_) => services);
-        services.AddSingleton<IPortsDiscoveryService, PortsDiscoveryService>();
-        services.AddSingleton<IModbusAcquisitionService, ModbusAcquisitionService>();
+        services.AddSingleton<ISerialPortsDiscoveryService, SerialPortsDiscoveryService>();
+        services.AddSingleton<ISerialModbusClientService, SerialModbusClientService>();
         services.AddSingleton<Windows.MainWindow>();
     }
 }
