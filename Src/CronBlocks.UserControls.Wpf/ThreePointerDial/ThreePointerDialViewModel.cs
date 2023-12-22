@@ -8,7 +8,8 @@ internal partial class ThreePointerDialViewModel : ObservableObject
 {
     public ThreePointerDialViewModel()
     {
-
+        MinRotation = -60;
+        MaxRotation = +60;
     }
 
     [ObservableProperty]
@@ -36,6 +37,11 @@ internal partial class ThreePointerDialViewModel : ObservableObject
     private Brush dial2BorderColor = new SolidColorBrush(Color.FromArgb(255, 0, 100, 0));
     [ObservableProperty]
     private Brush dial3BorderColor = new SolidColorBrush(Color.FromArgb(255, 0, 0, 100));
+
+    [ObservableProperty]
+    private double minRotation;
+    [ObservableProperty]
+    private double maxRotation;
 
     [ObservableProperty]
     private double dial1Rotation = 0.0;
