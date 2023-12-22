@@ -18,6 +18,13 @@ public partial class ThreePointerDial : UserControl
         IsDial1Visible = true;
         IsDial2Visible = true;
         IsDial3Visible = true;
+        
+        GaugeMinValue = 0;
+        GaugeMaxValue = 10.0;
+
+        Dial1Value = 0;
+        Dial2Value = 0;
+        Dial3Value = 0;
 
         backgroundColor = viewModel.BackgroundColor;
         borderColor = viewModel.BorderColor;
@@ -213,11 +220,98 @@ public partial class ThreePointerDial : UserControl
     }
     #endregion
     #region Dial Values
-    private double gaugeMinValue = 0.0;
-    private double gaugeMaxValue = 10.0;
+    private double gaugeMinValue = -1000;
+    private double gaugeMaxValue = -1000;
 
-    private double dial1Value = 0.0;
-    private double dial2Value = 0.0;
-    private double dial3Value = 0.0;
+    public double GaugeMinValue
+    {
+        get => gaugeMinValue;
+        set
+        {
+            if (gaugeMinValue != value)
+            {
+                gaugeMinValue = value;
+
+                viewModel.Dial1Rotation = GetDialRotation(dial1Value);
+                viewModel.Dial2Rotation = GetDialRotation(dial2Value);
+                viewModel.Dial3Rotation = GetDialRotation(dial3Value);
+            }
+        }
+    }
+
+    public double GaugeMaxValue
+    {
+        get => gaugeMaxValue;
+        set
+        {
+            if (gaugeMaxValue != value)
+            {
+                gaugeMaxValue = value;
+
+                viewModel.Dial1Rotation = GetDialRotation(dial1Value);
+                viewModel.Dial2Rotation = GetDialRotation(dial2Value);
+                viewModel.Dial3Rotation = GetDialRotation(dial3Value);
+            }
+        }
+    }
+
+    private double dial1Value = -1000;
+    private double dial2Value = -1000;
+    private double dial3Value = -1000;
+
+    public double Dial1Value
+    {
+        get => dial1Value;
+        set
+        {
+            if (dial1Value != value)
+            {
+                dial1Value = value;
+                viewModel.Dial1Rotation = GetDialRotation(dial1Value);
+            }
+        }
+    }
+
+    public double Dial2Value
+    {
+        get => dial2Value;
+        set
+        {
+            if (dial2Value != value)
+            {
+                dial2Value = value;
+                viewModel.Dial2Rotation = GetDialRotation(dial2Value);
+            }
+        }
+    }
+
+    public double Dial3Value
+    {
+        get => dial3Value;
+        set
+        {
+            if (dial3Value != value)
+            {
+                dial3Value = value;
+                viewModel.Dial3Rotation = GetDialRotation(dial3Value);
+            }
+        }
+    }
+
+    private double GetDialRotation(double value)
+    {
+        double valuePerDegree =
+            (gaugeMaxValue - gaugeMinValue) / (viewModel.MaxRotation - viewModel.MinRotation);
+
+        double rotationDegrees = viewModel.MinRotation + (value / valuePerDegree);
+
+        if (rotationDegrees < viewModel.MinRotation)
+            rotationDegrees = viewModel.MinRotation;
+
+        if (rotationDegrees > viewModel.MaxRotation)
+            rotationDegrees = viewModel.MaxRotation;
+
+        return rotationDegrees;
+    }
     #endregion
 }
