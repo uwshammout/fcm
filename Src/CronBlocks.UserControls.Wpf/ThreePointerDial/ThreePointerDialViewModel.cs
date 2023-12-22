@@ -12,11 +12,11 @@ internal partial class ThreePointerDialViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    private Visibility dial1Visible = Visibility.Visible;
+    private Visibility dial1Visibility = Visibility.Visible;
     [ObservableProperty]
-    private Visibility dial2Visible = Visibility.Visible;
+    private Visibility dial2Visibility = Visibility.Visible;
     [ObservableProperty]
-    private Visibility dial3Visible = Visibility.Visible;
+    private Visibility dial3Visibility = Visibility.Visible;
 
     [ObservableProperty]
     private Brush backgroundColor = new SolidColorBrush(Color.FromArgb(255, 114, 114, 114));

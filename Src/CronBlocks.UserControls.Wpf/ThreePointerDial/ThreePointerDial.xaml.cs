@@ -15,9 +15,9 @@ public partial class ThreePointerDial : UserControl
         viewModel = new ThreePointerDialViewModel();
         DataContext = viewModel;
 
-        dial1Visible = viewModel.Dial1Visible;
-        dial2Visible = viewModel.Dial2Visible;
-        dial3Visible = viewModel.Dial3Visible;
+        IsDial1Visible = true;
+        IsDial2Visible = true;
+        IsDial3Visible = true;
 
         backgroundColor = viewModel.BackgroundColor;
         borderColor = viewModel.BorderColor;
@@ -32,45 +32,66 @@ public partial class ThreePointerDial : UserControl
     }
 
     #region Dial Visibility
-    private Visibility dial1Visible;
-    private Visibility dial2Visible;
-    private Visibility dial3Visible;
+    private bool isDial1Visible = false;
+    private bool isDial2Visible = false;
+    private bool isDial3Visible = false;
 
-    public Visibility Dial1Visible
+    public bool IsDial1Visible
     {
-        get => dial1Visible;
+        get => isDial1Visible;
         set
         {
-            if (dial1Visible != value)
+            if (isDial1Visible != value)
             {
-                dial1Visible = value;
-                viewModel.Dial1Visible = value;
+                isDial1Visible = value;
+                if (value)
+                {
+                    viewModel.Dial1Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    viewModel.Dial1Visibility = Visibility.Hidden;
+                }
             }
         }
     }
 
-    public Visibility Dial2Visible
+    public bool IsDial2Visible
     {
-        get => dial2Visible;
+        get => isDial2Visible;
         set
         {
-            if (dial2Visible != value)
+            if (isDial2Visible != value)
             {
-                dial2Visible = value;
-                viewModel.Dial2Visible = value;
+                isDial2Visible = value;
+                if (value)
+                {
+                    viewModel.Dial2Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    viewModel.Dial2Visibility = Visibility.Hidden;
+                }
             }
         }
     }
 
-    public Visibility Dial3Visible
+    public bool IsDial3Visible
     {
-        get => dial3Visible;
+        get => isDial3Visible;
         set
         {
-            if (dial3Visible != value)
+            if (isDial3Visible != value)
             {
-                dial3Visible = value;
-                viewModel.Dial3Visible = value;
+                isDial3Visible = value;
+                if (value)
+                {
+                    viewModel.Dial3Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    viewModel.Dial3Visibility = Visibility.Hidden;
+                }
             }
         }
     }
