@@ -17,7 +17,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*"/>
             <ColumnDefinition Width="9*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="9*"/>
             <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
@@ -64,8 +64,16 @@
         </Path>
 
         <!-- Front Box -->
-        <Rectangle Fill="{Binding BackgroundColor}" d:Fill="Gray"
-                   Grid.Row="2"  Grid.ColumnSpan="5" Grid.RowSpan="2"  />
+        <Ellipse Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 Fill="{Binding BackgroundColor}" d:Fill="Gray" />
+        
+        <Rectangle Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   Fill="{Binding BackgroundColor}" d:Fill="Gray" />
 
+        <Rectangle Fill="{x:Null}" d:Fill="{x:Null}"
+                   Stroke="{Binding BorderColor}" d:Stroke="White"
+                   Grid.ColumnSpan="5" Grid.RowSpan="4" />
     </Grid>
 </UserControl>

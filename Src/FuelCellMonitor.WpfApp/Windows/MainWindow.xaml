@@ -9,17 +9,38 @@
         Title="Fuel Cell Monitor"
         Width="800" Height="450"
         MinWidth="800" MinHeight="450">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="ThreePointerDialBackgroundColor" Color="AliceBlue"/>
+        <SolidColorBrush x:Key="ThreePointerDialBorderColor" Color="BlanchedAlmond"/>
+        <SolidColorBrush x:Key="ThreePointerDialDial1Color" Color="#FF5555E0"/>
+        <SolidColorBrush x:Key="ThreePointerDialDial1BorderColor" Color="#FF75A1F9"/>
+        <SolidColorBrush x:Key="ThreePointerDialDial2Color" Color="#FF2D2D2D"/>
+        <SolidColorBrush x:Key="ThreePointerDialDial2BorderColor" Color="#FFF1F1F1"/>
+        <SolidColorBrush x:Key="ThreePointerDialDial3Color" Color="#FFF1FF00"/>
+        <SolidColorBrush x:Key="ThreePointerDialDial3BorderColor" Color="#FFD0C802"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <cblk3pd:ThreePointerDial Grid.Row="1" Grid.Column="1" />
+        <cblk3pd:ThreePointerDial Grid.Row="1" Grid.Column="1"
+                                  BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
+                                  BorderColor="{StaticResource ThreePointerDialBorderColor}"
+                                  Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
+                                  Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
+                                  Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
+                                  GaugeMinValue="0" GaugeMaxValue="1.5"
+                                  Dial1Value="0" Dial2Value=".5" Dial3Value="1"/>
+        
     </Grid>
 </Window>
