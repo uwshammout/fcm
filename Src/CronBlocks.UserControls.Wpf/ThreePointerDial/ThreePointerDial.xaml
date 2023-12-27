@@ -27,7 +27,7 @@
         <Rectangle Fill="{Binding BackgroundColor}" d:Fill="Gray"
                    Stroke="{Binding BorderColor}" d:Stroke="White"
                    Grid.ColumnSpan="5" Grid.RowSpan="5"  />
-
+        
         <!-- Dial 1 -->
         <Path Data="M149.99835,221.89231 C149.99835,221.89231 149.05828,113.46585 158.56242,113.46585 167.61703,113.46585 167.06847,221.92328 167.06847,221.92328 z"
               Visibility="{Binding Dial1Visible}"
@@ -76,5 +76,12 @@
         <Rectangle Fill="{x:Null}" d:Fill="{x:Null}"
                    Stroke="{Binding BorderColor}" d:Stroke="White"
                    Grid.ColumnSpan="5" Grid.RowSpan="5" />
+
+        <!-- Title -->
+        <Label Grid.Row="0" Grid.Column="0"
+               Grid.RowSpan="3" Grid.ColumnSpan="5"
+               HorizontalAlignment="Center" VerticalAlignment="Top"
+               FontSize="14" FontWeight="Bold"
+               Content="{Binding GaugeTitle}" d:Content="Title" />
     </Grid>
 </UserControl>

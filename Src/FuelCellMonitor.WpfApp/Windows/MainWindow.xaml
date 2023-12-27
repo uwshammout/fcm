@@ -42,6 +42,7 @@
 
         <cblk3pd:ThreePointerDial Grid.Row="1" Grid.Column="2"
                                   Margin="1"
+                                  GaugeTitle="V"
                                   BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
                                   BorderColor="{StaticResource ThreePointerDialBorderColor}"
                                   Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
@@ -52,6 +53,7 @@
         
         <cblk3pd:ThreePointerDial Grid.Row="2" Grid.Column="2"
                                   Margin="1"
+                                  GaugeTitle="A"
                                   BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
                                   BorderColor="{StaticResource ThreePointerDialBorderColor}"
                                   Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
@@ -62,6 +64,7 @@
 
         <cblk3pd:ThreePointerDial Grid.Row="3" Grid.Column="2"
                                   Margin="1"
+                                  GaugeTitle="P (W)"
                                   BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
                                   BorderColor="{StaticResource ThreePointerDialBorderColor}"
                                   Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"

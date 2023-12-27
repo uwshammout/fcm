@@ -314,4 +314,20 @@ public partial class ThreePointerDial : UserControl
         return rotationDegrees;
     }
     #endregion
+    #region Title / Text
+    private string gaugeTitle = "";
+
+    public string GaugeTitle
+    {
+        get => gaugeTitle;
+        set
+        {
+            if (gaugeTitle != value)
+            {
+                gaugeTitle = value;
+                viewModel.GaugeTitle = value;
+            }
+        }
+    }
+    #endregion
 }

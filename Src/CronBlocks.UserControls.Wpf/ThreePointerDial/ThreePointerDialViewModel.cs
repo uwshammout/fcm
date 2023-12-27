@@ -49,4 +49,7 @@ internal partial class ThreePointerDialViewModel : ObservableObject
     private double dial2Rotation = 0.0;
     [ObservableProperty]
     private double dial3Rotation = 0.0;
+
+    [ObservableProperty]
+    private string gaugeTitle = "";
 }
