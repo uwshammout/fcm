@@ -11,7 +11,7 @@
         MinWidth="800" MinHeight="450">
 
     <Window.Resources>
-        <SolidColorBrush x:Key="ThreePointerDialBackgroundColor" Color="AliceBlue"/>
+        <SolidColorBrush x:Key="ThreePointerDialBackgroundColor" Color="#FFEBF0F5"/>
         <SolidColorBrush x:Key="ThreePointerDialBorderColor" Color="BlanchedAlmond"/>
         <SolidColorBrush x:Key="ThreePointerDialDial1Color" Color="#FF5555E0"/>
         <SolidColorBrush x:Key="ThreePointerDialDial1BorderColor" Color="#FF75A1F9"/>
@@ -58,7 +58,7 @@
                                   Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
                                   Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
                                   GaugeMinValue="0" GaugeMaxValue="1.5"
-                                  Dial1Value="0" Dial2Value=".5" Dial3Value="1"/>
+                                  Dial1Value="0" Dial2Value=".5" Dial3Value="1.2"/>
 
         <cblk3pd:ThreePointerDial Grid.Row="3" Grid.Column="2"
                                   Margin="1"
@@ -68,6 +68,6 @@
                                   Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
                                   Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
                                   GaugeMinValue="0" GaugeMaxValue="1.5"
-                                  Dial1Value="0" Dial2Value=".5" Dial3Value="1"/>
+                                  Dial1Value="0" Dial2Value=".5" Dial3Value="1.5"/>
     </Grid>
 </Window>
