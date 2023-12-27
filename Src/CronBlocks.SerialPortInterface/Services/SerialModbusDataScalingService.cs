@@ -1,8 +1,8 @@
-﻿using CronBlocks.SerialPortInterface.Configuration;
+﻿using CronBlocks.Helpers;
+using CronBlocks.SerialPortInterface.Configuration;
 using CronBlocks.SerialPortInterface.Interfaces;
 using Microsoft.Extensions.Logging;
 using System.Collections.Immutable;
-using System.IO;
 
 namespace CronBlocks.SerialPortInterface.Services;
 
@@ -12,6 +12,7 @@ public class SerialModbusDataScalingService : ISerialModbusDataScalingService
 
     private readonly ILogger<SerialModbusDataScalingService> _logger;
     private readonly ISerialModbusClientService _service;
+    private readonly IniConfigIO _iniConfig;
     private readonly string _filename;
 
     private List<double> _scaledValues;
@@ -21,11 +22,13 @@ public class SerialModbusDataScalingService : ISerialModbusDataScalingService
     public SerialModbusDataScalingService(
         ILogger<SerialModbusDataScalingService> logger,
         ISerialModbusClientService service,
-        string filename = null!)
+        string filename = null!,
+        ILogger<IniConfigIO> iniLogger = null!)
     {
         _logger = logger;
         _service = service;
         _filename = filename;
+        _iniConfig = null!;
 
         _scaledValues = new List<double>(Constants.TotalRegisters);
         _multiplicationFactors = new List<double>(Constants.TotalRegisters);
@@ -42,13 +45,9 @@ public class SerialModbusDataScalingService : ISerialModbusDataScalingService
             _logger.LogInformation(
                 $"No filename is provided, so we are using defaults.");
         }
-        else if (File.Exists(_filename) == false)
-        {
-            _logger.LogWarning(
-                $"File '{_filename}' doesn't exist, so we are using defaults.");
-        }
         else
         {
+            _iniConfig = new(_filename, iniLogger);
             LoadValuesFromFile();
         }
 
@@ -85,19 +84,40 @@ public class SerialModbusDataScalingService : ISerialModbusDataScalingService
         _offsets[index] = value;
     }
 
-    private void LoadValuesFromFile()
+    public void LoadValuesFromFile()
     {
-        // TODO: To be implemented
+        if (_iniConfig != null)
+        {
+            for (int i = 0; i < Constants.TotalRegisters; i++)
+            {
+                _multiplicationFactors[i] = _iniConfig.GetDouble($"FACTORS/MultiplicationFactor_{i}", 1);
+                _offsets[i] = _iniConfig.GetDouble($"FACTORS/Offset_{i}", 0);
+            }
+        }
     }
 
-    private void SaveValuesToFile()
+    public void SaveValuesToFile()
     {
-        // TODO: To be implemented
+        if (_iniConfig != null)
+        {
+            for (int i = 0; i < Constants.TotalRegisters; i++)
+            {
+                _iniConfig.SetDouble($"FACTORS/MultiplicationFactor_{i}", _multiplicationFactors[i]);
+                _iniConfig.SetDouble($"FACTORS/Offset_{i}", _offsets[i]);
+            }
+
+            _iniConfig.SaveFile();
+        }
     }
 
     public void Dispose()
     {
-        _service.NewValuesReceived -= OnNewModbusValuesReceived;
+        try
+        {
+            _service.NewValuesReceived -= OnNewModbusValuesReceived;
+        }
+        catch { }
+
         SaveValuesToFile();
     }
 
