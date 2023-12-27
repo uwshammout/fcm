@@ -80,6 +80,7 @@
         <!-- Title -->
         <Label Grid.Row="0" Grid.Column="0"
                Grid.RowSpan="3" Grid.ColumnSpan="5"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Top"
                HorizontalAlignment="Center" VerticalAlignment="Top"
                FontSize="14" FontWeight="Bold"
                Content="{Binding GaugeTitle}" d:Content="Title" />
