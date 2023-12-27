@@ -10,6 +10,12 @@ internal partial class ThreePointerDialViewModel : ObservableObject
     {
         MinRotation = -60;
         MaxRotation = +60;
+
+        Grading1Rotation = MinRotation;
+        Grading2Rotation = MinRotation / 2;
+        Grading3Rotation = 0.0;
+        Grading4Rotation = MaxRotation / 2;
+        Grading5Rotation = MaxRotation;
     }
 
     [ObservableProperty]
@@ -52,4 +58,26 @@ internal partial class ThreePointerDialViewModel : ObservableObject
 
     [ObservableProperty]
     private string gaugeTitle = "";
+
+    [ObservableProperty]
+    private string grading1Text = "";
+    [ObservableProperty]
+    private string grading2Text = "";
+    [ObservableProperty]
+    private string grading3Text = "";
+    [ObservableProperty]
+    private string grading4Text = "";
+    [ObservableProperty]
+    private string grading5Text = "";
+
+    [ObservableProperty]
+    private double grading1Rotation = 0.0;
+    [ObservableProperty]
+    private double grading2Rotation = 0.0;
+    [ObservableProperty]
+    private double grading3Rotation = 0.0;
+    [ObservableProperty]
+    private double grading4Rotation = 0.0;
+    [ObservableProperty]
+    private double grading5Rotation = 0.0;
 }

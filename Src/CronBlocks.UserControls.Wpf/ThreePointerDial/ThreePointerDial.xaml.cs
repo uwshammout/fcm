@@ -235,6 +235,8 @@ public partial class ThreePointerDial : UserControl
                 viewModel.Dial1Rotation = GetDialRotation(dial1Value);
                 viewModel.Dial2Rotation = GetDialRotation(dial2Value);
                 viewModel.Dial3Rotation = GetDialRotation(dial3Value);
+
+                SetGradingTexts();
             }
         }
     }
@@ -251,6 +253,8 @@ public partial class ThreePointerDial : UserControl
                 viewModel.Dial1Rotation = GetDialRotation(dial1Value);
                 viewModel.Dial2Rotation = GetDialRotation(dial2Value);
                 viewModel.Dial3Rotation = GetDialRotation(dial3Value);
+
+                SetGradingTexts();
             }
         }
     }
@@ -312,6 +316,18 @@ public partial class ThreePointerDial : UserControl
             rotationDegrees = viewModel.MaxRotation;
 
         return rotationDegrees;
+    }
+
+    private void SetGradingTexts()
+    {
+        double diff = gaugeMaxValue - gaugeMinValue;
+        double perGradeValue = diff / (5 - 1);
+
+        viewModel.Grading1Text = $"{gaugeMinValue: 0.00}";
+        viewModel.Grading2Text = $"{gaugeMinValue + perGradeValue: 0.00}";
+        viewModel.Grading3Text = $"{diff / 2: 0.00}";
+        viewModel.Grading4Text = $"{gaugeMaxValue - perGradeValue: 0.00}";
+        viewModel.Grading5Text = $"{gaugeMaxValue: 0.00}";
     }
     #endregion
     #region Title / Text
