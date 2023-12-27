@@ -10,8 +10,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="60*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="50*"/>
             <RowDefinition Height="13*"/>
             <RowDefinition Height="13*"/>
         </Grid.RowDefinitions>
@@ -28,6 +28,126 @@
                    Stroke="{Binding BorderColor}" d:Stroke="White"
                    Grid.ColumnSpan="5" Grid.RowSpan="5"  />
         
+        <!-- Gradings - 1 -->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="3"
+              RenderTransformOrigin="0.5,1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+            
+            <Label Content="{Binding Grading1Text}" d:Content="0.00"
+                   FontSize="12"
+                   Foreground="{Binding GradingTextColor}" d:Foreground="White"
+                   HorizontalAlignment="Center"/>
+            
+            <Rectangle Grid.Row="1"
+                       HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                       Width="1"
+                       Stroke="{Binding GradingLineColor}" d:Stroke="White" />
+
+            <Grid.RenderTransform>
+                <RotateTransform Angle="{Binding Grading1Rotation}" d:Angle="-45" />
+            </Grid.RenderTransform>
+        </Grid>
+
+        <!-- Gradings - 2 -->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="3"
+              RenderTransformOrigin="0.5,1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+
+            <Label Content="{Binding Grading2Text}" d:Content="0.00"
+                   FontSize="12"
+                   Foreground="{Binding GradingTextColor}" d:Foreground="White"
+                   HorizontalAlignment="Center"/>
+
+            <Rectangle Grid.Row="1"
+                       HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                       Width="1"
+                       Stroke="{Binding GradingLineColor}" d:Stroke="White" />
+
+            <Grid.RenderTransform>
+                <RotateTransform Angle="{Binding Grading2Rotation}" d:Angle="-22.5" />
+            </Grid.RenderTransform>
+        </Grid>
+
+        <!-- Gradings - 3 -->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="3"
+              RenderTransformOrigin="0.5,1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+
+            <Label Content="{Binding Grading3Text}" d:Content="0.00"
+                   FontSize="12"
+                   Foreground="{Binding GradingTextColor}" d:Foreground="White"
+                   HorizontalAlignment="Center"/>
+
+            <Rectangle Grid.Row="1"
+                       HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                       Width="1"
+                       Stroke="{Binding GradingLineColor}" d:Stroke="White" />
+
+            <Grid.RenderTransform>
+                <RotateTransform Angle="{Binding Grading3Rotation}" d:Angle="0" />
+            </Grid.RenderTransform>
+        </Grid>
+
+        <!-- Gradings - 4 -->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="3"
+              RenderTransformOrigin="0.5,1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+
+            <Label Content="{Binding Grading4Text}" d:Content="0.00"
+                   FontSize="12"
+                   Foreground="{Binding GradingTextColor}" d:Foreground="White"
+                   HorizontalAlignment="Center"/>
+
+            <Rectangle Grid.Row="1"
+                       HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                       Width="1"
+                       Stroke="{Binding GradingLineColor}" d:Stroke="White" />
+
+            <Grid.RenderTransform>
+                <RotateTransform Angle="{Binding Grading4Rotation}" d:Angle="22.5" />
+            </Grid.RenderTransform>
+        </Grid>
+
+        <!-- Gradings - 5 -->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="3"
+              RenderTransformOrigin="0.5,1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+
+            <Label Content="{Binding Grading5Text}" d:Content="0.00"
+                   FontSize="12"
+                   Foreground="{Binding GradingTextColor}" d:Foreground="White"
+                   HorizontalAlignment="Center"/>
+
+            <Rectangle Grid.Row="1"
+                       HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                       Width="1"
+                       Stroke="{Binding GradingLineColor}" d:Stroke="White" />
+
+            <Grid.RenderTransform>
+                <RotateTransform Angle="{Binding Grading5Rotation}" d:Angle="45" />
+            </Grid.RenderTransform>
+        </Grid>
+
         <!-- Dial 1 -->
         <Path Data="M149.99835,221.89231 C149.99835,221.89231 149.05828,113.46585 158.56242,113.46585 167.61703,113.46585 167.06847,221.92328 167.06847,221.92328 z"
               Visibility="{Binding Dial1Visible}"
@@ -65,6 +185,7 @@
         </Path>
 
         <!-- Front Box -->
+        
         <Ellipse Grid.Row="3" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                  Fill="{Binding BackgroundColor}" d:Fill="Gray" />
@@ -83,6 +204,7 @@
                HorizontalContentAlignment="Center" VerticalContentAlignment="Top"
                HorizontalAlignment="Center" VerticalAlignment="Top"
                FontSize="14" FontWeight="Bold"
+               Foreground="{Binding TitleTextColor}" d:Foreground="Black"
                Content="{Binding GaugeTitle}" d:Content="Title" />
     </Grid>
 </UserControl>

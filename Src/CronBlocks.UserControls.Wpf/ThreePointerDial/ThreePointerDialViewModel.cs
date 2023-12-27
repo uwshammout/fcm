@@ -31,6 +31,13 @@ internal partial class ThreePointerDialViewModel : ObservableObject
     private Brush borderColor = new SolidColorBrush(Color.FromArgb(255, 200, 200, 200));
 
     [ObservableProperty]
+    private Brush titleTextColor = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+    [ObservableProperty]
+    private Brush gradingTextColor = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+    [ObservableProperty]
+    private Brush gradingLineColor = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+
+    [ObservableProperty]
     private Brush dial1Color = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
     [ObservableProperty]
     private Brush dial2Color = new SolidColorBrush(Color.FromArgb(255, 0, 255, 0));

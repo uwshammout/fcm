@@ -29,6 +29,10 @@ public partial class ThreePointerDial : UserControl
         backgroundColor = viewModel.BackgroundColor;
         borderColor = viewModel.BorderColor;
 
+        titleTextColor = viewModel.TitleTextColor;
+        gradingTextColor = viewModel.GradingTextColor;
+        gradingLineColor = viewModel.GradingLineColor;
+
         dial1Color = viewModel.Dial1Color;
         dial2Color = viewModel.Dial2Color;
         dial3Color = viewModel.Dial3Color;
@@ -107,6 +111,10 @@ public partial class ThreePointerDial : UserControl
     private Brush backgroundColor;
     private Brush borderColor;
 
+    private Brush titleTextColor;
+    private Brush gradingTextColor;
+    private Brush gradingLineColor;
+
     public Brush BackgroundColor
     {
         get => backgroundColor;
@@ -129,6 +137,45 @@ public partial class ThreePointerDial : UserControl
             {
                 borderColor = value;
                 viewModel.BorderColor = value;
+            }
+        }
+    }
+
+    public Brush TitleTextColor
+    {
+        get => titleTextColor;
+        set
+        {
+            if (titleTextColor != value)
+            {
+                titleTextColor = value;
+                viewModel.TitleTextColor = value;
+            }
+        }
+    }
+
+    public Brush GradingTextColor
+    {
+        get => gradingTextColor;
+        set
+        {
+            if (gradingTextColor != value)
+            {
+                gradingTextColor = value;
+                viewModel.GradingTextColor = value;
+            }
+        }
+    }
+
+    public Brush GradingLineColor
+    {
+        get => gradingLineColor;
+        set
+        {
+            if (gradingLineColor != value)
+            {
+                gradingLineColor = value;
+                viewModel.GradingLineColor = value;
             }
         }
     }
