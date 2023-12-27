@@ -11,9 +11,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="20*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="13*"/>
-            <RowDefinition Height="13*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*"/>
@@ -206,5 +206,46 @@
                FontSize="14" FontWeight="Bold"
                Foreground="{Binding TitleTextColor}" d:Foreground="Black"
                Content="{Binding GaugeTitle}" d:Content="Title" />
+        
+        <!-- Gauge Values -->
+        <Grid Grid.Row="5" Grid.ColumnSpan="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="3" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="{Binding Dial1Text}" d:Text="0.00"
+                       FontFamily="Cascadia Code"
+                       FontSize="16" FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Grid.Column="1" />
+            <TextBlock Text="{Binding Dial2Text}" d:Text="0.00"
+                       FontFamily="Cascadia Code"
+                       FontSize="16" FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Grid.Column="3"/>
+            <TextBlock Text="{Binding Dial3Text}" d:Text="0.00"
+                       FontFamily="Cascadia Code"
+                       FontSize="16" FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Grid.Column="5"/>
+            
+            <Border Background="{Binding Dial1Color}" d:Background="Red"
+                    Grid.Row="1" Grid.Column="1" />
+            <Border Background="{Binding Dial2Color}" d:Background="Green"
+                    Grid.Row="1" Grid.Column="3" />
+            <Border Background="{Binding Dial3Color}" d:Background="Blue"
+                    Grid.Row="1" Grid.Column="5" />
+        </Grid>
     </Grid>
 </UserControl>

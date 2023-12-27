@@ -67,6 +67,13 @@ internal partial class ThreePointerDialViewModel : ObservableObject
     private string gaugeTitle = "";
 
     [ObservableProperty]
+    private string dial1Text = "";
+    [ObservableProperty]
+    private string dial2Text = "";
+    [ObservableProperty]
+    private string dial3Text = "";
+
+    [ObservableProperty]
     private string grading1Text = "";
     [ObservableProperty]
     private string grading2Text = "";

@@ -319,6 +319,7 @@ public partial class ThreePointerDial : UserControl
             {
                 dial1Value = value;
                 viewModel.Dial1Rotation = GetDialRotation(dial1Value);
+                viewModel.Dial1Text = GetDialText(dial1Value);
             }
         }
     }
@@ -332,6 +333,7 @@ public partial class ThreePointerDial : UserControl
             {
                 dial2Value = value;
                 viewModel.Dial2Rotation = GetDialRotation(dial2Value);
+                viewModel.Dial2Text = GetDialText(dial2Value);
             }
         }
     }
@@ -345,6 +347,7 @@ public partial class ThreePointerDial : UserControl
             {
                 dial3Value = value;
                 viewModel.Dial3Rotation = GetDialRotation(dial3Value);
+                viewModel.Dial3Text = GetDialText(dial3Value);
             }
         }
     }
@@ -375,6 +378,11 @@ public partial class ThreePointerDial : UserControl
         viewModel.Grading3Text = $"{diff / 2: 0.00}";
         viewModel.Grading4Text = $"{gaugeMaxValue - perGradeValue: 0.00}";
         viewModel.Grading5Text = $"{gaugeMaxValue: 0.00}";
+    }
+
+    private string GetDialText(double value)
+    {
+        return $"{value: 0.00}";
     }
     #endregion
     #region Title / Text
