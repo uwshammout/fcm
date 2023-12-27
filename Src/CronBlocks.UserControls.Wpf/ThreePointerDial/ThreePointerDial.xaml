@@ -9,10 +9,11 @@
              d:DesignHeight="220" d:DesignWidth="320">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="90*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="13*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*"/>
@@ -25,14 +26,14 @@
         <!-- Background Box -->
         <Rectangle Fill="{Binding BackgroundColor}" d:Fill="Gray"
                    Stroke="{Binding BorderColor}" d:Stroke="White"
-                   Grid.ColumnSpan="5" Grid.RowSpan="4"  />
+                   Grid.ColumnSpan="5" Grid.RowSpan="5"  />
 
         <!-- Dial 1 -->
         <Path Data="M149.99835,221.89231 C149.99835,221.89231 149.05828,113.46585 158.56242,113.46585 167.61703,113.46585 167.06847,221.92328 167.06847,221.92328 z"
               Visibility="{Binding Dial1Visible}"
               Fill="{Binding Dial1Color}" d:Fill="Red"
               Stroke="{Binding Dial1BorderColor}" d:Stroke="Chocolate"
-              Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"
+              Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"
               Stretch="Fill" RenderTransformOrigin="0.5,1">
             <Path.RenderTransform>
                 <RotateTransform Angle="{Binding Dial1Rotation}" d:Angle="-45" />
@@ -44,7 +45,7 @@
               Visibility="{Binding Dial2Visible}"
               Fill="{Binding Dial2Color}" d:Fill="Green"
               Stroke="{Binding Dial2BorderColor}" d:Stroke="Azure"
-              Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"
+              Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"
               Stretch="Fill" RenderTransformOrigin="0.5,1">
             <Path.RenderTransform>
                 <RotateTransform Angle="{Binding Dial2Rotation}" d:Angle="0" />
@@ -56,7 +57,7 @@
               Visibility="{Binding Dial3Visible}"
               Fill="{Binding Dial3Color}" d:Fill="Blue"
               Stroke="{Binding Dial3BorderColor}" d:Stroke="AliceBlue"
-              Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"
+              Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"
               Stretch="Fill" RenderTransformOrigin="0.5,1">
             <Path.RenderTransform>
                 <RotateTransform Angle="{Binding Dial3Rotation}" d:Angle="45" />
@@ -64,16 +65,16 @@
         </Path>
 
         <!-- Front Box -->
-        <Ellipse Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"
+        <Ellipse Grid.Row="3" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                  Fill="{Binding BackgroundColor}" d:Fill="Gray" />
         
-        <Rectangle Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
+        <Rectangle Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                    Fill="{Binding BackgroundColor}" d:Fill="Gray" />
 
         <Rectangle Fill="{x:Null}" d:Fill="{x:Null}"
                    Stroke="{Binding BorderColor}" d:Stroke="White"
-                   Grid.ColumnSpan="5" Grid.RowSpan="4" />
+                   Grid.ColumnSpan="5" Grid.RowSpan="5" />
     </Grid>
 </UserControl>
