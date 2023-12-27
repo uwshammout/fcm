@@ -30,8 +30,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -42,35 +42,35 @@
 
         <cblk3pd:ThreePointerDial Grid.Row="1" Grid.Column="2"
                                   Margin="1"
-                                  GaugeTitle="V"
+                                  GaugeTitle="Voltage (V)"
                                   BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
                                   BorderColor="{StaticResource ThreePointerDialBorderColor}"
                                   Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
                                   Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
                                   Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
-                                  GaugeMinValue="0" GaugeMaxValue="1.5"
-                                  Dial1Value="0" Dial2Value=".5" Dial3Value="1"/>
+                                  GaugeMinValue="0" GaugeMaxValue="12"
+                                  Dial1Value="0" Dial2Value=".5" Dial3Value="12"/>
         
         <cblk3pd:ThreePointerDial Grid.Row="2" Grid.Column="2"
                                   Margin="1"
-                                  GaugeTitle="A"
+                                  GaugeTitle="Current (A)"
                                   BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
                                   BorderColor="{StaticResource ThreePointerDialBorderColor}"
                                   Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
                                   Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
                                   Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
-                                  GaugeMinValue="0" GaugeMaxValue="1.5"
-                                  Dial1Value="0" Dial2Value=".5" Dial3Value="1.2"/>
+                                  GaugeMinValue="0" GaugeMaxValue="5"
+                                  Dial1Value="0" Dial2Value=".5" Dial3Value="5"/>
 
         <cblk3pd:ThreePointerDial Grid.Row="3" Grid.Column="2"
                                   Margin="1"
-                                  GaugeTitle="P (W)"
+                                  GaugeTitle="Power (W)"
                                   BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
                                   BorderColor="{StaticResource ThreePointerDialBorderColor}"
                                   Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
                                   Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
                                   Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
-                                  GaugeMinValue="0" GaugeMaxValue="1.5"
-                                  Dial1Value="0" Dial2Value=".5" Dial3Value="1.5"/>
+                                  GaugeMinValue="0" GaugeMaxValue="10"
+                                  Dial1Value="0" Dial2Value=".5" Dial3Value="10"/>
     </Grid>
 </Window>
