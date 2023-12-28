@@ -12,14 +12,23 @@
         MinWidth="800" MinHeight="450">
 
     <Window.Resources>
-        <SolidColorBrush x:Key="ThreePointerDialBackgroundColor" Color="#FFF5F1EB"/>
-        <SolidColorBrush x:Key="ThreePointerDialBorderColor" Color="#FF7F8C08"/>
-        <SolidColorBrush x:Key="ThreePointerDialDial1Color" Color="#FF5656E8"/>
-        <SolidColorBrush x:Key="ThreePointerDialDial1BorderColor" Color="#FF75A1F9"/>
-        <SolidColorBrush x:Key="ThreePointerDialDial2Color" Color="#FF383838"/>
-        <SolidColorBrush x:Key="ThreePointerDialDial2BorderColor" Color="#FF1D1D1D"/>
-        <SolidColorBrush x:Key="ThreePointerDialDial3Color" Color="#FFB6C107"/>
-        <SolidColorBrush x:Key="ThreePointerDialDial3BorderColor" Color="#FF9A9404"/>
+        <SolidColorBrush x:Key="FuelCellTpdBackgroundColor" Color="#FFF1EBF5"/>
+        <SolidColorBrush x:Key="FuelCellTpdBorderColor" Color="#FF7F8C08"/>
+        <SolidColorBrush x:Key="FuelCellTpdDial1Color" Color="#FF5656E8"/>
+        <SolidColorBrush x:Key="FuelCellTpdDial1BorderColor" Color="#FF75A1F9"/>
+        <SolidColorBrush x:Key="FuelCellTpdDial2Color" Color="#FF383838"/>
+        <SolidColorBrush x:Key="FuelCellTpdDial2BorderColor" Color="#FF1D1D1D"/>
+        <SolidColorBrush x:Key="FuelCellTpdDial3Color" Color="#FFB6C107"/>
+        <SolidColorBrush x:Key="FuelCellTpdDial3BorderColor" Color="#FF9A9404"/>
+
+        <SolidColorBrush x:Key="ElectrolyzerTpdBackgroundColor" Color="#FFF5F5EB"/>
+        <SolidColorBrush x:Key="ElectrolyzerTpdBorderColor" Color="#FF7F8C08"/>
+        <SolidColorBrush x:Key="ElectrolyzerTpdDial1Color" Color="#FF5656E8"/>
+        <SolidColorBrush x:Key="ElectrolyzerTpdDial1BorderColor" Color="#FF75A1F9"/>
+        <SolidColorBrush x:Key="ElectrolyzerTpdDial2Color" Color="#FF383838"/>
+        <SolidColorBrush x:Key="ElectrolyzerTpdDial2BorderColor" Color="#FF1D1D1D"/>
+        <SolidColorBrush x:Key="ElectrolyzerTpdDial3Color" Color="#FFB6C107"/>
+        <SolidColorBrush x:Key="ElectrolyzerTpdDial3BorderColor" Color="#FF9A9404"/>
     </Window.Resources>
 
     <Grid>
@@ -57,33 +66,33 @@
                         <cblk3pd:ThreePointerDial Grid.Row="0"
                                                   Margin="3"
                                                   GaugeTitle="Voltage (V)"
-                                                  BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
-                                                  BorderColor="{StaticResource ThreePointerDialBorderColor}"
-                                                  Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
-                                                  Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
-                                                  Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
+                                                  BackgroundColor="{StaticResource FuelCellTpdBackgroundColor}"
+                                                  BorderColor="{StaticResource FuelCellTpdBorderColor}"
+                                                  Dial1Color="{StaticResource FuelCellTpdDial1Color}" Dial1BorderColor="{StaticResource FuelCellTpdDial1BorderColor}"
+                                                  Dial2Color="{StaticResource FuelCellTpdDial2Color}" Dial2BorderColor="{StaticResource FuelCellTpdDial2BorderColor}"
+                                                  Dial3Color="{StaticResource FuelCellTpdDial3Color}" Dial3BorderColor="{StaticResource FuelCellTpdDial3BorderColor}"
                                                   GaugeMinValue="0" GaugeMaxValue="10"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
                         <cblk3pd:ThreePointerDial Grid.Row="1"
                                                   Margin="3"
                                                   GaugeTitle="Current (A)"
-                                                  BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
-                                                  BorderColor="{StaticResource ThreePointerDialBorderColor}"
-                                                  Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
-                                                  Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
-                                                  Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
+                                                  BackgroundColor="{StaticResource FuelCellTpdBackgroundColor}"
+                                                  BorderColor="{StaticResource FuelCellTpdBorderColor}"
+                                                  Dial1Color="{StaticResource FuelCellTpdDial1Color}" Dial1BorderColor="{StaticResource FuelCellTpdDial1BorderColor}"
+                                                  Dial2Color="{StaticResource FuelCellTpdDial2Color}" Dial2BorderColor="{StaticResource FuelCellTpdDial2BorderColor}"
+                                                  Dial3Color="{StaticResource FuelCellTpdDial3Color}" Dial3BorderColor="{StaticResource FuelCellTpdDial3BorderColor}"
                                                   GaugeMinValue="0" GaugeMaxValue="5"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
                         <cblk3pd:ThreePointerDial Grid.Row="2"
                                                   Margin="3"
                                                   GaugeTitle="Power (W)"
-                                                  BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
-                                                  BorderColor="{StaticResource ThreePointerDialBorderColor}"
-                                                  Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
-                                                  Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
-                                                  Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
+                                                  BackgroundColor="{StaticResource FuelCellTpdBackgroundColor}"
+                                                  BorderColor="{StaticResource FuelCellTpdBorderColor}"
+                                                  Dial1Color="{StaticResource FuelCellTpdDial1Color}" Dial1BorderColor="{StaticResource FuelCellTpdDial1BorderColor}"
+                                                  Dial2Color="{StaticResource FuelCellTpdDial2Color}" Dial2BorderColor="{StaticResource FuelCellTpdDial2BorderColor}"
+                                                  Dial3Color="{StaticResource FuelCellTpdDial3Color}" Dial3BorderColor="{StaticResource FuelCellTpdDial3BorderColor}"
                                                   GaugeMinValue="0" GaugeMaxValue="10"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
@@ -118,33 +127,33 @@
                         <cblk3pd:ThreePointerDial Grid.Row="0"
                                                   Margin="3"
                                                   GaugeTitle="Voltage (V)"
-                                                  BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
-                                                  BorderColor="{StaticResource ThreePointerDialBorderColor}"
-                                                  Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
-                                                  Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
-                                                  Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
+                                                  BackgroundColor="{StaticResource ElectrolyzerTpdBackgroundColor}"
+                                                  BorderColor="{StaticResource ElectrolyzerTpdBorderColor}"
+                                                  Dial1Color="{StaticResource ElectrolyzerTpdDial1Color}" Dial1BorderColor="{StaticResource ElectrolyzerTpdDial1BorderColor}"
+                                                  Dial2Color="{StaticResource ElectrolyzerTpdDial2Color}" Dial2BorderColor="{StaticResource ElectrolyzerTpdDial2BorderColor}"
+                                                  Dial3Color="{StaticResource ElectrolyzerTpdDial3Color}" Dial3BorderColor="{StaticResource ElectrolyzerTpdDial3BorderColor}"
                                                   GaugeMinValue="0" GaugeMaxValue="4"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
                         <cblk3pd:ThreePointerDial Grid.Row="1"
                                                   Margin="3"
                                                   GaugeTitle="Current (A)"
-                                                  BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
-                                                  BorderColor="{StaticResource ThreePointerDialBorderColor}"
-                                                  Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
-                                                  Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
-                                                  Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
+                                                  BackgroundColor="{StaticResource ElectrolyzerTpdBackgroundColor}"
+                                                  BorderColor="{StaticResource ElectrolyzerTpdBorderColor}"
+                                                  Dial1Color="{StaticResource ElectrolyzerTpdDial1Color}" Dial1BorderColor="{StaticResource ElectrolyzerTpdDial1BorderColor}"
+                                                  Dial2Color="{StaticResource ElectrolyzerTpdDial2Color}" Dial2BorderColor="{StaticResource ElectrolyzerTpdDial2BorderColor}"
+                                                  Dial3Color="{StaticResource ElectrolyzerTpdDial3Color}" Dial3BorderColor="{StaticResource ElectrolyzerTpdDial3BorderColor}"
                                                   GaugeMinValue="0" GaugeMaxValue="3"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
                         <cblk3pd:ThreePointerDial Grid.Row="2"
                                                   Margin="3"
                                                   GaugeTitle="Power (W)"
-                                                  BackgroundColor="{StaticResource ThreePointerDialBackgroundColor}"
-                                                  BorderColor="{StaticResource ThreePointerDialBorderColor}"
-                                                  Dial1Color="{StaticResource ThreePointerDialDial1Color}" Dial1BorderColor="{StaticResource ThreePointerDialDial1BorderColor}"
-                                                  Dial2Color="{StaticResource ThreePointerDialDial2Color}" Dial2BorderColor="{StaticResource ThreePointerDialDial2BorderColor}"
-                                                  Dial3Color="{StaticResource ThreePointerDialDial3Color}" Dial3BorderColor="{StaticResource ThreePointerDialDial3BorderColor}"
+                                                  BackgroundColor="{StaticResource ElectrolyzerTpdBackgroundColor}"
+                                                  BorderColor="{StaticResource ElectrolyzerTpdBorderColor}"
+                                                  Dial1Color="{StaticResource ElectrolyzerTpdDial1Color}" Dial1BorderColor="{StaticResource ElectrolyzerTpdDial1BorderColor}"
+                                                  Dial2Color="{StaticResource ElectrolyzerTpdDial2Color}" Dial2BorderColor="{StaticResource ElectrolyzerTpdDial2BorderColor}"
+                                                  Dial3Color="{StaticResource ElectrolyzerTpdDial3Color}" Dial3BorderColor="{StaticResource ElectrolyzerTpdDial3BorderColor}"
                                                   GaugeMinValue="0" GaugeMaxValue="10"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
