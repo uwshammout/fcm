@@ -23,4 +23,12 @@ public partial class MainWindow : Window
         this.serialOptions = serialOptions;
         this.modbusScaling = scalingService;
     }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        modbus.Dispose();
+        modbusScaling.Dispose();
+
+        base.OnClosed(e);
+    }
 }
