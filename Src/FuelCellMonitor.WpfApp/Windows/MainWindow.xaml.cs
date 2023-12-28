@@ -44,13 +44,13 @@ public partial class MainWindow : Window
 
     private void On_MenuItem_Device_ConnectDisconnect(object sender, RoutedEventArgs e)
     {
-        DeviceConnectionWindow w = _app.GetInstance<DeviceConnectionWindow>();
+        var w = _app.GetInstance<DeviceConnectionWindow>();
         w.ShowDialog();
     }
 
     private void On_MenuItem_Device_Callibrate(object sender, RoutedEventArgs e)
     {
-        DeviceCallibrationWindow w = _app.GetInstance<DeviceCallibrationWindow>();
+        var w = _app.GetInstance<DeviceCallibrationWindow>();
         w.ShowDialog();
     }
 }
