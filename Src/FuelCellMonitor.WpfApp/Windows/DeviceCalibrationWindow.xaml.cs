@@ -3,12 +3,12 @@ using System.Windows;
 
 namespace CronBlocks.FuelCellMonitor.Windows;
 
-public partial class DeviceCallibrationWindow : Window
+public partial class DeviceCalibrationWindow : Window
 {
     private readonly ISerialModbusClientService _modbus;
     private readonly ISerialModbusDataScalingService _modbusScaling;
 
-    public DeviceCallibrationWindow(
+    public DeviceCalibrationWindow(
         ISerialModbusClientService modbus,
         ISerialModbusDataScalingService modbusScaling)
     {

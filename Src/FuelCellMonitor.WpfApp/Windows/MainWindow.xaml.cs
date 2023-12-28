@@ -2,6 +2,7 @@
 using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CronBlocks.FuelCellMonitor.Windows;
 
@@ -42,15 +43,33 @@ public partial class MainWindow : Window
     {
     }
 
-    private void On_MenuItem_Device_ConnectDisconnect(object sender, RoutedEventArgs e)
+    private void OnMenuItemClicked(object sender, RoutedEventArgs e)
     {
-        var w = _app.GetInstance<DeviceConnectionWindow>();
-        w.ShowDialog();
-    }
+        if (sender is MenuItem mi)
+        {
+            string? header = mi.Header as string;
 
-    private void On_MenuItem_Device_Callibrate(object sender, RoutedEventArgs e)
-    {
-        var w = _app.GetInstance<DeviceCallibrationWindow>();
-        w.ShowDialog();
+            if (string.IsNullOrEmpty(header) == false)
+            {
+                Window window = null!;
+
+                switch (header)
+                {
+                    case "Connect / Disconnect":
+                        window = _app.GetInstance<DeviceConnectionWindow>();                        
+                        break;
+
+                    case "Calibrate":
+                        window = _app.GetInstance<DeviceCalibrationWindow>();
+                        break;
+                }
+
+                if (window != null)
+                {
+                    window.ShowDialog();
+                }
+            }
+        }
+        
     }
 }
