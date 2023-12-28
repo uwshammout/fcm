@@ -69,7 +69,7 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
             
-            <Button x:Name="ConnectButton" Content="Connect" />
+            <Button x:Name="ConnectButton" Content="Connect" Click="ConnectButtonClicked" />
         </StackPanel>
                     
     </Grid>

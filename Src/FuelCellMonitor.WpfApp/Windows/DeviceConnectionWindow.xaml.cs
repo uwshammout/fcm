@@ -28,4 +28,9 @@ public partial class DeviceConnectionWindow : Window
         _serialPortsDiscovery.StopPortsDiscovery();
         base.OnClosed(e);
     }
+
+    private void ConnectButtonClicked(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
