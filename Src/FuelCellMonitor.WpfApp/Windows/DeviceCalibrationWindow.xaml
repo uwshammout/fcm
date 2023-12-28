@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:CronBlocks.FuelCellMonitor.Windows"
         mc:Ignorable="d"
         Title="Device Calibration"
+        FontFamily="Segoe UI Light"
+        FontSize="14"
         MinHeight="450" MinWidth="400"
         MaxHeight="750" MaxWidth="600"
         Height="650" Width="500">
