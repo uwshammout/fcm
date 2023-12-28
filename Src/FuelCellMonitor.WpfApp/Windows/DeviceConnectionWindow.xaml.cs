@@ -19,5 +19,13 @@ public partial class DeviceConnectionWindow : Window
         _serialPortsDiscovery = serialPortsDiscovery;
         _serialOptions = serialOptions;
         _serialModbusClient = serialModbusClient;
+
+        _serialPortsDiscovery.StartPortsDiscovery();
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        _serialPortsDiscovery.StopPortsDiscovery();
+        base.OnClosed(e);
     }
 }
