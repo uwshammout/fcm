@@ -26,20 +26,20 @@ public partial class MainWindow : Window
         _modbusScaling.NewValuesReceived += OnNewValuesReceived;
     }
 
-    private void OnNewValuesReceived(List<double> values)
-    {
-    }
-
-    private void OnDeviceOperationStateChanged(OperationState state)
-    {
-    }
-
     protected override void OnClosed(EventArgs e)
     {
         _modbusScaling.Dispose();
         _modbus.Dispose();
 
         base.OnClosed(e);
+    }
+
+    private void OnNewValuesReceived(List<double> values)
+    {
+    }
+
+    private void OnDeviceOperationStateChanged(OperationState state)
+    {
     }
 
     private void On_MenuItem_Device_ConnectDisconnect(object sender, RoutedEventArgs e)
