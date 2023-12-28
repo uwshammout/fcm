@@ -11,8 +11,11 @@ internal static class ConfigureServices
 {
     public static void ConfigureAppServices(this IServiceCollection services, App app)
     {
+        //- Overall
         services.AddSingleton((_) => app);
         services.AddSingleton((_) => services);
+
+        //- Serial Port Services
         services.AddSingleton<ISerialPortsDiscoveryService, SerialPortsDiscoveryService>();
         services.AddSingleton<ISerialModbusClientService, SerialModbusClientService>();
         services.AddSingleton<ISerialOptionsService, SerialOptionsService>();
@@ -24,6 +27,9 @@ internal static class ConfigureServices
                 FilePaths.DataScalingFilename,
                 sp.GetRequiredService<ILogger<IniConfigIO>>());
         });
+
+        //- Windows
         services.AddSingleton<Windows.MainWindow>();
+        services.AddTransient<Windows.DeviceConnectionWindow>();
     }
 }
