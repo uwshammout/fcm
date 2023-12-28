@@ -5,10 +5,10 @@ namespace CronBlocks.FuelCellMonitor.Windows;
 
 public partial class MainWindow : Window
 {
-    private readonly ISerialPortsDiscoveryService portsDiscovery;
-    private readonly ISerialModbusClientService modbus;
-    private readonly ISerialOptionsService serialOptions;
-    private readonly ISerialModbusDataScalingService modbusScaling;
+    private readonly ISerialPortsDiscoveryService _portsDiscovery;
+    private readonly ISerialModbusClientService _modbus;
+    private readonly ISerialOptionsService _serialOptions;
+    private readonly ISerialModbusDataScalingService _modbusScaling;
 
     public MainWindow(
         ISerialPortsDiscoveryService portsDiscovery,
@@ -18,16 +18,16 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        this.portsDiscovery = portsDiscovery;
-        this.modbus = modbus;
-        this.serialOptions = serialOptions;
-        this.modbusScaling = scalingService;
+        _portsDiscovery = portsDiscovery;
+        _modbus = modbus;
+        _serialOptions = serialOptions;
+        _modbusScaling = scalingService;
     }
 
     protected override void OnClosed(EventArgs e)
     {
-        modbus.Dispose();
-        modbusScaling.Dispose();
+        _modbusScaling.Dispose();
+        _modbus.Dispose();
 
         base.OnClosed(e);
     }
