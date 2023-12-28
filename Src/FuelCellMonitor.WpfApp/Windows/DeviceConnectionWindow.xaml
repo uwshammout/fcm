@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Connect to Device"
         MinHeight="450" MinWidth="400"
-        MaxHeight="950" MaxWidth="800"
+        MaxHeight="750" MaxWidth="600"
         Height="650" Width="500">
     <Grid>
         
