@@ -201,6 +201,10 @@ public class SerialModbusClientService : ISerialModbusClientService
         catch (Exception ex)
         {
             _logger.LogError($"Error occurred while reading at {_comPort}: {ex.Message}");
+            _logger.LogInformation($"Stopping acquisition due to error");
+
+            _isRunning = false;
+            shortData = null!;
         }
 
         if (shortData != null &&
