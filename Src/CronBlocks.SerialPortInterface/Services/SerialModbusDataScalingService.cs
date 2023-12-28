@@ -15,9 +15,9 @@ public class SerialModbusDataScalingService : ISerialModbusDataScalingService
     private readonly IniConfigIO _iniConfig;
     private readonly string _filename;
 
-    private List<double> _scaledValues;
-    private List<double> _multiplicationFactors;
-    private List<double> _offsets;
+    private double[] _scaledValues;
+    private double[] _multiplicationFactors;
+    private double[] _offsets;
 
     public SerialModbusDataScalingService(
         ILogger<SerialModbusDataScalingService> logger,
@@ -30,9 +30,9 @@ public class SerialModbusDataScalingService : ISerialModbusDataScalingService
         _filename = filename;
         _iniConfig = null!;
 
-        _scaledValues = new List<double>(Constants.TotalRegisters);
-        _multiplicationFactors = new List<double>(Constants.TotalRegisters);
-        _offsets = new List<double>(Constants.TotalRegisters);
+        _scaledValues = new double[Constants.TotalRegisters];
+        _multiplicationFactors = new double[Constants.TotalRegisters];
+        _offsets = new double[Constants.TotalRegisters];
 
         for (int i = 0; i < Constants.TotalRegisters; i++)
         {
@@ -146,6 +146,6 @@ public class SerialModbusDataScalingService : ISerialModbusDataScalingService
                 (values[i] * _multiplicationFactors[i]) + _offsets[i];
         }
 
-        NewValuesReceived?.Invoke(_scaledValues);
+        NewValuesReceived?.Invoke(_scaledValues.ToList());
     }
 }
