@@ -13,6 +13,9 @@
         Height="650" Width="500">
 
     <Window.Resources>
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="5" />
+        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="0,10,0,0" />
             <Setter Property="TextWrapping" Value="Wrap" />
@@ -22,18 +25,23 @@
             <Setter Property="Margin" Value="0,5,0,0" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Padding" Value="25,8" />
+        </Style>
     </Window.Resources>
     
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Column="0"
+        <ScrollViewer Grid.Row="0"
                       HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Auto">
 
-            <StackPanel Margin="5">
+            <StackPanel>
 
                 <!-- Baud-rate -->
                 <TextBlock x:Name="PortHeading" Text="Comm Port" />
@@ -56,5 +64,13 @@
                 <ComboBox x:Name="StopBitsComboBox" />
             </StackPanel>
         </ScrollViewer>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            
+            <Button x:Name="ConnectButton" Content="Connect" />
+        </StackPanel>
+                    
     </Grid>
 </Window>
