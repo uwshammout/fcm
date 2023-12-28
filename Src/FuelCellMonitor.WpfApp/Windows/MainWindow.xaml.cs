@@ -1,27 +1,33 @@
-﻿using CronBlocks.SerialPortInterface.Interfaces;
+﻿using CronBlocks.SerialPortInterface.Entities;
+using CronBlocks.SerialPortInterface.Interfaces;
 using System.Windows;
 
 namespace CronBlocks.FuelCellMonitor.Windows;
 
 public partial class MainWindow : Window
 {
-    private readonly ISerialPortsDiscoveryService _portsDiscovery;
     private readonly ISerialModbusClientService _modbus;
-    private readonly ISerialOptionsService _serialOptions;
     private readonly ISerialModbusDataScalingService _modbusScaling;
 
     public MainWindow(
-        ISerialPortsDiscoveryService portsDiscovery,
         ISerialModbusClientService modbus,
-        ISerialOptionsService serialOptions,
         ISerialModbusDataScalingService scalingService)
     {
         InitializeComponent();
 
-        _portsDiscovery = portsDiscovery;
         _modbus = modbus;
-        _serialOptions = serialOptions;
         _modbusScaling = scalingService;
+
+        _modbus.OperationStateChanged += OnDeviceOperationStateChanged;
+        _modbusScaling.NewValuesReceived += OnNewValuesReceived;
+    }
+
+    private void OnNewValuesReceived(List<double> values)
+    {
+    }
+
+    private void OnDeviceOperationStateChanged(OperationState state)
+    {
     }
 
     protected override void OnClosed(EventArgs e)
