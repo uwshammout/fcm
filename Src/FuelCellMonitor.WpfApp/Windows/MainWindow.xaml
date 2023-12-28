@@ -44,6 +44,7 @@
             
             <MenuItem Header="Device">
                 <MenuItem Header="Connect / Disconnect" Click="On_MenuItem_Device_ConnectDisconnect" />
+                <MenuItem Header="Callibrate" Click="On_MenuItem_Device_Callibrate" />
             </MenuItem>
         </Menu>
 

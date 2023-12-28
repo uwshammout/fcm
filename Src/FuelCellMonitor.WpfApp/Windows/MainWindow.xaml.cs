@@ -47,4 +47,10 @@ public partial class MainWindow : Window
         DeviceConnectionWindow w = _app.GetInstance<DeviceConnectionWindow>();
         w.ShowDialog();
     }
+
+    private void On_MenuItem_Device_Callibrate(object sender, RoutedEventArgs e)
+    {
+        DeviceCallibrationWindow w = _app.GetInstance<DeviceCallibrationWindow>();
+        w.ShowDialog();
+    }
 }
