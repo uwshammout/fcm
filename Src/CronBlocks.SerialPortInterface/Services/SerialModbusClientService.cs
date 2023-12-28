@@ -41,7 +41,7 @@ public class SerialModbusClientService : ISerialModbusClientService
     
     //- Received Values
 
-    private List<double> _valuesReceivedList;
+    private double[] _valuesReceived;
 
     public SerialModbusClientService(ILogger<SerialModbusClientService> logger)
     {
@@ -54,7 +54,7 @@ public class SerialModbusClientService : ISerialModbusClientService
         _settingsProvided = false;
         _client = null!;
 
-        _valuesReceivedList = new List<double>(Constants.TotalRegisters);
+        _valuesReceived = new double[Constants.TotalRegisters];
     }
 
     public void SetComSettings(SerialModbusClientSettings portSettings)
@@ -209,10 +209,10 @@ public class SerialModbusClientService : ISerialModbusClientService
         {
             for (int i = 0; i < shortData.Length; i++)
             {
-                _valuesReceivedList[i] = ((double)shortData[i]) / 1000.0;
+                _valuesReceived[i] = ((double)shortData[i]) / 1000.0;
             }
 
-            NewValuesReceived?.Invoke(_valuesReceivedList);
+            NewValuesReceived?.Invoke(_valuesReceived.ToList());
         }
 
         bool stillRunning = false;
