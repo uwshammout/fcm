@@ -6,10 +6,55 @@
         xmlns:local="clr-namespace:CronBlocks.FuelCellMonitor.Windows"
         mc:Ignorable="d"
         Title="Connect to Device"
+        FontFamily="Segoe UI Light"
+        FontSize="14"
         MinHeight="450" MinWidth="400"
         MaxHeight="750" MaxWidth="600"
         Height="650" Width="500">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,5,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+    </Window.Resources>
+    
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Column="0"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto">
+
+            <StackPanel Margin="5">
+
+                <!-- Baud-rate -->
+                <TextBlock x:Name="PortHeading" Text="Comm Port" />
+                <ComboBox x:Name="PortComboBox" />
+                
+                <!-- Baud-rate -->
+                <TextBlock x:Name="BaudRateHeading" Text="Baud Rate" />
+                <ComboBox x:Name="BaudRateComboBox" />
+
+                <!-- Data Bits -->
+                <TextBlock x:Name="DataBitsHeading" Text="Data Bits" />
+                <ComboBox x:Name="DataBitsComboBox" />
+
+                <!-- Parity -->
+                <TextBlock x:Name="ParityHeading" Text="Parity" />
+                <ComboBox x:Name="ParityComboBox" />
+
+                <!-- Stop Bits -->
+                <TextBlock x:Name="StopBitsHeading" Text="Stop Bits" />
+                <ComboBox x:Name="StopBitsComboBox" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
