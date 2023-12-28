@@ -39,7 +39,12 @@
 
         <Menu Grid.Row="0"
               Background="{x:Null}">
-            <MenuItem Header="Settings" />
+            
+            <MenuItem Header="File" />
+            
+            <MenuItem Header="Device">
+                <MenuItem Header="Connect / Disconnect" Click="On_MenuItem_Device_ConnectDisconnect" />
+            </MenuItem>
         </Menu>
 
         <TabControl Grid.Row="1" Margin="2">
