@@ -216,7 +216,7 @@
         <Label Grid.Row="16" Grid.Column="6" Content="-- RESERVED --" />
         <Label Grid.Row="17" Grid.Column="6" Content="-- RESERVED --" />
 
-        <StatusBar Grid.Row="18" Grid.ColumnSpan="6">
+        <StatusBar Grid.Row="18" Grid.ColumnSpan="7">
             <TextBlock x:Name="StatusMessage"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Stretch"
