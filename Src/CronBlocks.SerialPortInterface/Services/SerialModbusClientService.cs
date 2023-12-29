@@ -104,6 +104,11 @@ public class SerialModbusClientService : ISerialModbusClientService
 
     public void SetDataAcquisitionInterval(double milliseconds)
     {
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(
+            milliseconds,
+            Constants.MaximumDataAcquisitionIntervalMS,
+            nameof(milliseconds));
+
         ArgumentOutOfRangeException.ThrowIfLessThan(
             milliseconds,
             Constants.MinimumDataAcquisitionIntervalMS,

@@ -9,6 +9,7 @@ internal class Constants
     public const double PortDiscoveryIntervalMS = 100;
     public const double DefaultDataAcquisitionIntervalMS = 500;
     public const double MinimumDataAcquisitionIntervalMS = 250;
+    public const double MaximumDataAcquisitionIntervalMS = 1500;
 
     // Device Constants
     public const ModbusEndianness ModbusEndianness = FluentModbus.ModbusEndianness.BigEndian;
