@@ -1,7 +1,11 @@
-﻿using CronBlocks.SerialPortInterface.Entities;
+﻿using CronBlocks.FuelCellMonitor.Settings;
+using CronBlocks.Helpers.Extensions;
+using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Extensions;
 using CronBlocks.SerialPortInterface.Interfaces;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace CronBlocks.FuelCellMonitor.Windows;
 
@@ -14,6 +18,9 @@ public partial class DeviceConnectionWindow : Window
     private SerialModbusClientSettings _settings;
 
     private List<FrameworkElement> _allSelectionElements;
+
+    private readonly Brush DeviceAddressInputBgBrush;
+    private readonly Brush RegistersStartAddressInputBgBrush;
 
     public DeviceConnectionWindow(
         ISerialPortsDiscoveryService serialPortsDiscovery,
@@ -40,19 +47,22 @@ public partial class DeviceConnectionWindow : Window
             RegistersStartAddressInput,
         };
 
+        DeviceAddressInputBgBrush = DeviceAddressInput.Background;
+        RegistersStartAddressInputBgBrush = RegistersStartAddressHeading.Background;
+
         _ports = serialPortsDiscovery;
         _options = serialOptions;
         _modbus = serialModbusClient;
 
         _settings = _modbus.GetComSettings();
 
-        _modbus.OperationStateChanged += OnModbusStatusChanged;
-        OnModbusStatusChanged(_modbus.OperationState);
+        _modbus.OperationStateChanged += HandleModbusStatus;
+        HandleModbusStatus(_modbus.OperationState);
     }
 
     protected override void OnClosed(EventArgs e)
     {
-        _modbus.OperationStateChanged -= OnModbusStatusChanged;
+        _modbus.OperationStateChanged -= HandleModbusStatus;
 
         _ports.NewPortFound -= OnComPortFound;
         _ports.ExistingPortRemoved -= OnComPortRemoved;
@@ -61,7 +71,7 @@ public partial class DeviceConnectionWindow : Window
         base.OnClosed(e);
     }
 
-    private void OnModbusStatusChanged(OperationState status)
+    private void HandleModbusStatus(OperationState status)
     {
         Dispatcher.Invoke(() =>
         {
@@ -199,6 +209,60 @@ public partial class DeviceConnectionWindow : Window
             if (PortInput.Items.Contains(port))
                 PortInput.Items.Remove(port);
         });
+    }
+
+    private void OnInputSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        string name = ((ComboBox)sender).Name;
+
+        switch (name)
+        {
+            case "PortInput": break;
+            case "BaudRateInput": break;
+            case "DataBitsInput": break;
+            case "ParityInput": break;
+            case "StopBitsInput": break;
+
+            default:
+                throw new NotImplementedException(
+                $"ComboBox-'{name}' - {nameof(OnInputSelectionChanged)} is not implemented");
+        }
+    }
+
+    private void OnInputTextChanged(object sender, TextChangedEventArgs e)
+    {
+        string name = ((TextBox)sender).Name;
+
+        switch (name)
+        {
+            case "DeviceAddressInput":
+                if (DeviceAddressInput.Text.IsValidDeviceAddress())
+                {
+                    DeviceAddressInput.Background = DeviceAddressInputBgBrush;
+                    _settings.DeviceAddress = int.Parse(DeviceAddressInput.Text);
+                }
+                else
+                {
+                    DeviceAddressInput.Background = DisplayColors.ErrorBg;
+                }
+                break;
+
+            case "RegistersStartAddressInput":
+                if (RegistersStartAddressInput.Text.IsValidHex())
+                {
+                    RegistersStartAddressInput.Background = RegistersStartAddressInputBgBrush;
+                    _settings.RegistersStartAddressHexStr = RegistersStartAddressInput.Text;
+                }
+                else
+                {
+                    RegistersStartAddressInput.Background = DisplayColors.ErrorBg;
+                }
+                break;
+
+            default:
+                throw new NotImplementedException(
+                $"TextBox-'{name}' - {nameof(OnInputTextChanged)} is not implemented");
+        }
     }
 
     private void ConnectButtonClicked(object sender, RoutedEventArgs e)

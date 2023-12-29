@@ -50,31 +50,31 @@
 
                 <!-- Port -->
                 <TextBlock x:Name="PortHeading" Text="Comm Port" />
-                <ComboBox x:Name="PortInput" />
+                <ComboBox x:Name="PortInput" SelectionChanged="OnInputSelectionChanged" />
 
                 <!-- Baud-rate -->
                 <TextBlock x:Name="BaudRateHeading" Text="Baud Rate" />
-                <ComboBox x:Name="BaudRateInput" />
+                <ComboBox x:Name="BaudRateInput" SelectionChanged="OnInputSelectionChanged" />
 
                 <!-- Data Bits -->
                 <TextBlock x:Name="DataBitsHeading" Text="Data Bits" />
-                <ComboBox x:Name="DataBitsInput" />
+                <ComboBox x:Name="DataBitsInput" SelectionChanged="OnInputSelectionChanged" />
 
                 <!-- Parity -->
                 <TextBlock x:Name="ParityHeading" Text="Parity" />
-                <ComboBox x:Name="ParityInput" />
+                <ComboBox x:Name="ParityInput" SelectionChanged="OnInputSelectionChanged" />
 
                 <!-- Stop Bits -->
                 <TextBlock x:Name="StopBitsHeading" Text="Stop Bits" />
-                <ComboBox x:Name="StopBitsInput" />
+                <ComboBox x:Name="StopBitsInput" SelectionChanged="OnInputSelectionChanged" />
 
                 <!-- Device address -->
                 <TextBlock x:Name="DeviceAddressHeading" Text="Device Address (Decimal)" />
-                <TextBox x:Name="DeviceAddressInput" />
+                <TextBox x:Name="DeviceAddressInput" TextChanged="OnInputTextChanged" />
 
                 <!-- Registers start address -->
                 <TextBlock x:Name="RegistersStartAddressHeading" Text="Registers' Start Address (HEX)" />
-                <TextBox x:Name="RegistersStartAddressInput" />
+                <TextBox x:Name="RegistersStartAddressInput" TextChanged="OnInputTextChanged" />
                 
             </StackPanel>
         </ScrollViewer>
