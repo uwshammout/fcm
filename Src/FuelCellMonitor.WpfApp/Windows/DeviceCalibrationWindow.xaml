@@ -11,7 +11,197 @@
         MinHeight="450" MinWidth="400"
         MaxHeight="750" MaxWidth="600"
         Height="650" Width="500">
+
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="CornerRadius" Value="5,5,5,5" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="Margin" Value="0,2,0,2" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2,2,2,2" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2,2,2,2" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="StatusBar">
+            <Setter Property="Margin" Value="3,2,3,2" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="150*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!-- Borders / Backgrounds -->
+        <Border Tag="Correction Factors"
+                Grid.Row="1" Grid.Column="1"
+                Grid.RowSpan="17" Grid.ColumnSpan="4"
+                Background="#FFF3FFE6" />
+
+        <Border Tag="Correction Factors"
+                Grid.Row="1" Grid.Column="5"
+                Grid.RowSpan="17" Grid.ColumnSpan="1"
+                Background="#FFE6FFFF" />
+
+        <!-- Register Settings -->
+        <Label Grid.Row="0" Content="Register Settings" FontStyle="Normal" Grid.Column="0" Grid.ColumnSpan="6" Margin="0" />
+        <Label Grid.Row="1" Grid.Column="1" Content="Correction factors" FontWeight="Normal" Grid.ColumnSpan="4" Margin="0" />
+        <Label Grid.Row="1" Grid.Column="5" Content="Processed Value" FontWeight="Normal" Margin="0" />
+
+        <!-- Register Names -->
+        <Label Grid.Row="2" Content="A1" FontStyle="Normal" />
+        <Label Grid.Row="3" Content="A2" FontStyle="Normal" />
+        <Label Grid.Row="4" Content="A3" FontStyle="Normal" />
+        <Label Grid.Row="5" Content="A4" FontStyle="Normal" />
+        <Label Grid.Row="6" Content="A5" FontStyle="Normal" />
+        <Label Grid.Row="7" Content="A6" FontStyle="Normal" />
+        <Label Grid.Row="8" Content="A7" FontStyle="Normal" />
+        <Label Grid.Row="9" Content="A8" FontStyle="Normal" />
+        <Label Grid.Row="10" Content="A9" FontStyle="Normal" />
+        <Label Grid.Row="11" Content="A10" FontStyle="Normal" />
+        <Label Grid.Row="12" Content="A11" FontStyle="Normal" />
+        <Label Grid.Row="13" Content="A12" FontStyle="Normal" />
+        <Label Grid.Row="14" Content="A13" FontStyle="Normal" />
+        <Label Grid.Row="15" Content="A14" FontStyle="Normal" />
+        <Label Grid.Row="16" Content="A15" FontStyle="Normal" />
+        <Label Grid.Row="17" Content="A16" FontStyle="Normal" />
+
+        <!-- Initial Multiplication Factor -->
+        <Label Grid.Row="2" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="3" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="4" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="5" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="6" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="7" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="8" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="9" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="10" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="11" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="12" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="13" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="14" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="15" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="16" Grid.Column="1" Content=" ÷ 1000 x " />
+        <Label Grid.Row="17" Grid.Column="1" Content=" ÷ 1000 x " />
+
+        <!-- Multiplication Factor -->
+        <TextBox Grid.Row="2" Grid.Column="2" x:Name="MultiplicationFactorA1" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="3" Grid.Column="2" x:Name="MultiplicationFactorA2" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="4" Grid.Column="2" x:Name="MultiplicationFactorA3" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="5" Grid.Column="2" x:Name="MultiplicationFactorA4" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="6" Grid.Column="2" x:Name="MultiplicationFactorA5" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="7" Grid.Column="2" x:Name="MultiplicationFactorA6" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="8" Grid.Column="2" x:Name="MultiplicationFactorA7" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="9" Grid.Column="2" x:Name="MultiplicationFactorA8" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="10" Grid.Column="2" x:Name="MultiplicationFactorA9" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="11" Grid.Column="2" x:Name="MultiplicationFactorA10" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="12" Grid.Column="2" x:Name="MultiplicationFactorA11" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="13" Grid.Column="2" x:Name="MultiplicationFactorA12" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="14" Grid.Column="2" x:Name="MultiplicationFactorA13" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="15" Grid.Column="2" x:Name="MultiplicationFactorA14" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="16" Grid.Column="2" x:Name="MultiplicationFactorA15" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="17" Grid.Column="2" x:Name="MultiplicationFactorA16" TextChanged="OnTextChanged" />
+
+        <!-- Addition Factor Symbol -->
+        <Label Grid.Row="2" Grid.Column="3" Content="+" />
+        <Label Grid.Row="3" Grid.Column="3" Content="+" />
+        <Label Grid.Row="4" Grid.Column="3" Content="+" />
+        <Label Grid.Row="5" Grid.Column="3" Content="+" />
+        <Label Grid.Row="6" Grid.Column="3" Content="+" />
+        <Label Grid.Row="7" Grid.Column="3" Content="+" />
+        <Label Grid.Row="8" Grid.Column="3" Content="+" />
+        <Label Grid.Row="9" Grid.Column="3" Content="+" />
+        <Label Grid.Row="10" Grid.Column="3" Content="+" />
+        <Label Grid.Row="11" Grid.Column="3" Content="+" />
+        <Label Grid.Row="12" Grid.Column="3" Content="+" />
+        <Label Grid.Row="13" Grid.Column="3" Content="+" />
+        <Label Grid.Row="14" Grid.Column="3" Content="+" />
+        <Label Grid.Row="15" Grid.Column="3" Content="+" />
+        <Label Grid.Row="16" Grid.Column="3" Content="+" />
+        <Label Grid.Row="17" Grid.Column="3" Content="+" />
+
+        <!-- Offsets -->
+        <TextBox Grid.Row="2" Grid.Column="4" x:Name="OffsetA1" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="3" Grid.Column="4" x:Name="OffsetA2" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="4" Grid.Column="4" x:Name="OffsetA3" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="5" Grid.Column="4" x:Name="OffsetA4" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="6" Grid.Column="4" x:Name="OffsetA5" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="7" Grid.Column="4" x:Name="OffsetA6" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="8" Grid.Column="4" x:Name="OffsetA7" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="9" Grid.Column="4" x:Name="OffsetA8" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="10" Grid.Column="4" x:Name="OffsetA9" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="11" Grid.Column="4" x:Name="OffsetA10" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="12" Grid.Column="4" x:Name="OffsetA11" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="13" Grid.Column="4" x:Name="OffsetA12" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="14" Grid.Column="4" x:Name="OffsetA13" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="15" Grid.Column="4" x:Name="OffsetA14" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="16" Grid.Column="4" x:Name="OffsetA15" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="17" Grid.Column="4" x:Name="OffsetA16" TextChanged="OnTextChanged" />
+
+        <!-- Processed Values -->
+        <TextBlock Grid.Row="2" Grid.Column="5" x:Name="ProcessedValueA1" Text="0.00" />
+        <TextBlock Grid.Row="3" Grid.Column="5" x:Name="ProcessedValueA2" Text="0.00" />
+        <TextBlock Grid.Row="4" Grid.Column="5" x:Name="ProcessedValueA3" Text="0.00" />
+        <TextBlock Grid.Row="5" Grid.Column="5" x:Name="ProcessedValueA4" Text="0.00" />
+        <TextBlock Grid.Row="6" Grid.Column="5" x:Name="ProcessedValueA5" Text="0.00" />
+        <TextBlock Grid.Row="7" Grid.Column="5" x:Name="ProcessedValueA6" Text="0.00" />
+        <TextBlock Grid.Row="8" Grid.Column="5" x:Name="ProcessedValueA7" Text="0.00" />
+        <TextBlock Grid.Row="9" Grid.Column="5" x:Name="ProcessedValueA8" Text="0.00" />
+        <TextBlock Grid.Row="10" Grid.Column="5" x:Name="ProcessedValueA9" Text="0.00" />
+        <TextBlock Grid.Row="11" Grid.Column="5" x:Name="ProcessedValueA10" Text="0.00" />
+        <TextBlock Grid.Row="12" Grid.Column="5" x:Name="ProcessedValueA11" Text="0.00" />
+        <TextBlock Grid.Row="13" Grid.Column="5" x:Name="ProcessedValueA12" Text="0.00" />
+        <TextBlock Grid.Row="14" Grid.Column="5" x:Name="ProcessedValueA13" Text="0.00" />
+        <TextBlock Grid.Row="15" Grid.Column="5" x:Name="ProcessedValueA14" Text="0.00" />
+        <TextBlock Grid.Row="16" Grid.Column="5" x:Name="ProcessedValueA15" Text="0.00" />
+        <TextBlock Grid.Row="17" Grid.Column="5" x:Name="ProcessedValueA16" Text="0.00" />
+
+        <StatusBar Grid.Row="18" Grid.ColumnSpan="6">
+            <TextBlock x:Name="StatusMessage"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch"
+                       FontWeight="Normal"
+                       Margin="1" />
+        </StatusBar>
     </Grid>
 </Window>
