@@ -237,6 +237,10 @@ public class SerialModbusClientService : ISerialModbusClientService
                 _registersStartAddress,
                 Constants.TotalRegisters).ToArray();
         }
+        catch (TimeoutException)
+        {
+            //- Not doing anything here
+        }
         catch (Exception ex)
         {
             _logger.LogError($"Error occurred while reading at {_comPort}: {ex.Message}");
