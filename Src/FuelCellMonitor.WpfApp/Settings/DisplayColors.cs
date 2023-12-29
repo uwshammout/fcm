@@ -4,5 +4,5 @@ namespace CronBlocks.FuelCellMonitor.Settings;
 
 internal static class DisplayColors
 {
-    public readonly static SolidColorBrush ErrorBg = new(Color.FromArgb(200, 150, 50, 55));
+    public readonly static SolidColorBrush ErrorBg = new(Color.FromArgb(200, 255, 174, 201));
 }
