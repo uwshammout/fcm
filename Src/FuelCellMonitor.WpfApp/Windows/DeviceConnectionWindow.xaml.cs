@@ -19,8 +19,12 @@ public partial class DeviceConnectionWindow : Window
 
     private List<FrameworkElement> _allSelectionElements;
 
-    private readonly Brush DeviceAddressInputBgBrush;
-    private readonly Brush RegistersStartAddressInputBgBrush;
+    private readonly string _connectButtonInitialText;
+    private readonly string _connectButtonConnectedText = "Disconnect";
+
+    private readonly Brush _connectButtonBgBrush;
+    private readonly Brush _deviceAddressInputBgBrush;
+    private readonly Brush _registersStartAddressInputBgBrush;
 
     public DeviceConnectionWindow(
         ISerialPortsDiscoveryService serialPortsDiscovery,
@@ -47,8 +51,11 @@ public partial class DeviceConnectionWindow : Window
             RegistersStartAddressInput,
         };
 
-        DeviceAddressInputBgBrush = DeviceAddressInput.Background;
-        RegistersStartAddressInputBgBrush = RegistersStartAddressHeading.Background;
+        _connectButtonInitialText = (string)ConnectButton.Content;
+
+        _connectButtonBgBrush = ConnectButton.Background;
+        _deviceAddressInputBgBrush = DeviceAddressInput.Background;
+        _registersStartAddressInputBgBrush = RegistersStartAddressHeading.Background;
 
         _ports = serialPortsDiscovery;
         _options = serialOptions;
@@ -170,6 +177,8 @@ public partial class DeviceConnectionWindow : Window
 
                     break;
             }
+
+            UpdateConnectButton();
         });
     }
 
@@ -215,31 +224,36 @@ public partial class DeviceConnectionWindow : Window
     {
         string name = ((ComboBox)sender).Name;
 
-        switch (name)
+        if (((ComboBox)sender).SelectedItem != null)
         {
-            case "PortInput":
-                _settings.ComPort = (string)PortInput.SelectedItem;
-                break;
+            switch (name)
+            {
+                case "PortInput":
+                    _settings.ComPort = (string)PortInput.SelectedItem;
+                    break;
 
-            case "BaudRateInput":
-                _settings.BaudRate = ((string)BaudRateInput.SelectedItem).FromDisplayString<BaudRate>();
-                break;
+                case "BaudRateInput":
+                    _settings.BaudRate = ((string)BaudRateInput.SelectedItem).FromDisplayString<BaudRate>();
+                    break;
 
-            case "DataBitsInput":
-                _settings.DataBits = ((string)DataBitsInput.SelectedItem).FromDisplayString<DataBits>();
-                break;
+                case "DataBitsInput":
+                    _settings.DataBits = ((string)DataBitsInput.SelectedItem).FromDisplayString<DataBits>();
+                    break;
 
-            case "ParityInput":
-                _settings.Parity = ((string)ParityInput.SelectedItem).FromDisplayString<Parity>();
-                break;
+                case "ParityInput":
+                    _settings.Parity = ((string)ParityInput.SelectedItem).FromDisplayString<Parity>();
+                    break;
 
-            case "StopBitsInput":
-                _settings.StopBits = ((string)StopBitsInput.SelectedItem).FromDisplayString<StopBits>(); 
-                break;
+                case "StopBitsInput":
+                    _settings.StopBits = ((string)StopBitsInput.SelectedItem).FromDisplayString<StopBits>();
+                    break;
 
-            default:
-                throw new NotImplementedException(
-                $"ComboBox-'{name}' - {nameof(OnInputSelectionChanged)} is not implemented");
+                default:
+                    throw new NotImplementedException(
+                    $"ComboBox-'{name}' - {nameof(OnInputSelectionChanged)} is not implemented");
+            }
+
+            UpdateConnectButton();
         }
     }
 
@@ -252,7 +266,7 @@ public partial class DeviceConnectionWindow : Window
             case "DeviceAddressInput":
                 if (DeviceAddressInput.Text.IsValidDeviceAddress())
                 {
-                    DeviceAddressInput.Background = DeviceAddressInputBgBrush;
+                    DeviceAddressInput.Background = _deviceAddressInputBgBrush;
                     _settings.DeviceAddress = int.Parse(DeviceAddressInput.Text);
                 }
                 else
@@ -264,7 +278,7 @@ public partial class DeviceConnectionWindow : Window
             case "RegistersStartAddressInput":
                 if (RegistersStartAddressInput.Text.IsValidHex())
                 {
-                    RegistersStartAddressInput.Background = RegistersStartAddressInputBgBrush;
+                    RegistersStartAddressInput.Background = _registersStartAddressInputBgBrush;
                     _settings.RegistersStartAddressHexStr = RegistersStartAddressInput.Text;
                 }
                 else
@@ -277,10 +291,61 @@ public partial class DeviceConnectionWindow : Window
                 throw new NotImplementedException(
                 $"TextBox-'{name}' - {nameof(OnInputTextChanged)} is not implemented");
         }
+
+        UpdateConnectButton();
+    }
+
+    private void UpdateConnectButton()
+    {
+        switch (_modbus.OperationState)
+        {
+            case OperationState.Running:
+                ConnectButton.Content = _connectButtonConnectedText;
+                break;
+
+            case OperationState.Stopped:
+                ConnectButton.Content = _connectButtonInitialText;
+                break;
+        }
+
+        if (PortInput.SelectedItem != null &&
+            DeviceAddressInput.Text.IsValidDeviceAddress() &&
+            RegistersStartAddressInput.Text.IsValidHex())
+        {
+            ConnectButton.IsEnabled = true;
+        }
+        else
+        {
+            ConnectButton.IsEnabled = false;
+        }
     }
 
     private void ConnectButtonClicked(object sender, RoutedEventArgs e)
     {
-
+        if ((string)ConnectButton.Content == _connectButtonInitialText)
+        {
+            //- Connect
+            if (_settings.IsValid())
+            {
+                _modbus.SetComSettings(_settings);
+                _modbus.StartAcquisition();
+            }
+            else
+            {
+                throw new InvalidOperationException(
+                    $"{_settings} object is invalid to start connection with the device");
+            }
+        }
+        else if ((string)ConnectButton.Content == _connectButtonConnectedText)
+        {
+            //- Disconnect
+            _modbus.StopAcquisition();
+        }
+        else
+        {
+            throw new NotImplementedException(
+                $"Handling of {nameof(ConnectButtonClicked)} is not implemented" +
+                $" when its used for '{(string)ConnectButton.Content}' purpose");
+        }
     }
 }
