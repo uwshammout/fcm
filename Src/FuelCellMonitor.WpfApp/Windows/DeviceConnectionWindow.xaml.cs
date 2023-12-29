@@ -1,4 +1,5 @@
 ﻿using CronBlocks.SerialPortInterface.Entities;
+using CronBlocks.SerialPortInterface.Extensions;
 using CronBlocks.SerialPortInterface.Interfaces;
 using System.Windows;
 
@@ -10,7 +11,9 @@ public partial class DeviceConnectionWindow : Window
     private readonly ISerialOptionsService _options;
     private readonly ISerialModbusClientService _modbus;
 
-    private readonly List<FrameworkElement> _allSelectionElements;
+    private SerialModbusClientSettings _settings;
+
+    private List<FrameworkElement> _allSelectionElements;
 
     public DeviceConnectionWindow(
         ISerialPortsDiscoveryService serialPortsDiscovery,
@@ -40,6 +43,8 @@ public partial class DeviceConnectionWindow : Window
         _ports = serialPortsDiscovery;
         _options = serialOptions;
         _modbus = serialModbusClient;
+
+        _settings = _modbus.GetComSettings();
 
         _modbus.OperationStateChanged += OnModbusStatusChanged;
         OnModbusStatusChanged(_modbus.OperationState);
@@ -76,14 +81,83 @@ public partial class DeviceConnectionWindow : Window
                     _ports.StopPortsDiscovery();
 
                     EnableSelectionControls(false);
+
+                    _settings = _modbus.GetComSettings();
+
+                    PortInput.Items.Add(_settings.ComPort);
+                    BaudRateInput.Items.Add(_settings.BaudRate.ToDisplayString());
+                    DataBitsInput.Items.Add(_settings.DataBits.ToDisplayString());
+                    ParityInput.Items.Add(_settings.Parity.ToDisplayString());
+                    StopBitsInput.Items.Add(_settings.StopBits.ToDisplayString());
+                    DeviceAddressInput.Text = _settings.DeviceAddress.ToString();
+                    RegistersStartAddressInput.Text = _settings.RegistersStartAddressHexStr;
+
+                    PortInput.SelectedIndex = 0;
+                    BaudRateInput.SelectedIndex = 0;
+                    DataBitsInput.SelectedIndex = 0;
+                    ParityInput.SelectedIndex = 0;
+                    StopBitsInput.SelectedIndex = 0;
+
                     break;
 
                 case OperationState.Stopped:
+                    EnableSelectionControls(true);
+
+                    _settings = _modbus.GetComSettings();
+
+                    int index;
+
+                    index = 0;
+                    foreach (string option in _options.GetAllOptions<BaudRate>())
+                    {
+                        BaudRateInput.Items.Add(option);
+                        if (option == _settings.BaudRate.ToDisplayString())
+                        {
+                            BaudRateInput.SelectedIndex = index;
+                        }
+                        index++;
+                    }
+
+                    index = 0;
+                    foreach (string option in _options.GetAllOptions<DataBits>())
+                    {
+                        DataBitsInput.Items.Add(option);
+                        if (option == _settings.DataBits.ToDisplayString())
+                        {
+                            DataBitsInput.SelectedIndex = index;
+                        }
+                        index++;
+                    }
+
+                    index = 0;
+                    foreach (string option in _options.GetAllOptions<Parity>())
+                    {
+                        ParityInput.Items.Add(option);
+                        if (option == _settings.Parity.ToDisplayString())
+                        {
+                            ParityInput.SelectedIndex = index;
+                        }
+                        index++;
+                    }
+
+                    index = 0;
+                    foreach (string option in _options.GetAllOptions<StopBits>())
+                    {
+                        StopBitsInput.Items.Add(option);
+                        if (option == _settings.StopBits.ToDisplayString())
+                        {
+                            StopBitsInput.SelectedIndex = index;
+                        }
+                        index++;
+                    }
+
+                    DeviceAddressInput.Text = _settings.DeviceAddress.ToString();
+                    RegistersStartAddressInput.Text = _settings.RegistersStartAddressHexStr;
+
                     _ports.NewPortFound += OnComPortFound;
                     _ports.ExistingPortRemoved += OnComPortRemoved;
                     _ports.StartPortsDiscovery();
 
-                    EnableSelectionControls(true);
                     break;
             }
         });
