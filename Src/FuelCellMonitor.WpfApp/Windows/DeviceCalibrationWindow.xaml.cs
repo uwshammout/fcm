@@ -1,6 +1,7 @@
 ﻿using CronBlocks.FuelCellMonitor.Settings;
 using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
+using System.Collections.Immutable;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -23,6 +24,9 @@ public partial class DeviceCalibrationWindow : Window
         ISerialModbusDataScalingService modbusScaling)
     {
         InitializeComponent();
+
+        _modbus = modbus;
+        _modbusScaling = modbusScaling;
 
         _originalTextBoxBg = MultiplicationFactorA1.Background;
 
@@ -52,8 +56,17 @@ public partial class DeviceCalibrationWindow : Window
                 ProcessedValueA13,  ProcessedValueA14,  ProcessedValueA15,  ProcessedValueA16
             ];
 
-        _modbus = modbus;
-        _modbusScaling = modbusScaling;
+        ImmutableList<double> mfs = _modbusScaling.GetMultiplicationFactors();
+        for (int i = 0; i < Math.Min(_mfInputs.Length, mfs.Count); i++)
+        {
+            _mfInputs[i].Text = mfs[i].ToString();
+        }
+
+        ImmutableList<double> ofs = _modbusScaling.GetOffsets();
+        for (int i = 0; i < Math.Min(_offInputs.Length, ofs.Count); i++)
+        {
+            _offInputs[i].Text = ofs[i].ToString();
+        }
 
         _modbus.OperationStateChanged += OnDeviceOperationStateChanged;
         OnDeviceOperationStateChanged(_modbus.OperationState);
