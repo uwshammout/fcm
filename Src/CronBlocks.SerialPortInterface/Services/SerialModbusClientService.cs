@@ -38,7 +38,7 @@ public class SerialModbusClientService : ISerialModbusClientService
     //- MODBUS Client
 
     private ModbusRtuClient _client;
-    
+
     //- Received Values
 
     private double[] _valuesReceived;
@@ -81,6 +81,21 @@ public class SerialModbusClientService : ISerialModbusClientService
                 _stopBits = portSettings.StopBits;
             }
         }
+    }
+
+    public SerialModbusClientSettings GetComSettings()
+    {
+        return new()
+        {
+            ComPort = _comPort,
+            DeviceAddress = _deviceAddress,
+            RegistersStartAddressHexStr =
+                  $"0x00{Convert.ToHexString(BitConverter.GetBytes(_registersStartAddress))}",
+            BaudRate = _baudRate,
+            DataBits = _dataBits,
+            Parity = _parity,
+            StopBits = _stopBits,
+        };
     }
 
     #region Start / Stop Acquisition

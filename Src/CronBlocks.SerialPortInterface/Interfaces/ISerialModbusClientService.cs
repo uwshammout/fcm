@@ -8,6 +8,7 @@ public interface ISerialModbusClientService : IDisposable
     event Action<OperationState>? OperationStateChanged;
 
     void SetComSettings(SerialModbusClientSettings portSettings);
+    SerialModbusClientSettings GetComSettings();
 
     OperationState OperationState { get; }
 
