@@ -27,8 +27,8 @@ public class SerialModbusClientService : ISerialModbusClientService
 
     private string _comPort = null!;
 
-    private int _deviceAddress;
-    private int _registersStartAddress;
+    private int _deviceAddress = Constants.DefaultDeviceAddress;
+    private int _registersStartAddress = Convert.ToInt32(Constants.DefaultRegistersStartAddressHexStr, 16);
 
     private BaudRate _baudRate = Constants.DefaultBaudRate;
     private DataBits _dataBits = Constants.DefaultDataBits;
