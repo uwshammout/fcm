@@ -301,10 +301,12 @@ public partial class DeviceConnectionWindow : Window
         {
             case OperationState.Running:
                 ConnectButton.Content = _connectButtonConnectedText;
+                ConnectButton.Background = DisplayColors.DisconnectButtonBg;
                 break;
 
             case OperationState.Stopped:
                 ConnectButton.Content = _connectButtonInitialText;
+                ConnectButton.Background = _connectButtonBgBrush;
                 break;
         }
 
