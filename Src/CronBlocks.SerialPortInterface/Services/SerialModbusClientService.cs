@@ -94,7 +94,7 @@ public class SerialModbusClientService : ISerialModbusClientService
             BaudRate = _baudRate,
             DataBits = _dataBits,
             Parity = _parity,
-            StopBits = _stopBits,
+            StopBits = _stopBits
         };
     }
 
