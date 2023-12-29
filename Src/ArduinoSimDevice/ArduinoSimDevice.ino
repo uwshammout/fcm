@@ -1,6 +1,6 @@
 #include "ModbusRTUSlave.h"
 
-#define SLAVE_ID     0x0020
+#define SLAVE_ID     0x0001
 
 void fill_holding_registers();
 void fill_input_registers();
