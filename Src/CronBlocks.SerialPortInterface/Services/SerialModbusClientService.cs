@@ -35,6 +35,8 @@ public class SerialModbusClientService : ISerialModbusClientService
     private Parity _parity = Constants.DefaultParity;
     private StopBits _stopBits = Constants.DefaultStopBits;
 
+    private double _dataAcquisitionInterval;
+
     //- MODBUS Client
 
     private ModbusRtuClient _client;
@@ -55,6 +57,8 @@ public class SerialModbusClientService : ISerialModbusClientService
         _client = null!;
 
         _valuesReceived = new double[Constants.TotalRegisters];
+
+        _dataAcquisitionInterval = Constants.DefaultDataAcquisitionIntervalMS;
     }
 
     public void SetComSettings(SerialModbusClientSettings portSettings)
@@ -98,6 +102,21 @@ public class SerialModbusClientService : ISerialModbusClientService
         };
     }
 
+    public void SetDataAcquisitionInterval(double milliseconds)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(
+            milliseconds,
+            Constants.MinimumDataAcquisitionIntervalMS,
+            nameof(milliseconds));
+
+        _dataAcquisitionInterval = milliseconds;
+    }
+
+    public double GetDataAcquisitionInterval()
+    {
+        return _dataAcquisitionInterval;
+    }
+
     #region Start / Stop Acquisition
     public void StartAcquisition()
     {
@@ -113,7 +132,7 @@ public class SerialModbusClientService : ISerialModbusClientService
             {
                 _logger.LogInformation(
                     $"Starting data acquisition from {_comPort}" +
-                    $" @{Constants.DataAcquisitionIntervalMS}ms interval");
+                    $" @{_dataAcquisitionInterval}ms interval");
 
                 CreateComClientObject();
 
@@ -122,8 +141,8 @@ public class SerialModbusClientService : ISerialModbusClientService
                 _isRunning = true;
 
                 _timer.Change(
-                    TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS),
-                    TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS));
+                    TimeSpan.FromMilliseconds(_dataAcquisitionInterval),
+                    TimeSpan.FromMilliseconds(_dataAcquisitionInterval));
             }
         }
     }
@@ -243,8 +262,8 @@ public class SerialModbusClientService : ISerialModbusClientService
             if (_isRunning)
             {
                 _timer.Change(
-                    TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS),
-                    TimeSpan.FromMilliseconds(Constants.DataAcquisitionIntervalMS));
+                    TimeSpan.FromMilliseconds(_dataAcquisitionInterval),
+                    TimeSpan.FromMilliseconds(_dataAcquisitionInterval));
             }
             else
             {

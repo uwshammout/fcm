@@ -10,6 +10,9 @@ public interface ISerialModbusClientService : IDisposable
     void SetComSettings(SerialModbusClientSettings portSettings);
     SerialModbusClientSettings GetComSettings();
 
+    void SetDataAcquisitionInterval(double milliseconds);
+    double GetDataAcquisitionInterval();
+
     OperationState OperationState { get; }
 
     void StartAcquisition();
