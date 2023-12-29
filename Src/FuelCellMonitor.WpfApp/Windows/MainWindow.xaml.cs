@@ -24,6 +24,8 @@ public partial class MainWindow : Window
         _modbusScaling = scalingService;
 
         _modbus.OperationStateChanged += OnDeviceOperationStateChanged;
+        OnDeviceOperationStateChanged(_modbus.OperationState);
+
         _modbusScaling.NewValuesReceived += OnNewValuesReceived;
     }
 
@@ -41,6 +43,20 @@ public partial class MainWindow : Window
 
     private void OnDeviceOperationStateChanged(OperationState state)
     {
+        Dispatcher.Invoke(() =>
+        {
+            switch (state)
+            {
+                case OperationState.Running:
+                    MessageBar.Text = "Device connected";
+                    break;
+
+                case OperationState.Stopped:
+                    MessageBar.Text = "Device not connected";
+                    DataProgress.Visibility = Visibility.Hidden;
+                    break;
+            }
+        });
     }
 
     private void OnMenuItemClicked(object sender, RoutedEventArgs e)

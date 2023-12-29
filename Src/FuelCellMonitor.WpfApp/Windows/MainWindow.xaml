@@ -37,6 +37,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0"
@@ -173,5 +174,11 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        
+        <!-- Message & progress bar -->
+        <StatusBar Grid.Row="2">
+            <TextBlock x:Name="MessageBar" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        </StatusBar>
+        <ProgressBar x:Name="DataProgress" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
     </Grid>
 </Window>
