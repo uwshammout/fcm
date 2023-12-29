@@ -1,7 +1,9 @@
-﻿using CronBlocks.SerialPortInterface.Entities;
+﻿using CronBlocks.FuelCellMonitor.Settings;
+using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace CronBlocks.FuelCellMonitor.Windows;
 
@@ -14,11 +16,15 @@ public partial class DeviceCalibrationWindow : Window
     private readonly TextBox[] _offInputs;
     private readonly TextBlock[] _outputs;
 
+    private readonly Brush _originalTextBoxBg;
+
     public DeviceCalibrationWindow(
         ISerialModbusClientService modbus,
         ISerialModbusDataScalingService modbusScaling)
     {
         InitializeComponent();
+
+        _originalTextBoxBg = MultiplicationFactorA1.Background;
 
         _mfInputs =
             [
@@ -91,6 +97,13 @@ public partial class DeviceCalibrationWindow : Window
 
     private void OnNewValuesReceived(List<double> list)
     {
+        Dispatcher.Invoke(() =>
+        {
+            for (int i = 0; i < Math.Min(list.Count, _outputs.Length); i++)
+            {
+                _outputs[i].Text = list[i].ToString("0.00");
+            }
+        });
     }
 
     private void OnDeviceOperationStateChanged(OperationState state)
@@ -115,9 +128,69 @@ public partial class DeviceCalibrationWindow : Window
         });
     }
 
-    private void OnTextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+    private void OnTextChanged(object sender, TextChangedEventArgs e)
     {
+        TextBox textBox = (TextBox)sender;
+        string name = textBox.Name;
 
+        int index = -1;
+        string prefix = null!;
+
+        string mfPrefix = "MultiplicationFactorA";
+        string offPrefix = "OffsetA";
+
+        //- Let's match prefix
+
+        if (name.StartsWith(mfPrefix))
+        {
+            prefix = mfPrefix;
+        }
+        else if (name.StartsWith(offPrefix))
+        {
+            prefix = offPrefix;
+        }
+        else
+        {
+            throw new NotImplementedException(
+                $"Implementation missing from {nameof(OnTextChanged)} for" +
+                $" handling {name}");
+        }
+
+        //- Let's get the index
+
+        if (prefix != null)
+        {
+            if (int.TryParse(name.Substring(prefix.Length), out index) &&
+                index >= 1 && index <= 16)
+            {
+                index -= 1;
+            }
+            else
+            {
+                throw new NotImplementedException(
+                    $"{nameof(OnTextChanged)}: cannot get valid index from {name}");
+            }
+        }
+
+        //- Check the value
+
+        if (double.TryParse(textBox.Text, out double value))
+        {
+            textBox.Background = _originalTextBoxBg;
+
+            if (prefix == mfPrefix)
+            {
+                _modbusScaling.SetMultiplicationFactor(index, value);
+            }
+            else if (prefix == offPrefix)
+            {
+                _modbusScaling.SetOffset(index, value);
+            }
+        }
+        else
+        {
+            textBox.Background = DisplayColors.ErrorBg;
+        }
     }
 
     protected override void OnClosed(EventArgs e)
