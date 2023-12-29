@@ -8,6 +8,7 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>CronBlocks.$(MSBuildProjectName.Replace(" ", "_").Replace(".WpfApp", ""))</RootNamespace>
     <ApplicationIcon>Resources\FuelCellMonitor.ico</ApplicationIcon>
+    <AssemblyName>$(MSBuildProjectName.Replace(".WpfApp", ""))</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
