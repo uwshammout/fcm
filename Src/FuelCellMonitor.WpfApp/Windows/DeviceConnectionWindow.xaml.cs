@@ -217,11 +217,25 @@ public partial class DeviceConnectionWindow : Window
 
         switch (name)
         {
-            case "PortInput": break;
-            case "BaudRateInput": break;
-            case "DataBitsInput": break;
-            case "ParityInput": break;
-            case "StopBitsInput": break;
+            case "PortInput":
+                _settings.ComPort = (string)PortInput.SelectedItem;
+                break;
+
+            case "BaudRateInput":
+                _settings.BaudRate = ((string)BaudRateInput.SelectedItem).FromDisplayString<BaudRate>();
+                break;
+
+            case "DataBitsInput":
+                _settings.DataBits = ((string)DataBitsInput.SelectedItem).FromDisplayString<DataBits>();
+                break;
+
+            case "ParityInput":
+                _settings.Parity = ((string)ParityInput.SelectedItem).FromDisplayString<Parity>();
+                break;
+
+            case "StopBitsInput":
+                _settings.StopBits = ((string)StopBitsInput.SelectedItem).FromDisplayString<StopBits>(); 
+                break;
 
             default:
                 throw new NotImplementedException(
