@@ -28,62 +28,28 @@ public partial class DeviceCalibrationWindow : Window
 
         _mfInputs =
             [
-                MultiplicationFactorA1,
-                MultiplicationFactorA2,
-                MultiplicationFactorA3,
-                MultiplicationFactorA4,
-                MultiplicationFactorA5,
-                MultiplicationFactorA6,
-                MultiplicationFactorA7,
-                MultiplicationFactorA8,
-                MultiplicationFactorA9,
-                MultiplicationFactorA10,
-                MultiplicationFactorA11,
-                MultiplicationFactorA12,
-                MultiplicationFactorA13,
-                MultiplicationFactorA14,
-                MultiplicationFactorA15,
+                MultiplicationFactorA1,   MultiplicationFactorA2,   MultiplicationFactorA3,
+                MultiplicationFactorA4,   MultiplicationFactorA5,   MultiplicationFactorA6,
+                MultiplicationFactorA7,   MultiplicationFactorA8,   MultiplicationFactorA9,
+                MultiplicationFactorA10,  MultiplicationFactorA11,  MultiplicationFactorA12,
+                MultiplicationFactorA13,  MultiplicationFactorA14,  MultiplicationFactorA15,
                 MultiplicationFactorA16
             ];
 
         _offInputs =
             [
-                OffsetA1,
-                OffsetA2,
-                OffsetA3,
-                OffsetA4,
-                OffsetA5,
-                OffsetA6,
-                OffsetA7,
-                OffsetA8,
-                OffsetA9,
-                OffsetA10,
-                OffsetA11,
-                OffsetA12,
-                OffsetA13,
-                OffsetA14,
-                OffsetA15,
-                OffsetA16
+                OffsetA1,   OffsetA2,   OffsetA3,   OffsetA4,
+                OffsetA5,   OffsetA6,   OffsetA7,   OffsetA8,
+                OffsetA9,   OffsetA10,  OffsetA11,  OffsetA12,
+                OffsetA13,  OffsetA14,  OffsetA15,  OffsetA16
             ];
 
         _outputs =
             [
-                ProcessedValueA1,
-                ProcessedValueA2,
-                ProcessedValueA3,
-                ProcessedValueA4,
-                ProcessedValueA5,
-                ProcessedValueA6,
-                ProcessedValueA7,
-                ProcessedValueA8,
-                ProcessedValueA9,
-                ProcessedValueA10,
-                ProcessedValueA11,
-                ProcessedValueA12,
-                ProcessedValueA13,
-                ProcessedValueA14,
-                ProcessedValueA15,
-                ProcessedValueA16
+                ProcessedValueA1,   ProcessedValueA2,   ProcessedValueA3,   ProcessedValueA4,
+                ProcessedValueA5,   ProcessedValueA6,   ProcessedValueA7,   ProcessedValueA8,
+                ProcessedValueA9,   ProcessedValueA10,  ProcessedValueA11,  ProcessedValueA12,
+                ProcessedValueA13,  ProcessedValueA14,  ProcessedValueA15,  ProcessedValueA16
             ];
 
         _modbus = modbus;
