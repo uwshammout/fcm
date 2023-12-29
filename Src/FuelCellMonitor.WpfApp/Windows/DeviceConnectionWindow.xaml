@@ -25,6 +25,11 @@
             <Setter Property="Margin" Value="0,5,0,0" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,5,0,0" />
+            <Setter Property="Padding" Value="3,5" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="3" />
             <Setter Property="Padding" Value="25,8" />
@@ -43,25 +48,34 @@
 
             <StackPanel>
 
-                <!-- Baud-rate -->
+                <!-- Port -->
                 <TextBlock x:Name="PortHeading" Text="Comm Port" />
-                <ComboBox x:Name="PortComboBox" />
-                
+                <ComboBox x:Name="PortInput" />
+
                 <!-- Baud-rate -->
                 <TextBlock x:Name="BaudRateHeading" Text="Baud Rate" />
-                <ComboBox x:Name="BaudRateComboBox" />
+                <ComboBox x:Name="BaudRateInput" />
 
                 <!-- Data Bits -->
                 <TextBlock x:Name="DataBitsHeading" Text="Data Bits" />
-                <ComboBox x:Name="DataBitsComboBox" />
+                <ComboBox x:Name="DataBitsInput" />
 
                 <!-- Parity -->
                 <TextBlock x:Name="ParityHeading" Text="Parity" />
-                <ComboBox x:Name="ParityComboBox" />
+                <ComboBox x:Name="ParityInput" />
 
                 <!-- Stop Bits -->
                 <TextBlock x:Name="StopBitsHeading" Text="Stop Bits" />
-                <ComboBox x:Name="StopBitsComboBox" />
+                <ComboBox x:Name="StopBitsInput" />
+
+                <!-- Device address -->
+                <TextBlock x:Name="DeviceAddressHeading" Text="Device Address" />
+                <TextBox x:Name="DeviceAddressInput" />
+
+                <!-- Registers start address -->
+                <TextBlock x:Name="RegistersStartAddressHeading" Text="Registers' Start Address" />
+                <TextBox x:Name="RegistersStartAddressInput" />
+                
             </StackPanel>
         </ScrollViewer>
 
