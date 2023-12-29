@@ -60,6 +60,14 @@ public partial class DeviceConnectionWindow : Window
     {
         Dispatcher.Invoke(() =>
         {
+            PortInput.Items.Clear();
+            BaudRateInput.Items.Clear();
+            DataBitsInput.Items.Clear();
+            ParityInput.Items.Clear();
+            StopBitsInput.Items.Clear();
+            DeviceAddressInput.Text = "";
+            RegistersStartAddressInput.Text = "";
+
             switch (status)
             {
                 case OperationState.Running:
