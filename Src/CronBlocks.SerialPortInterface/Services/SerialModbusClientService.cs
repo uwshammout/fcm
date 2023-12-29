@@ -94,7 +94,7 @@ public class SerialModbusClientService : ISerialModbusClientService
             ComPort = _comPort,
             DeviceAddress = _deviceAddress,
             RegistersStartAddressHexStr =
-                  $"0x00{Convert.ToHexString(BitConverter.GetBytes(_registersStartAddress))}",
+                  $"0x00{_registersStartAddress:X}",
             BaudRate = _baudRate,
             DataBits = _dataBits,
             Parity = _parity,
