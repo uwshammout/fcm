@@ -69,11 +69,11 @@
                 <ComboBox x:Name="StopBitsInput" />
 
                 <!-- Device address -->
-                <TextBlock x:Name="DeviceAddressHeading" Text="Device Address" />
+                <TextBlock x:Name="DeviceAddressHeading" Text="Device Address (Decimal)" />
                 <TextBox x:Name="DeviceAddressInput" />
 
                 <!-- Registers start address -->
-                <TextBlock x:Name="RegistersStartAddressHeading" Text="Registers' Start Address" />
+                <TextBlock x:Name="RegistersStartAddressHeading" Text="Registers' Start Address (HEX)" />
                 <TextBox x:Name="RegistersStartAddressInput" />
                 
             </StackPanel>
