@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CronBlocks.FuelCellMonitor.Windows"
         xmlns:cblk3pd="clr-namespace:CronBlocks.UserControls.Wpf.ThreePointerDial;assembly=CronBlocks.UserControls.Wpf"
-        xmlns:simplePlot="clr-namespace:CronBlocks.UserControls.Wpf.SimplePlot;assembly=CronBlocks.UserControls.Wpf"
         xmlns:timedPlot="clr-namespace:CronBlocks.UserControls.Wpf.TimedPlot;assembly=CronBlocks.UserControls.Wpf"
         xmlns:xyPlot="clr-namespace:CronBlocks.UserControls.Wpf.XYPlot;assembly=CronBlocks.UserControls.Wpf"
         mc:Ignorable="d"
