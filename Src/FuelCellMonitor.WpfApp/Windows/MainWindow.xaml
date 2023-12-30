@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:CronBlocks.FuelCellMonitor.Windows"
         xmlns:cblk3pd="clr-namespace:CronBlocks.UserControls.Wpf.ThreePointerDial;assembly=CronBlocks.UserControls.Wpf"
         xmlns:simplePlot="clr-namespace:CronBlocks.UserControls.Wpf.SimplePlot;assembly=CronBlocks.UserControls.Wpf"
+        xmlns:timedPlot="clr-namespace:CronBlocks.UserControls.Wpf.TimedPlot;assembly=CronBlocks.UserControls.Wpf"
+        xmlns:xyPlot="clr-namespace:CronBlocks.UserControls.Wpf.XYPlot;assembly=CronBlocks.UserControls.Wpf"
         mc:Ignorable="d"
         Title="Fuel Cell Monitor"
         FontFamily="Segoe UI Light"
@@ -72,14 +74,25 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <simplePlot:SimplePlot x:Name="FuelCellVIPlot"
-                                               Grid.Row="0" Grid.Column="0" />
-                        <simplePlot:SimplePlot x:Name="FuelCellPTPlot"                                               
-                                               Grid.Row="0" Grid.Column="1" />
-                        <simplePlot:SimplePlot x:Name="FuelCellPIPlot"                                               
-                                               Grid.Row="1" Grid.Column="0" />
-                        <simplePlot:SimplePlot x:Name="FuelCellPVPlot"                                               
-                                               Grid.Row="1" Grid.Column="1" />
+                        <xyPlot:XYPlot x:Name="FuelCellVIPlot"
+                                       XAxisTitle="Current (A)"
+                                       YAxisTitle="Voltage (V)"
+                                       Grid.Row="0" Grid.Column="0" />
+                        
+                        <timedPlot:TimedPlot x:Name="FuelCellPTPlot"
+                                             XAxisTitle="Time (sec : msec)"
+                                             YAxisTitle="Power (W)"
+                                             Grid.Row="0" Grid.Column="1" />
+                        
+                        <xyPlot:XYPlot x:Name="FuelCellPIPlot"
+                                       XAxisTitle="Current (A)"
+                                       YAxisTitle="Power (W)"
+                                       Grid.Row="1" Grid.Column="0" />
+                        
+                        <xyPlot:XYPlot x:Name="FuelCellPVPlot"
+                                       XAxisTitle="Voltage (V)"
+                                       YAxisTitle="Power (W)"
+                                       Grid.Row="1" Grid.Column="1" />
                     </Grid>
 
                     <!-- Gauges -->
