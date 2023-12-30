@@ -176,12 +176,12 @@ public partial class MainWindow : Window
                         window = _app.GetInstance<DeviceConnectionWindow>();
                         break;
 
-                    case "Calibrate":
-                        window = _app.GetInstance<DeviceCalibrationWindow>();
-                        break;
-
                     case "Measurement Settings":
                         window = _app.GetInstance<MeasurementSettingsWindow>();
+                        break;
+
+                    case "Calibrate":
+                        window = _app.GetInstance<DeviceCalibrationWindow>();
                         break;
                 }
 
