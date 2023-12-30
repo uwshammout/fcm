@@ -162,7 +162,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-
+                        
                         <!-- Plots -->
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
@@ -322,7 +322,11 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Charts -->
-                    <Grid Grid.Column="0"></Grid>
+                    <Grid Grid.Column="0">
+                        <xyPlot:XYPlot x:Name="ElectrolyzerIVPlot"
+                                       XAxisTitle="Voltage (V)"
+                                       YAxisTitle="Current (A)" />
+                    </Grid>
 
                     <!-- Gauges -->
                     <Grid Grid.Column="1">
