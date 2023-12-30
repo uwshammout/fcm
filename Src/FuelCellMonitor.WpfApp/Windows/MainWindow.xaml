@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CronBlocks.FuelCellMonitor.Windows"
         xmlns:cblk3pd="clr-namespace:CronBlocks.UserControls.Wpf.ThreePointerDial;assembly=CronBlocks.UserControls.Wpf"
+        xmlns:simplePlot="clr-namespace:CronBlocks.UserControls.Wpf.SimplePlot;assembly=CronBlocks.UserControls.Wpf"
         mc:Ignorable="d"
         Title="Fuel Cell Monitor"
         FontFamily="Segoe UI Light"
@@ -60,8 +61,26 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Charts -->
-                    <Grid Grid.Column="0"></Grid>
+                    <!-- Plots -->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <simplePlot:SimplePlot x:Name="FuelCellVIPlot"
+                                               Grid.Row="0" Grid.Column="0" />
+                        <simplePlot:SimplePlot x:Name="FuelCellPTPlot"                                               
+                                               Grid.Row="0" Grid.Column="1" />
+                        <simplePlot:SimplePlot x:Name="FuelCellPIPlot"                                               
+                                               Grid.Row="1" Grid.Column="0" />
+                        <simplePlot:SimplePlot x:Name="FuelCellPVPlot"                                               
+                                               Grid.Row="1" Grid.Column="1" />
+                    </Grid>
 
                     <!-- Gauges -->
                     <Grid Grid.Column="1">
