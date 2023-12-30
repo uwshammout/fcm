@@ -42,9 +42,7 @@
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0"
-              Background="{x:Null}">
-
+        <Menu Grid.Row="0" Background="{x:Null}">
             <MenuItem Header="File">
                 <MenuItem Header="Save CSV" IsEnabled="False" Click="OnMenuItemClicked" />
             </MenuItem>
