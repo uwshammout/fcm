@@ -72,7 +72,8 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <cblk3pd:ThreePointerDial Grid.Row="0"
+                        <cblk3pd:ThreePointerDial x:Name="FuelCellVoltageGauge"
+                                                  Grid.Row="0"
                                                   Margin="3"
                                                   GaugeTitle="Voltage (V)"
                                                   BackgroundColor="{StaticResource FuelCellTpdBackgroundColor}"
@@ -83,7 +84,8 @@
                                                   GaugeMinValue="0" GaugeMaxValue="10"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
-                        <cblk3pd:ThreePointerDial Grid.Row="1"
+                        <cblk3pd:ThreePointerDial x:Name="FuelCellCurrentGauge"
+                                                  Grid.Row="1"
                                                   Margin="3"
                                                   GaugeTitle="Current (A)"
                                                   BackgroundColor="{StaticResource FuelCellTpdBackgroundColor}"
@@ -94,7 +96,8 @@
                                                   GaugeMinValue="0" GaugeMaxValue="5"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
-                        <cblk3pd:ThreePointerDial Grid.Row="2"
+                        <cblk3pd:ThreePointerDial x:Name="FuelCellPowerGauge"
+                                                  Grid.Row="2"
                                                   Margin="3"
                                                   GaugeTitle="Power (W)"
                                                   BackgroundColor="{StaticResource FuelCellTpdBackgroundColor}"
@@ -133,7 +136,8 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <cblk3pd:ThreePointerDial Grid.Row="0"
+                        <cblk3pd:ThreePointerDial x:Name="ElectrolyzerVoltageGauge"
+                                                  Grid.Row="0"
                                                   Margin="3"
                                                   GaugeTitle="Voltage (V)"
                                                   BackgroundColor="{StaticResource ElectrolyzerTpdBackgroundColor}"
@@ -144,7 +148,8 @@
                                                   GaugeMinValue="0" GaugeMaxValue="4"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
-                        <cblk3pd:ThreePointerDial Grid.Row="1"
+                        <cblk3pd:ThreePointerDial x:Name="ElectrolyzerCurrentGauge"
+                                                  Grid.Row="1"
                                                   Margin="3"
                                                   GaugeTitle="Current (A)"
                                                   BackgroundColor="{StaticResource ElectrolyzerTpdBackgroundColor}"
@@ -155,7 +160,8 @@
                                                   GaugeMinValue="0" GaugeMaxValue="3"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
-                        <cblk3pd:ThreePointerDial Grid.Row="2"
+                        <cblk3pd:ThreePointerDial x:Name="ElectrolyzerPowerGauge"
+                                                  Grid.Row="2"
                                                   Margin="3"
                                                   GaugeTitle="Power (W)"
                                                   BackgroundColor="{StaticResource ElectrolyzerTpdBackgroundColor}"
