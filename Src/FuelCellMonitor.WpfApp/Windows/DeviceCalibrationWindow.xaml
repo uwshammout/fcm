@@ -8,7 +8,7 @@
         Title="Device Calibration"
         FontFamily="Segoe UI Light"
         FontSize="14"
-        MinHeight="450" MinWidth="600"
+        MinHeight="450" MinWidth="650"
         MaxHeight="750" MaxWidth="900"
         Height="650" Width="700">
 
