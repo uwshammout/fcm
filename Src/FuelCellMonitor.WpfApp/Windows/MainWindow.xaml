@@ -44,12 +44,14 @@
 
         <Menu Grid.Row="0"
               Background="{x:Null}">
-            
+
             <MenuItem Header="File" />
-            
             <MenuItem Header="Device">
                 <MenuItem Header="Connect / Disconnect" Click="OnMenuItemClicked" />
                 <MenuItem Header="Calibrate" Click="OnMenuItemClicked" />
+            </MenuItem>
+            <MenuItem Header="Settings">
+                <MenuItem Header="Measurement Settings" Click="OnMenuItemClicked" />
             </MenuItem>
         </Menu>
 

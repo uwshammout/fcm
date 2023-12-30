@@ -32,5 +32,6 @@ internal static class ConfigureServices
         services.AddSingleton<Windows.MainWindow>();
         services.AddTransient<Windows.DeviceConnectionWindow>();
         services.AddTransient<Windows.DeviceCalibrationWindow>();
+        services.AddTransient<Windows.MeasurementSettingsWindow>();
     }
 }
