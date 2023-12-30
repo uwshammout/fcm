@@ -8,9 +8,17 @@ namespace CronBlocks.FuelCellMonitor.Windows;
 
 public partial class MainWindow : Window
 {
+    private enum PlottingState
+    {
+        None, FuelCell, FuelCellSeries, Electrolyzer
+    }
+
     private readonly App _app;
     private readonly ISerialModbusClientService _modbus;
     private readonly ISerialModbusDataScalingService _modbusScaling;
+
+    private PlottingState _plottingState;
+    private PlottingState _lastPlottingState;
 
     public MainWindow(
         App app,
@@ -22,6 +30,10 @@ public partial class MainWindow : Window
         _app = app;
         _modbus = modbus;
         _modbusScaling = scalingService;
+
+        _plottingState = PlottingState.None;
+        _lastPlottingState = PlottingState.None;
+        ChangePlottingState(_plottingState);
 
         _modbus.OperationStateChanged += OnDeviceOperationStateChanged;
         OnDeviceOperationStateChanged(_modbus.OperationState);
@@ -91,11 +103,23 @@ public partial class MainWindow : Window
             ElectrolyzerVoltageGauge.Dial1Value = elTotalVoltage;
             ElectrolyzerCurrentGauge.Dial1Value = elTotalCurrent;
             ElectrolyzerPowerGauge.Dial1Value = elTotalPower;
+
+            //- Plotting
+
+            switch (_plottingState)
+            {
+                case PlottingState.None: break;
+                case PlottingState.FuelCell: break;
+                case PlottingState.FuelCellSeries: break;
+                case PlottingState.Electrolyzer: break;
+            }
         });
     }
 
     private void OnDeviceOperationStateChanged(OperationState state)
     {
+        ChangePlottingState(PlottingState.None);
+
         Dispatcher.Invoke(() =>
         {
             switch (state)
@@ -109,6 +133,30 @@ public partial class MainWindow : Window
                     DataProgress.Visibility = Visibility.Hidden;
                     break;
             }
+        });
+    }
+
+    private void ChangePlottingState(PlottingState state)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            switch (_lastPlottingState)
+            {
+                case PlottingState.None: break;
+                case PlottingState.FuelCell: break;
+                case PlottingState.FuelCellSeries: break;
+                case PlottingState.Electrolyzer: break;
+            }
+
+            switch (state)
+            {
+                case PlottingState.None: break;
+                case PlottingState.FuelCell: break;
+                case PlottingState.FuelCellSeries: break;
+                case PlottingState.Electrolyzer: break;
+            }
+
+            _lastPlottingState = state;
         });
     }
 
@@ -139,6 +187,5 @@ public partial class MainWindow : Window
                 }
             }
         }
-
     }
 }
