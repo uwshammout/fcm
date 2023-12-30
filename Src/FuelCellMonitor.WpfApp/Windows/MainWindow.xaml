@@ -174,16 +174,16 @@
                                 </Style>
                             </Grid.Resources>
 
-                            <ProgressBar x:Name="FuelCellNo1Voltage" Grid.Column="0" />
-                            <ProgressBar x:Name="FuelCellNo2Voltage" Grid.Column="1" />
-                            <ProgressBar x:Name="FuelCellNo3Voltage" Grid.Column="2" />
-                            <ProgressBar x:Name="FuelCellNo4Voltage" Grid.Column="3" />
-                            <ProgressBar x:Name="FuelCellNo5Voltage" Grid.Column="4" />
-                            <ProgressBar x:Name="FuelCellNo6Voltage" Grid.Column="5" />
-                            <ProgressBar x:Name="FuelCellNo7Voltage" Grid.Column="6" />
-                            <ProgressBar x:Name="FuelCellNo8Voltage" Grid.Column="7" />
-                            <ProgressBar x:Name="FuelCellNo9Voltage" Grid.Column="8" />
-                            <ProgressBar x:Name="FuelCellNo10Voltage" Grid.Column="9" />
+                            <ProgressBar x:Name="FuelCellNo1Voltage" Grid.Column="0" d:Value="0.5" />
+                            <ProgressBar x:Name="FuelCellNo2Voltage" Grid.Column="1" d:Value="0.5" />
+                            <ProgressBar x:Name="FuelCellNo3Voltage" Grid.Column="2" d:Value="0.5" />
+                            <ProgressBar x:Name="FuelCellNo4Voltage" Grid.Column="3" d:Value="0.5" />
+                            <ProgressBar x:Name="FuelCellNo5Voltage" Grid.Column="4" d:Value="0.5" />
+                            <ProgressBar x:Name="FuelCellNo6Voltage" Grid.Column="5" d:Value="0.5" />
+                            <ProgressBar x:Name="FuelCellNo7Voltage" Grid.Column="6" d:Value="0.5" />
+                            <ProgressBar x:Name="FuelCellNo8Voltage" Grid.Column="7" d:Value="0.5" />
+                            <ProgressBar x:Name="FuelCellNo9Voltage" Grid.Column="8" d:Value="0.5" />
+                            <ProgressBar x:Name="FuelCellNo10Voltage" Grid.Column="9" d:Value="0.5" />
 
                             <TextBlock Grid.Column="0" Text="{Binding ElementName=FuelCellNo1Voltage, Path=Value, StringFormat={}{0:0.00}}" Style="{StaticResource CellVoltage}" />
                             <TextBlock Grid.Column="1" Text="{Binding ElementName=FuelCellNo2Voltage, Path=Value, StringFormat={}{0:0.00}}" Style="{StaticResource CellVoltage}" />
