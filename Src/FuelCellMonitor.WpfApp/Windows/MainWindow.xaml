@@ -156,12 +156,30 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Charts -->
+                    <!-- Plots -->
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
+
+                        <!-- Plots -->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <xyPlot:XYPlot x:Name="FuelCellSeriesVIPlot"
+                                           XAxisTitle="Current (A)"
+                                           YAxisTitle="Voltage (V)"
+                                           Grid.Column="0" />
+
+                            <timedPlot:TimedPlot x:Name="FuelCellSeriesPTPlot"
+                                                 XAxisTitle="Time (sec : msec)"
+                                                 YAxisTitle="Power (W)"
+                                                 Grid.Column="1" />
+                        </Grid>
 
                         <!-- Individual Cell Voltage -->
                         <Grid Grid.Row="1">
