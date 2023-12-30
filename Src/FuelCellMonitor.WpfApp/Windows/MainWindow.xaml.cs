@@ -172,6 +172,9 @@ public partial class MainWindow : Window
 
                 switch (header)
                 {
+                    case "Save CSV":
+                        break;
+
                     case "Connect / Disconnect":
                         window = _app.GetInstance<DeviceConnectionWindow>();
                         break;

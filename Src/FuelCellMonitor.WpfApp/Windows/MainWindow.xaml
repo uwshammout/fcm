@@ -45,7 +45,9 @@
         <Menu Grid.Row="0"
               Background="{x:Null}">
 
-            <MenuItem Header="File" />
+            <MenuItem Header="File">
+                <MenuItem Header="Save CSV" IsEnabled="False" Click="OnMenuItemClicked" />
+            </MenuItem>
             <MenuItem Header="Connect / Disconnect" Click="OnMenuItemClicked" />
             <MenuItem Header="Settings">
                 <MenuItem Header="Measurement Settings" Click="OnMenuItemClicked" />
