@@ -67,6 +67,10 @@ public partial class MainWindow : Window
             FuelCellCurrentGauge.Dial1Value = fcTotalCurrent;
             FuelCellPowerGauge.Dial1Value = fcTotalPower;
 
+            FuelCellSeriesVoltageGauge.Dial1Value = fcTotalVoltage;
+            FuelCellSeriesCurrentGauge.Dial1Value = fcTotalCurrent;
+            FuelCellSeriesPowerGauge.Dial1Value = fcTotalPower;
+
             //- Electrolyzer
 
             double elTotalVoltage = values[11];

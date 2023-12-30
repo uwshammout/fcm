@@ -116,6 +116,70 @@
                 </Grid>
             </TabItem>
 
+            <!-- Fuel Cell Series -->
+            <TabItem Header="Fuel Cell - Series">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.5*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Charts -->
+                    <Grid Grid.Column="0"></Grid>
+
+                    <!-- Gauges -->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <cblk3pd:ThreePointerDial x:Name="FuelCellSeriesVoltageGauge"
+                                      Grid.Row="0"
+                                      Margin="3"
+                                      GaugeTitle="Voltage (V)"
+                                      BackgroundColor="{StaticResource FuelCellTpdBackgroundColor}"
+                                      BorderColor="{StaticResource FuelCellTpdBorderColor}"
+                                      Dial1Color="{StaticResource FuelCellTpdDial1Color}" Dial1BorderColor="{StaticResource FuelCellTpdDial1BorderColor}"
+                                      Dial2Color="{StaticResource FuelCellTpdDial2Color}" Dial2BorderColor="{StaticResource FuelCellTpdDial2BorderColor}"
+                                      Dial3Color="{StaticResource FuelCellTpdDial3Color}" Dial3BorderColor="{StaticResource FuelCellTpdDial3BorderColor}"
+                                      GaugeMinValue="0" GaugeMaxValue="10"
+                                      Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
+
+                        <cblk3pd:ThreePointerDial x:Name="FuelCellSeriesCurrentGauge"
+                                      Grid.Row="1"
+                                      Margin="3"
+                                      GaugeTitle="Current (A)"
+                                      BackgroundColor="{StaticResource FuelCellTpdBackgroundColor}"
+                                      BorderColor="{StaticResource FuelCellTpdBorderColor}"
+                                      Dial1Color="{StaticResource FuelCellTpdDial1Color}" Dial1BorderColor="{StaticResource FuelCellTpdDial1BorderColor}"
+                                      Dial2Color="{StaticResource FuelCellTpdDial2Color}" Dial2BorderColor="{StaticResource FuelCellTpdDial2BorderColor}"
+                                      Dial3Color="{StaticResource FuelCellTpdDial3Color}" Dial3BorderColor="{StaticResource FuelCellTpdDial3BorderColor}"
+                                      GaugeMinValue="0" GaugeMaxValue="5"
+                                      Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
+
+                        <cblk3pd:ThreePointerDial x:Name="FuelCellSeriesPowerGauge"
+                                      Grid.Row="2"
+                                      Margin="3"
+                                      GaugeTitle="Power (W)"
+                                      BackgroundColor="{StaticResource FuelCellTpdBackgroundColor}"
+                                      BorderColor="{StaticResource FuelCellTpdBorderColor}"
+                                      Dial1Color="{StaticResource FuelCellTpdDial1Color}" Dial1BorderColor="{StaticResource FuelCellTpdDial1BorderColor}"
+                                      Dial2Color="{StaticResource FuelCellTpdDial2Color}" Dial2BorderColor="{StaticResource FuelCellTpdDial2BorderColor}"
+                                      Dial3Color="{StaticResource FuelCellTpdDial3Color}" Dial3BorderColor="{StaticResource FuelCellTpdDial3BorderColor}"
+                                      GaugeMinValue="0" GaugeMaxValue="10"
+                                      Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
+
+                        <Button Grid.Row="3"
+                    Margin="3" MinHeight="30"
+                    Content="Start" />
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+
             <!-- Electrolyzer -->
             <TabItem Header="Electrolyzer">
                 <Grid>
