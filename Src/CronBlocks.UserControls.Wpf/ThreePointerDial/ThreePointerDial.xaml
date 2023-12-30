@@ -150,7 +150,7 @@
 
         <!-- Dial 1 -->
         <Path Data="M149.99835,221.89231 C149.99835,221.89231 149.05828,113.46585 158.56242,113.46585 167.61703,113.46585 167.06847,221.92328 167.06847,221.92328 z"
-              Visibility="{Binding Dial1Visible}"
+              Visibility="{Binding Dial1Visibility}"
               Fill="{Binding Dial1Color}" d:Fill="Red"
               Stroke="{Binding Dial1BorderColor}" d:Stroke="Chocolate"
               Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"
@@ -162,7 +162,7 @@
 
         <!-- Dial 2 -->
         <Path Data="M149.99835,221.89231 C149.99835,221.89231 149.05828,113.46585 158.56242,113.46585 167.61703,113.46585 167.06847,221.92328 167.06847,221.92328 z"
-              Visibility="{Binding Dial2Visible}"
+              Visibility="{Binding Dial2Visibility}"
               Fill="{Binding Dial2Color}" d:Fill="Green"
               Stroke="{Binding Dial2BorderColor}" d:Stroke="Azure"
               Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"
@@ -174,7 +174,7 @@
 
         <!-- Dial 3 -->
         <Path Data="M149.99835,221.89231 C149.99835,221.89231 149.05828,113.46585 158.56242,113.46585 167.61703,113.46585 167.06847,221.92328 167.06847,221.92328 z"
-              Visibility="{Binding Dial3Visible}"
+              Visibility="{Binding Dial3Visibility}"
               Fill="{Binding Dial3Color}" d:Fill="Blue"
               Stroke="{Binding Dial3BorderColor}" d:Stroke="AliceBlue"
               Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"
