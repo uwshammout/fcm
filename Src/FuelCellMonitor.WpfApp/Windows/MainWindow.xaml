@@ -400,6 +400,8 @@
         </StatusBar>
         <ProgressBar Grid.Row="2" x:Name="DataProgress"
                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Background="#FF252B00"
+                     Foreground="#FFA27602"
                      Minimum="0" Maximum="100" />
     </Grid>
 </Window>
