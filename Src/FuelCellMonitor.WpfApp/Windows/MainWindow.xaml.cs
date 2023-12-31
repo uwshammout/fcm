@@ -21,6 +21,9 @@ public partial class MainWindow : Window
     private readonly ISerialModbusClientService _modbus;
     private readonly ISerialModbusDataScalingService _modbusScaling;
 
+    private readonly Timer _timer;
+    private DateTime _experimentStartTime = DateTime.MinValue;
+
     private Brush _fuelCellStartButtonInitialColor;
     private Brush _fuelCellSeriesStartButtonInitialColor;
     private Brush _electrolyzerStartButtonInitialColor;
@@ -45,6 +48,8 @@ public partial class MainWindow : Window
         _dataExchange = dataExchange;
         _modbus = modbus;
         _modbusScaling = scalingService;
+
+        _timer = new Timer(OnTimerTick, null, 500, 500);
 
         _fuelCellStartButtonInitialColor = FuelCellStartButton.Background;
         _fuelCellSeriesStartButtonInitialColor = FuelCellSeriesStartButton.Background;
@@ -71,6 +76,37 @@ public partial class MainWindow : Window
         _modbus.Dispose();
 
         base.OnClosed(e);
+    }
+
+    private void OnTimerTick(object? state)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            switch (_plottingState)
+            {
+                case PlottingState.None: break;
+
+                case PlottingState.FuelCell:
+                case PlottingState.FuelCellSeries:
+                case PlottingState.Electrolyzer:
+
+                    double secondsElapsed = (DateTime.Now - _experimentStartTime).TotalSeconds;
+                    double secondsTotal = _dataExchange.ExperimentTimeDuration;
+                    double secondsRemaining = secondsTotal - secondsElapsed;
+
+                    if (secondsElapsed >= _dataExchange.ExperimentTimeDuration)
+                    {
+                        ChangePlottingState(PlottingState.None);
+                    }
+                    else
+                    {
+                        DataProgress.Value = (secondsElapsed / secondsTotal) * 100;
+                        DataProgressMessage.Text = $"{(int)secondsRemaining} Seconds Remaining";
+                    }
+
+                    break;
+            }
+        });
     }
 
     private void OnNewValuesReceived(List<double> values)
@@ -262,6 +298,7 @@ public partial class MainWindow : Window
             {
                 case PlottingState.None:
                     DataProgress.Visibility = Visibility.Hidden;
+                    DataProgressMessage.Visibility = Visibility.Hidden;
 
                     FuelCellTabItem.IsEnabled = true;
                     FuelCellSeriesTabItem.IsEnabled = true;
@@ -277,9 +314,6 @@ public partial class MainWindow : Window
                     break;
 
                 case PlottingState.FuelCell:
-                    DataProgress.Visibility = Visibility.Visible;
-                    DataProgress.Value = 0;
-
                     FuelCellTabItem.IsEnabled = true;
                     FuelCellSeriesTabItem.IsEnabled = false;
                     ElectrolyzerTabItem.IsEnabled = false;
@@ -301,9 +335,6 @@ public partial class MainWindow : Window
                     break;
 
                 case PlottingState.FuelCellSeries:
-                    DataProgress.Visibility = Visibility.Visible;
-                    DataProgress.Value = 0;
-
                     FuelCellTabItem.IsEnabled = false;
                     FuelCellSeriesTabItem.IsEnabled = true;
                     ElectrolyzerTabItem.IsEnabled = false;
@@ -323,9 +354,6 @@ public partial class MainWindow : Window
                     break;
 
                 case PlottingState.Electrolyzer:
-                    DataProgress.Visibility = Visibility.Visible;
-                    DataProgress.Value = 0;
-
                     FuelCellTabItem.IsEnabled = false;
                     FuelCellSeriesTabItem.IsEnabled = false;
                     ElectrolyzerTabItem.IsEnabled = true;
@@ -342,6 +370,16 @@ public partial class MainWindow : Window
                     ElectrolyzerPowerGauge.Dial2Value = 0;
                     ElectrolyzerPowerGauge.Dial3Value = 0;
                     break;
+            }
+
+            if (state != PlottingState.None)
+            {
+                DataProgress.Visibility = Visibility.Visible;
+                DataProgressMessage.Visibility = Visibility.Visible;
+
+                DataProgress.Value = 0;
+
+                _experimentStartTime = DateTime.Now;
             }
 
             _lastPlottingState = _plottingState;
