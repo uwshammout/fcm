@@ -141,7 +141,8 @@
 
                         <Button Grid.Row="3"
                                 Margin="3" MinHeight="30"
-                                Content="Start" />
+                                Content="Start"
+                                x:Name="FuelCellStartButton" />
                     </Grid>
 
                 </Grid>
@@ -305,8 +306,9 @@
                                       Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
                         <Button Grid.Row="3"
-                    Margin="3" MinHeight="30"
-                    Content="Start" />
+                                Margin="3" MinHeight="30"
+                                Content="Start"
+                                x:Name="FuelCellSeriesStartButton" />
                     </Grid>
 
                 </Grid>
@@ -374,7 +376,8 @@
 
                         <Button Grid.Row="3"
                                 Margin="3" MinHeight="30"
-                                Content="Start" />
+                                Content="Start"
+                                x:Name="ElectrolyzerStartButton" />
                     </Grid>
 
                 </Grid>
