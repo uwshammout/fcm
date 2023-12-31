@@ -398,6 +398,8 @@
         <StatusBar Grid.Row="2">
             <TextBlock x:Name="MessageBar" HorizontalAlignment="Left" VerticalAlignment="Center" />
         </StatusBar>
-        <ProgressBar Grid.Row="2" x:Name="DataProgress" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <ProgressBar Grid.Row="2" x:Name="DataProgress"
+                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Minimum="0" Maximum="100" />
     </Grid>
 </Window>
