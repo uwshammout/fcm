@@ -7,6 +7,9 @@ public class DataExchangeService : IDisposable
 {
     private readonly IniConfigIO _iniConfig;
 
+    /// <summary>
+    /// Experiment duration in seconds
+    /// </summary>
     public double ExperimentTimeDuration { get; set; }
 
     public DataExchangeService(IniConfigIO iniConfig)
