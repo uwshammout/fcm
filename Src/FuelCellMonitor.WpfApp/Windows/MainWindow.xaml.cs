@@ -259,4 +259,9 @@ public partial class MainWindow : Window
             }
         }
     }
+
+    private void OnStartButtonClicked(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
