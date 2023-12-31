@@ -135,18 +135,81 @@ public partial class MainWindow : Window
                 case PlottingState.None: break;
 
                 case PlottingState.FuelCell:
-                    FuelCellVIPlot.Update(fcTotalCurrent, fcTotalVoltage, 0, 0);
-                    FuelCellPTPlot.Update(fcTotalPower, 0);
-                    FuelCellPIPlot.Update(fcTotalCurrent, fcTotalPower, 0, 0);
-                    FuelCellPVPlot.Update(fcTotalVoltage, fcTotalPower, 0, 0);
+                    {
+                        FuelCellVIPlot.Update(fcTotalCurrent, fcTotalVoltage, 0, 0);
+                        FuelCellPTPlot.Update(fcTotalPower, 0);
+                        FuelCellPIPlot.Update(fcTotalCurrent, fcTotalPower, 0, 0);
+                        FuelCellPVPlot.Update(fcTotalVoltage, fcTotalPower, 0, 0);
+
+                        if (fcTotalVoltage > FuelCellVoltageGauge.Dial2Value)
+                        {
+                            FuelCellVoltageGauge.Dial2Value = fcTotalVoltage;
+                        }
+
+                        if (fcTotalCurrent > FuelCellCurrentGauge.Dial2Value)
+                        {
+                            FuelCellCurrentGauge.Dial2Value = fcTotalCurrent;
+                        }
+
+                        if (fcTotalPower > FuelCellPowerGauge.Dial2Value)
+                        {
+                            FuelCellPowerGauge.Dial2Value = fcTotalPower;
+
+                            FuelCellVoltageGauge.Dial3Value = fcTotalVoltage;
+                            FuelCellCurrentGauge.Dial3Value = fcTotalCurrent;
+                            FuelCellPowerGauge.Dial3Value = fcTotalPower;
+                        }
+                    }
                     break;
 
                 case PlottingState.FuelCellSeries:
-                    FuelCellSeriesVIPlot.Update(fcTotalCurrent, fcTotalVoltage, 0, 0);
-                    FuelCellSeriesPTPlot.Update(fcTotalPower, 0);
+                    {
+                        FuelCellSeriesVIPlot.Update(fcTotalCurrent, fcTotalVoltage, 0, 0);
+                        FuelCellSeriesPTPlot.Update(fcTotalPower, 0);
+
+                        if (fcTotalVoltage > FuelCellSeriesVoltageGauge.Dial2Value)
+                        {
+                            FuelCellSeriesVoltageGauge.Dial2Value = fcTotalVoltage;
+                        }
+
+                        if (fcTotalCurrent > FuelCellSeriesCurrentGauge.Dial2Value)
+                        {
+                            FuelCellSeriesCurrentGauge.Dial2Value = fcTotalCurrent;
+                        }
+
+                        if (fcTotalPower > FuelCellSeriesPowerGauge.Dial2Value)
+                        {
+                            FuelCellSeriesPowerGauge.Dial2Value = fcTotalPower;
+
+                            FuelCellSeriesVoltageGauge.Dial3Value = fcTotalVoltage;
+                            FuelCellSeriesCurrentGauge.Dial3Value = fcTotalCurrent;
+                            FuelCellSeriesPowerGauge.Dial3Value = fcTotalPower;
+                        }
+                    }
                     break;
                 case PlottingState.Electrolyzer:
-                    ElectrolyzerIVPlot.Update(elTotalVoltage, elTotalCurrent, 0, 0);
+                    {
+                        ElectrolyzerIVPlot.Update(elTotalVoltage, elTotalCurrent, 0, 0);
+
+                        if (elTotalVoltage > ElectrolyzerVoltageGauge.Dial2Value)
+                        {
+                            ElectrolyzerVoltageGauge.Dial2Value = elTotalVoltage;
+                        }
+
+                        if (elTotalCurrent > ElectrolyzerCurrentGauge.Dial2Value)
+                        {
+                            ElectrolyzerCurrentGauge.Dial2Value = elTotalCurrent;
+                        }
+
+                        if (elTotalPower > ElectrolyzerPowerGauge.Dial2Value)
+                        {
+                            ElectrolyzerPowerGauge.Dial2Value = elTotalPower;
+
+                            ElectrolyzerVoltageGauge.Dial3Value = elTotalVoltage;
+                            ElectrolyzerCurrentGauge.Dial3Value = elTotalCurrent;
+                            ElectrolyzerPowerGauge.Dial3Value = elTotalPower;
+                        }
+                    }
                     break;
             }
         });
