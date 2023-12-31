@@ -228,6 +228,13 @@ public partial class MainWindow : Window
                     FuelCellPTPlot.ClearData();
                     FuelCellPIPlot.ClearData();
                     FuelCellPVPlot.ClearData();
+
+                    FuelCellVoltageGauge.Dial2Value = 0;
+                    FuelCellVoltageGauge.Dial3Value = 0;
+                    FuelCellCurrentGauge.Dial2Value = 0;
+                    FuelCellCurrentGauge.Dial3Value = 0;
+                    FuelCellPowerGauge.Dial2Value = 0;
+                    FuelCellPowerGauge.Dial3Value = 0;
                     break;
 
                 case PlottingState.FuelCellSeries:
@@ -243,6 +250,13 @@ public partial class MainWindow : Window
 
                     FuelCellSeriesVIPlot.ClearData();
                     FuelCellSeriesPTPlot.ClearData();
+
+                    FuelCellSeriesVoltageGauge.Dial2Value = 0;
+                    FuelCellSeriesVoltageGauge.Dial3Value = 0;
+                    FuelCellSeriesCurrentGauge.Dial2Value = 0;
+                    FuelCellSeriesCurrentGauge.Dial3Value = 0;
+                    FuelCellSeriesPowerGauge.Dial2Value = 0;
+                    FuelCellSeriesPowerGauge.Dial3Value = 0;
                     break;
 
                 case PlottingState.Electrolyzer:
@@ -257,6 +271,13 @@ public partial class MainWindow : Window
                     ElectrolyzerStartButton.Content = _stopText;
 
                     ElectrolyzerIVPlot.ClearData();
+
+                    ElectrolyzerVoltageGauge.Dial2Value = 0;
+                    ElectrolyzerVoltageGauge.Dial3Value = 0;
+                    ElectrolyzerCurrentGauge.Dial2Value = 0;
+                    ElectrolyzerCurrentGauge.Dial3Value = 0;
+                    ElectrolyzerPowerGauge.Dial2Value = 0;
+                    ElectrolyzerPowerGauge.Dial3Value = 0;
                     break;
             }
 
