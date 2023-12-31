@@ -158,7 +158,6 @@ public partial class MainWindow : Window
 
                 case OperationState.Stopped:
                     MessageBar.Text = "Device not connected";
-                    DataProgress.Visibility = Visibility.Hidden;
 
                     FuelCellStartButton.IsEnabled = false;
                     FuelCellSeriesStartButton.IsEnabled = false;
@@ -187,6 +186,8 @@ public partial class MainWindow : Window
             switch (state)
             {
                 case PlottingState.None:
+                    DataProgress.Visibility = Visibility.Hidden;
+
                     FuelCellTabItem.IsEnabled = true;
                     FuelCellSeriesTabItem.IsEnabled = true;
                     ElectrolyzerTabItem.IsEnabled = true;
@@ -201,6 +202,8 @@ public partial class MainWindow : Window
                     break;
 
                 case PlottingState.FuelCell:
+                    DataProgress.Visibility = Visibility.Visible;
+
                     FuelCellTabItem.IsEnabled = true;
                     FuelCellSeriesTabItem.IsEnabled = false;
                     ElectrolyzerTabItem.IsEnabled = false;
@@ -210,6 +213,8 @@ public partial class MainWindow : Window
                     break;
 
                 case PlottingState.FuelCellSeries:
+                    DataProgress.Visibility = Visibility.Visible;
+
                     FuelCellTabItem.IsEnabled = false;
                     FuelCellSeriesTabItem.IsEnabled = true;
                     ElectrolyzerTabItem.IsEnabled = false;
@@ -219,6 +224,8 @@ public partial class MainWindow : Window
                     break;
 
                 case PlottingState.Electrolyzer:
+                    DataProgress.Visibility = Visibility.Visible;
+
                     FuelCellTabItem.IsEnabled = false;
                     FuelCellSeriesTabItem.IsEnabled = false;
                     ElectrolyzerTabItem.IsEnabled = true;
