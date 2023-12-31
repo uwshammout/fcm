@@ -145,6 +145,8 @@ public partial class MainWindow : Window
     {
         Dispatcher.Invoke(() =>
         {
+            //- Last state cleanup - if any
+
             switch (_lastPlottingState)
             {
                 case PlottingState.None: break;
@@ -153,9 +155,16 @@ public partial class MainWindow : Window
                 case PlottingState.Electrolyzer: break;
             }
 
+            //- Current state setup
+
             switch (state)
             {
-                case PlottingState.None: break;
+                case PlottingState.None:
+                    FuelCellTabItem.IsEnabled = true;
+                    FuelCellSeriesTabItem.IsEnabled = true;
+                    ElectrolyzerTabItem.IsEnabled = true;
+                    break;
+
                 case PlottingState.FuelCell: break;
                 case PlottingState.FuelCellSeries: break;
                 case PlottingState.Electrolyzer: break;
