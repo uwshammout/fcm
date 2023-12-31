@@ -1,4 +1,5 @@
-﻿using CronBlocks.FuelCellMonitor.Startup;
+﻿using CronBlocks.FuelCellMonitor.InternalServices;
+using CronBlocks.FuelCellMonitor.Startup;
 using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
 using System.Windows;
@@ -14,6 +15,7 @@ public partial class MainWindow : Window
     }
 
     private readonly App _app;
+    private readonly DataExchangeService _dataExchange;
     private readonly ISerialModbusClientService _modbus;
     private readonly ISerialModbusDataScalingService _modbusScaling;
 
@@ -22,12 +24,14 @@ public partial class MainWindow : Window
 
     public MainWindow(
         App app,
+        DataExchangeService dataExchange,
         ISerialModbusClientService modbus,
         ISerialModbusDataScalingService scalingService)
     {
         InitializeComponent();
 
         _app = app;
+        _dataExchange = dataExchange;
         _modbus = modbus;
         _modbusScaling = scalingService;
 
@@ -43,6 +47,7 @@ public partial class MainWindow : Window
 
     protected override void OnClosed(EventArgs e)
     {
+        _dataExchange.Dispose();
         _modbusScaling.Dispose();
         _modbus.Dispose();
 
