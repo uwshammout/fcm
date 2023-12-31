@@ -11,4 +11,5 @@ internal static class FilePaths
         $"{Path.DirectorySeparatorChar}";
 
     public static readonly string DataScalingFilename = $"{FilesDirectory}ScalingFactors.ini";
+    public static readonly string DataExchangeSvcFilename = $"{FilesDirectory}CommonData.ini";
 }
