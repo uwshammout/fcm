@@ -55,7 +55,7 @@
 
         <TabControl Grid.Row="1" Margin="2">
             <!-- Fuel Cell -->
-            <TabItem Header="Fuel Cell">
+            <TabItem Header="Fuel Cell" x:Name="FuelCellTabItem">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2.5*" />
@@ -148,7 +148,7 @@
             </TabItem>
 
             <!-- Fuel Cell Series -->
-            <TabItem Header="Fuel Cell - Series">
+            <TabItem Header="Fuel Cell - Series" x:Name="FuelCellSeriesTabItem">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2.5*" />
@@ -313,7 +313,7 @@
             </TabItem>
 
             <!-- Electrolyzer -->
-            <TabItem Header="Electrolyzer">
+            <TabItem Header="Electrolyzer" x:Name="ElectrolyzerTabItem">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2.5*" />
