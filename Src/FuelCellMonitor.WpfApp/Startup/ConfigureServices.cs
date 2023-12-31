@@ -1,4 +1,5 @@
-﻿using CronBlocks.FuelCellMonitor.Settings;
+﻿using CronBlocks.FuelCellMonitor.InternalServices;
+using CronBlocks.FuelCellMonitor.Settings;
 using CronBlocks.Helpers;
 using CronBlocks.SerialPortInterface.Interfaces;
 using CronBlocks.SerialPortInterface.Services;
@@ -26,6 +27,13 @@ internal static class ConfigureServices
                 sp.GetRequiredService<ISerialModbusClientService>(),
                 FilePaths.DataScalingFilename,
                 sp.GetRequiredService<ILogger<IniConfigIO>>());
+        });
+        services.AddSingleton((sp) =>
+        {
+            return new DataExchangeService(
+                new IniConfigIO(
+                    FilePaths.DataExchangeSvcFilename,
+                    sp.GetRequiredService<ILogger<IniConfigIO>>()));
         });
 
         //- Windows
