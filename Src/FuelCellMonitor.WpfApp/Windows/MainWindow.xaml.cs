@@ -262,6 +262,27 @@ public partial class MainWindow : Window
 
     private void OnStartButtonClicked(object sender, RoutedEventArgs e)
     {
+        Button button = (Button)sender;
+        bool doStop = ((string)button.Content) == _stopText;
 
+        if (doStop)
+        {
+            ChangePlottingState(PlottingState.None);
+        }
+        else
+        {
+            if (button == FuelCellStartButton)
+            {
+                ChangePlottingState(PlottingState.FuelCell);
+            }
+            else if (button == FuelCellSeriesStartButton)
+            {
+                ChangePlottingState(PlottingState.FuelCellSeries);
+            }
+            else if (button == ElectrolyzerStartButton)
+            {
+                ChangePlottingState(PlottingState.Electrolyzer);
+            }
+        }
     }
 }
