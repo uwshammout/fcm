@@ -398,10 +398,14 @@
         <StatusBar Grid.Row="2">
             <TextBlock x:Name="MessageBar" HorizontalAlignment="Left" VerticalAlignment="Center" />
         </StatusBar>
+        
         <ProgressBar Grid.Row="2" x:Name="DataProgress"
                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                      Background="#FF252B00"
                      Foreground="#FFA27602"
                      Minimum="0" Maximum="100" />
+        <TextBlock Grid.Row="2" x:Name="DataProgressMessage"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Foreground="#FFF9F9F9" />
     </Grid>
 </Window>
