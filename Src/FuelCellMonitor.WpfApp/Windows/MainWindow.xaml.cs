@@ -1,9 +1,11 @@
 ﻿using CronBlocks.FuelCellMonitor.InternalServices;
+using CronBlocks.FuelCellMonitor.Settings;
 using CronBlocks.FuelCellMonitor.Startup;
 using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace CronBlocks.FuelCellMonitor.Windows;
 
@@ -18,6 +20,15 @@ public partial class MainWindow : Window
     private readonly DataExchangeService _dataExchange;
     private readonly ISerialModbusClientService _modbus;
     private readonly ISerialModbusDataScalingService _modbusScaling;
+
+    private Brush _fuelCellStartButtonInitialColor;
+    private Brush _fuelCellSeriesStartButtonInitialColor;
+    private Brush _electrolyzerStartButtonInitialColor;
+
+    private string _fuelCellStartButtonInitialText;
+    private string _fuelCellSeriesStartButtonInitialText;
+    private string _electrolyzerStartButtonInitialText;
+    private string _stopText = "STOP";
 
     private PlottingState _plottingState;
     private PlottingState _lastPlottingState;
@@ -34,6 +45,14 @@ public partial class MainWindow : Window
         _dataExchange = dataExchange;
         _modbus = modbus;
         _modbusScaling = scalingService;
+
+        _fuelCellStartButtonInitialColor = FuelCellStartButton.Background;
+        _fuelCellSeriesStartButtonInitialColor = FuelCellSeriesStartButton.Background;
+        _electrolyzerStartButtonInitialColor = ElectrolyzerStartButton.Background;
+
+        _fuelCellStartButtonInitialText = (string)FuelCellStartButton.Content;
+        _fuelCellSeriesStartButtonInitialText = (string)FuelCellSeriesStartButton.Content;
+        _electrolyzerStartButtonInitialText = (string)ElectrolyzerStartButton.Content;
 
         _plottingState = PlottingState.None;
         _lastPlottingState = PlottingState.None;
@@ -163,24 +182,41 @@ public partial class MainWindow : Window
                     FuelCellTabItem.IsEnabled = true;
                     FuelCellSeriesTabItem.IsEnabled = true;
                     ElectrolyzerTabItem.IsEnabled = true;
+
+                    FuelCellStartButton.Background = _fuelCellStartButtonInitialColor;
+                    FuelCellSeriesStartButton.Background = _fuelCellSeriesStartButtonInitialColor;
+                    ElectrolyzerStartButton.Background = _electrolyzerStartButtonInitialColor;
+
+                    FuelCellStartButton.Content = _fuelCellStartButtonInitialText;
+                    FuelCellSeriesStartButton.Content = _fuelCellSeriesStartButtonInitialText;
+                    ElectrolyzerStartButton.Content = _electrolyzerStartButtonInitialText;
                     break;
 
                 case PlottingState.FuelCell:
                     FuelCellTabItem.IsEnabled = true;
                     FuelCellSeriesTabItem.IsEnabled = false;
                     ElectrolyzerTabItem.IsEnabled = false;
+
+                    FuelCellStartButton.Background = DisplayColors.DisconnectButtonBg;
+                    FuelCellStartButton.Content = _stopText;
                     break;
 
                 case PlottingState.FuelCellSeries:
                     FuelCellTabItem.IsEnabled = false;
                     FuelCellSeriesTabItem.IsEnabled = true;
                     ElectrolyzerTabItem.IsEnabled = false;
+
+                    FuelCellSeriesStartButton.Background = DisplayColors.DisconnectButtonBg;
+                    FuelCellSeriesStartButton.Content = _stopText;
                     break;
 
                 case PlottingState.Electrolyzer:
                     FuelCellTabItem.IsEnabled = false;
                     FuelCellSeriesTabItem.IsEnabled = false;
                     ElectrolyzerTabItem.IsEnabled = true;
+
+                    ElectrolyzerStartButton.Background = DisplayColors.DisconnectButtonBg;
+                    ElectrolyzerStartButton.Content = _stopText;
                     break;
             }
 
