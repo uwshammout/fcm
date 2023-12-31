@@ -203,6 +203,7 @@ public partial class MainWindow : Window
 
                 case PlottingState.FuelCell:
                     DataProgress.Visibility = Visibility.Visible;
+                    DataProgress.Value = 0;
 
                     FuelCellTabItem.IsEnabled = true;
                     FuelCellSeriesTabItem.IsEnabled = false;
@@ -214,6 +215,7 @@ public partial class MainWindow : Window
 
                 case PlottingState.FuelCellSeries:
                     DataProgress.Visibility = Visibility.Visible;
+                    DataProgress.Value = 0;
 
                     FuelCellTabItem.IsEnabled = false;
                     FuelCellSeriesTabItem.IsEnabled = true;
@@ -225,6 +227,7 @@ public partial class MainWindow : Window
 
                 case PlottingState.Electrolyzer:
                     DataProgress.Visibility = Visibility.Visible;
+                    DataProgress.Value = 0;
 
                     FuelCellTabItem.IsEnabled = false;
                     FuelCellSeriesTabItem.IsEnabled = false;
