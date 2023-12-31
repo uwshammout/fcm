@@ -133,7 +133,13 @@ public partial class MainWindow : Window
             switch (_plottingState)
             {
                 case PlottingState.None: break;
-                case PlottingState.FuelCell: break;
+
+                case PlottingState.FuelCell:
+                    FuelCellVIPlot.Update(fcTotalCurrent, fcTotalVoltage, 0, 0);
+                    FuelCellPTPlot.Update(fcTotalPower, 0);
+                    FuelCellPIPlot.Update(fcTotalCurrent, fcTotalPower, 0, 0);
+                    FuelCellPVPlot.Update(fcTotalVoltage, fcTotalPower, 0, 0);
+                    break;
                 case PlottingState.FuelCellSeries: break;
                 case PlottingState.Electrolyzer: break;
             }
