@@ -165,9 +165,23 @@ public partial class MainWindow : Window
                     ElectrolyzerTabItem.IsEnabled = true;
                     break;
 
-                case PlottingState.FuelCell: break;
-                case PlottingState.FuelCellSeries: break;
-                case PlottingState.Electrolyzer: break;
+                case PlottingState.FuelCell:
+                    FuelCellTabItem.IsEnabled = true;
+                    FuelCellSeriesTabItem.IsEnabled = false;
+                    ElectrolyzerTabItem.IsEnabled = false;
+                    break;
+
+                case PlottingState.FuelCellSeries:
+                    FuelCellTabItem.IsEnabled = false;
+                    FuelCellSeriesTabItem.IsEnabled = true;
+                    ElectrolyzerTabItem.IsEnabled = false;
+                    break;
+
+                case PlottingState.Electrolyzer:
+                    FuelCellTabItem.IsEnabled = false;
+                    FuelCellSeriesTabItem.IsEnabled = false;
+                    ElectrolyzerTabItem.IsEnabled = true;
+                    break;
             }
 
             _lastPlottingState = state;
