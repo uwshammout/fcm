@@ -150,11 +150,19 @@ public partial class MainWindow : Window
             {
                 case OperationState.Running:
                     MessageBar.Text = "Device connected";
+
+                    FuelCellStartButton.IsEnabled = true;
+                    FuelCellSeriesStartButton.IsEnabled = true;
+                    ElectrolyzerStartButton.IsEnabled = true;
                     break;
 
                 case OperationState.Stopped:
                     MessageBar.Text = "Device not connected";
                     DataProgress.Visibility = Visibility.Hidden;
+
+                    FuelCellStartButton.IsEnabled = false;
+                    FuelCellSeriesStartButton.IsEnabled = false;
+                    ElectrolyzerStartButton.IsEnabled = false;
                     break;
             }
         });
