@@ -223,6 +223,11 @@ public partial class MainWindow : Window
 
                     FuelCellStartButton.Background = DisplayColors.DisconnectButtonBg;
                     FuelCellStartButton.Content = _stopText;
+
+                    FuelCellVIPlot.ClearData();
+                    FuelCellPTPlot.ClearData();
+                    FuelCellPIPlot.ClearData();
+                    FuelCellPVPlot.ClearData();
                     break;
 
                 case PlottingState.FuelCellSeries:
@@ -235,6 +240,9 @@ public partial class MainWindow : Window
 
                     FuelCellSeriesStartButton.Background = DisplayColors.DisconnectButtonBg;
                     FuelCellSeriesStartButton.Content = _stopText;
+
+                    FuelCellSeriesVIPlot.ClearData();
+                    FuelCellSeriesPTPlot.ClearData();
                     break;
 
                 case PlottingState.Electrolyzer:
@@ -247,6 +255,8 @@ public partial class MainWindow : Window
 
                     ElectrolyzerStartButton.Background = DisplayColors.DisconnectButtonBg;
                     ElectrolyzerStartButton.Content = _stopText;
+
+                    ElectrolyzerIVPlot.ClearData();
                     break;
             }
 
