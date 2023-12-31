@@ -238,7 +238,8 @@ public partial class MainWindow : Window
                     break;
             }
 
-            _lastPlottingState = state;
+            _lastPlottingState = _plottingState;
+            _plottingState = state;
         });
     }
 
