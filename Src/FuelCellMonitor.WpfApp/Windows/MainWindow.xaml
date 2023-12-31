@@ -76,21 +76,25 @@
                         <xyPlot:XYPlot x:Name="FuelCellVIPlot"
                                        XAxisTitle="Current (A)"
                                        YAxisTitle="Voltage (V)"
+                                       PlotVisibility2="Hidden"
                                        Grid.Row="0" Grid.Column="0" />
                         
                         <timedPlot:TimedPlot x:Name="FuelCellPTPlot"
                                              XAxisTitle="Time (sec : msec)"
                                              YAxisTitle="Power (W)"
+                                             PlotVisibility2="Hidden"
                                              Grid.Row="0" Grid.Column="1" />
                         
                         <xyPlot:XYPlot x:Name="FuelCellPIPlot"
                                        XAxisTitle="Current (A)"
                                        YAxisTitle="Power (W)"
+                                       PlotVisibility2="Hidden"
                                        Grid.Row="1" Grid.Column="0" />
                         
                         <xyPlot:XYPlot x:Name="FuelCellPVPlot"
                                        XAxisTitle="Voltage (V)"
                                        YAxisTitle="Power (W)"
+                                       PlotVisibility2="Hidden"
                                        Grid.Row="1" Grid.Column="1" />
                     </Grid>
 
@@ -174,11 +178,13 @@
                             <xyPlot:XYPlot x:Name="FuelCellSeriesVIPlot"
                                            XAxisTitle="Current (A)"
                                            YAxisTitle="Voltage (V)"
+                                           PlotVisibility2="Hidden"
                                            Grid.Column="0" />
 
                             <timedPlot:TimedPlot x:Name="FuelCellSeriesPTPlot"
                                                  XAxisTitle="Time (sec : msec)"
                                                  YAxisTitle="Power (W)"
+                                                 PlotVisibility2="Hidden"
                                                  Grid.Column="1" />
                         </Grid>
 
@@ -328,7 +334,8 @@
                     <Grid Grid.Column="0">
                         <xyPlot:XYPlot x:Name="ElectrolyzerIVPlot"
                                        XAxisTitle="Voltage (V)"
-                                       YAxisTitle="Current (A)" />
+                                       YAxisTitle="Current (A)"
+                                       PlotVisibility2="Hidden" />
                     </Grid>
 
                     <!-- Gauges -->
