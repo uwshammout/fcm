@@ -140,8 +140,14 @@ public partial class MainWindow : Window
                     FuelCellPIPlot.Update(fcTotalCurrent, fcTotalPower, 0, 0);
                     FuelCellPVPlot.Update(fcTotalVoltage, fcTotalPower, 0, 0);
                     break;
-                case PlottingState.FuelCellSeries: break;
-                case PlottingState.Electrolyzer: break;
+
+                case PlottingState.FuelCellSeries:
+                    FuelCellSeriesVIPlot.Update(fcTotalCurrent, fcTotalVoltage, 0, 0);
+                    FuelCellSeriesPTPlot.Update(fcTotalPower, 0);
+                    break;
+                case PlottingState.Electrolyzer:
+                    ElectrolyzerIVPlot.Update(elTotalVoltage, elTotalCurrent, 0, 0);
+                    break;
             }
         });
     }
