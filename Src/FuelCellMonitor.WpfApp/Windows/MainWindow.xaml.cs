@@ -4,6 +4,7 @@ using CronBlocks.FuelCellMonitor.Startup;
 using CronBlocks.Helpers.Extensions;
 using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
+using Microsoft.Win32;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -499,6 +500,25 @@ public partial class MainWindow : Window
                 switch (header)
                 {
                     case "Save CSV":
+                        FileDialog dialog = new SaveFileDialog()
+                        {
+                            DefaultDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                            Filter = "CSV File|*.csv",
+                            OverwritePrompt = true,
+                            Title = header
+                        };
+
+                        if (dialog.ShowDialog() == true)
+                        {
+                            try
+                            {
+                                File.Copy(_csvDumpFilename, dialog.FileName, true);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Error");
+                            }
+                        }
                         break;
 
                     case "Connect / Disconnect":
