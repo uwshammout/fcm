@@ -1,8 +1,10 @@
 ﻿using CronBlocks.FuelCellMonitor.InternalServices;
 using CronBlocks.FuelCellMonitor.Settings;
 using CronBlocks.FuelCellMonitor.Startup;
+using CronBlocks.Helpers.Extensions;
 using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -23,6 +25,9 @@ public partial class MainWindow : Window
 
     private readonly Timer _timer;
     private DateTime _experimentStartTime = DateTime.MinValue;
+
+    private readonly string _csvDumpFilename;
+    private StreamWriter _csvDumpFile = null!;
 
     private Brush _fuelCellStartButtonInitialColor;
     private Brush _fuelCellSeriesStartButtonInitialColor;
@@ -50,6 +55,9 @@ public partial class MainWindow : Window
         _modbusScaling = scalingService;
 
         _timer = new Timer(OnTimerTick, null, 500, 500);
+
+        _csvDumpFilename = FilePaths.CsvDumpFilename;
+        _csvDumpFilename.CreateFoldersForRelativeFilename();
 
         _fuelCellStartButtonInitialColor = FuelCellStartButton.Background;
         _fuelCellSeriesStartButtonInitialColor = FuelCellSeriesStartButton.Background;
@@ -250,6 +258,26 @@ public partial class MainWindow : Window
                     }
                     break;
             }
+
+            //- Writing to file
+
+            WriteCsvDumpFileValues(_plottingState,
+                fcTotalVoltage,
+                fcTotalCurrent,
+                fcTotalPower,
+                FuelCellNo1Voltage.Value,
+                FuelCellNo2Voltage.Value,
+                FuelCellNo3Voltage.Value,
+                FuelCellNo4Voltage.Value,
+                FuelCellNo5Voltage.Value,
+                FuelCellNo6Voltage.Value,
+                FuelCellNo7Voltage.Value,
+                FuelCellNo8Voltage.Value,
+                FuelCellNo9Voltage.Value,
+                FuelCellNo10Voltage.Value,
+                elTotalVoltage,
+                elTotalCurrent,
+                elTotalPower);
         });
     }
 
@@ -313,6 +341,16 @@ public partial class MainWindow : Window
                     FuelCellStartButton.Content = _fuelCellStartButtonInitialText;
                     FuelCellSeriesStartButton.Content = _fuelCellSeriesStartButtonInitialText;
                     ElectrolyzerStartButton.Content = _electrolyzerStartButtonInitialText;
+
+                    if (_csvDumpFile != null)
+                    {
+                        _csvDumpFile.Flush();
+                        _csvDumpFile.Dispose();
+                        _csvDumpFile = null!;
+
+                        SaveCsvMenuItem.IsEnabled = true;
+                    }
+
                     break;
 
                 case PlottingState.FuelCell:
@@ -376,17 +414,76 @@ public partial class MainWindow : Window
 
             if (state != PlottingState.None)
             {
+                SaveCsvMenuItem.IsEnabled = false;
+
                 DataProgress.Visibility = Visibility.Visible;
                 DataProgressMessage.Visibility = Visibility.Visible;
 
                 DataProgress.Value = 0;
 
                 _experimentStartTime = DateTime.Now;
+
+                if (_csvDumpFile != null)
+                {
+                    _csvDumpFile.Flush();
+                    _csvDumpFile.Dispose();
+                    _csvDumpFile = null!;
+                }
+
+                _csvDumpFile = File.CreateText(_csvDumpFilename);
+                WriteCsvDumpFileHeader(state);
             }
 
             _lastPlottingState = _plottingState;
             _plottingState = state;
         });
+    }
+
+    private void WriteCsvDumpFileHeader(PlottingState state)
+    {
+        switch (state)
+        {
+            case PlottingState.None: break;
+
+            case PlottingState.FuelCell:
+                _csvDumpFile.WriteLine($"Total Voltage (V), Total Current (A), Total Power (W)");
+                break;
+
+            case PlottingState.FuelCellSeries:
+                _csvDumpFile.WriteLine($"Total Voltage (V), Total Current (A), Total Power (W), Cell #1 Voltage, Cell #2 Voltage, Cell #3 Voltage, Cell #4 Voltage, Cell #5 Voltage, Cell #6 Voltage, Cell #7 Voltage, Cell #8 Voltage, Cell #9 Voltage, Cell #10 Voltage");
+                break;
+
+            case PlottingState.Electrolyzer:
+                _csvDumpFile.WriteLine($"Total Voltage (V), Total Current (A), Total Power (W)");
+                break;
+        }
+    }
+
+    private void WriteCsvDumpFileValues(PlottingState state,
+        double fcTotalVoltage, double fcTotalCurrent, double fcTotalPower,
+        double cellVoltage1, double cellVoltage2,
+        double cellVoltage3, double cellVoltage4,
+        double cellVoltage5, double cellVoltage6,
+        double cellVoltage7, double cellVoltage8,
+        double cellVoltage9, double cellVoltage10,
+        double elTotalVoltage, double elTotalCurrent, double elTotalPower)
+    {
+        switch (state)
+        {
+            case PlottingState.None: break;
+
+            case PlottingState.FuelCell:
+                _csvDumpFile.WriteLine($"{fcTotalVoltage:0.0000}, {fcTotalCurrent:0.0000}, {fcTotalPower:0.0000}");
+                break;
+
+            case PlottingState.FuelCellSeries:
+                _csvDumpFile.WriteLine($"{fcTotalVoltage:0.0000}, {fcTotalCurrent:0.0000}, {fcTotalPower:0.0000}, {cellVoltage1:0.0000}, {cellVoltage2:0.0000}, {cellVoltage3:0.0000}, {cellVoltage4:0.0000}, {cellVoltage5:0.0000}, {cellVoltage6:0.0000}, {cellVoltage7:0.0000}, {cellVoltage8:0.0000}, {cellVoltage9:0.0000}, {cellVoltage10:0.0000}");
+                break;
+
+            case PlottingState.Electrolyzer:
+                _csvDumpFile.WriteLine($"{elTotalVoltage:0.0000}, {elTotalCurrent:0.0000}, {elTotalPower:0.0000}");
+                break;
+        }
     }
 
     private void OnMenuItemClicked(object sender, RoutedEventArgs e)

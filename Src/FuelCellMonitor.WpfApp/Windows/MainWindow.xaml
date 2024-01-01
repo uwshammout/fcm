@@ -44,7 +44,7 @@
 
         <Menu Grid.Row="0" Background="{x:Null}">
             <MenuItem Header="File">
-                <MenuItem Header="Save CSV" IsEnabled="False" Click="OnMenuItemClicked" />
+                <MenuItem Header="Save CSV" x:Name="SaveCsvMenuItem" IsEnabled="False" Click="OnMenuItemClicked" />
             </MenuItem>
             <MenuItem Header="Connect / Disconnect" Click="OnMenuItemClicked" />
             <MenuItem Header="Settings">
