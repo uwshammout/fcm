@@ -71,6 +71,8 @@ public partial class MainWindow : Window
 
     protected override void OnClosed(EventArgs e)
     {
+        _timer.Dispose();
+
         _dataExchange.Dispose();
         _modbusScaling.Dispose();
         _modbus.Dispose();
