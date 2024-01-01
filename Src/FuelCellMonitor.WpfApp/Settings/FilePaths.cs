@@ -12,4 +12,5 @@ internal static class FilePaths
 
     public static readonly string DataScalingFilename = $"{FilesDirectory}ScalingFactors.ini";
     public static readonly string DataExchangeSvcFilename = $"{FilesDirectory}CommonData.ini";
+    public static readonly string CsvDumpFilename = $"{FilesDirectory}temp.csv";
 }
