@@ -84,6 +84,7 @@
                                              XAxisTitle="Time (min : sec)"
                                              YAxisTitle="Power (W)"
                                              PlotVisibility2="Hidden"
+                                             IsAutoYRangeEnabled="True"
                                              Grid.Row="0" Grid.Column="1" />
                         
                         <xyPlot:XYPlot x:Name="FuelCellPIPlot"
@@ -189,6 +190,7 @@
                                                  XAxisTitle="Time (min : sec)"
                                                  YAxisTitle="Power (W)"
                                                  PlotVisibility2="Hidden"
+                                                 IsAutoYRangeEnabled="True"
                                                  Grid.Column="1" />
                         </Grid>
 
