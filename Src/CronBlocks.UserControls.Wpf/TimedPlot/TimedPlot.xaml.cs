@@ -223,7 +223,7 @@ public partial class TimedPlot : UserControl, INotifyPropertyChanged
     {
         PlotValues1.Clear();
         PlotValues2.Clear();
-
+        /*
         for (int i = 0; i < MAX_NUMBER_OF_VALUES; i++)
         {
             PlotValues1.Add(new TimedPlotModel()
@@ -237,7 +237,7 @@ public partial class TimedPlot : UserControl, INotifyPropertyChanged
                 DateTime = startTime - TimeSpan.FromSeconds(MAX_NUMBER_OF_VALUES - i),
                 Value = 0
             });
-        }
+        }*/
     }
 
     private void SetXAxisLimits(DateTime now)
@@ -255,7 +255,7 @@ public partial class TimedPlot : UserControl, INotifyPropertyChanged
             YAxisMin = min;
 
         if (max > YAxisMax)
-        YAxisMax = max;
+            YAxisMax = max;
     }
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null!)
