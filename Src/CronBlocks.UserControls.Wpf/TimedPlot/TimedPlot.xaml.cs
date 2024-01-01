@@ -31,6 +31,8 @@ public partial class TimedPlot : UserControl, INotifyPropertyChanged
     private string _xAxisTitle;
     private string _yAxisTitle;
 
+    private bool _isAutoYRangeEnabled;
+
     private DateTime startTime;
 
     public TimedPlot()
@@ -59,10 +61,13 @@ public partial class TimedPlot : UserControl, INotifyPropertyChanged
         SetXAxisLimits(startTime);
 
         YAxisStep = 1;
-        SetYAxisLimits(0, 10);
+        YAxisMin = 0;
+        YAxisMax = 5;
 
         _xAxisTitle = "";
         _yAxisTitle = "";
+
+        IsAutoYRangeEnabled = false;
 
         DataContext = this;
     }
@@ -177,6 +182,16 @@ public partial class TimedPlot : UserControl, INotifyPropertyChanged
         }
     }
 
+    public bool IsAutoYRangeEnabled
+    {
+        get { return _isAutoYRangeEnabled; }
+        set
+        {
+            _isAutoYRangeEnabled = value;
+            OnPropertyChanged();
+        }
+    }
+
     public void Update(double value1, double value2)
     {
         DateTime now = DateTime.Now;
@@ -194,6 +209,11 @@ public partial class TimedPlot : UserControl, INotifyPropertyChanged
         });
 
         SetXAxisLimits(now);
+
+        if (IsAutoYRangeEnabled)
+        {
+            SetYAxisLimits(Math.Min(value1, value2), Math.Max(value1, value2));
+        }
 
         if (PlotValues1.Count > MAX_NUMBER_OF_VALUES) PlotValues1.RemoveAt(0);
         if (PlotValues2.Count > MAX_NUMBER_OF_VALUES) PlotValues2.RemoveAt(0);
@@ -228,8 +248,14 @@ public partial class TimedPlot : UserControl, INotifyPropertyChanged
 
     private void SetYAxisLimits(double min, double max)
     {
+        if (min < 0) min -= 1.0;
+        if (max > 0) max += 1.0;
+
+        if (min < YAxisMin)
+            YAxisMin = min;
+
+        if (max > YAxisMax)
         YAxisMax = max;
-        YAxisMin = min;
     }
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null!)
