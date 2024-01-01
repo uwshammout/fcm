@@ -31,6 +31,8 @@ public partial class XYPlot : UserControl, INotifyPropertyChanged
     private string _xAxisTitle;
     private string _yAxisTitle;
 
+    private bool _isAutoRangeEnabled;
+
     public XYPlot()
     {
         InitializeComponent();
@@ -50,13 +52,17 @@ public partial class XYPlot : UserControl, INotifyPropertyChanged
         YValueFormatter = value => value.ToString("0.00");
 
         XAxisStep = 1;
-        SetXAxisLimits(0, 10);
+        XAxisMin = 0;
+        XAxisMax = 5;
 
         YAxisStep = 1;
-        SetYAxisLimits(0, 10);
+        YAxisMin = 0;
+        YAxisMax = 5;
 
         _xAxisTitle = "";
         _yAxisTitle = "";
+
+        IsAutoRangeEnabled = false;
 
         DataContext = this;
     }
@@ -169,6 +175,16 @@ public partial class XYPlot : UserControl, INotifyPropertyChanged
         }
     }
 
+    public bool IsAutoRangeEnabled
+    {
+        get { return _isAutoRangeEnabled; }
+        set
+        {
+            _isAutoRangeEnabled = value;
+            OnPropertyChanged();
+        }
+    }
+
     public void Update(double valueX1, double valueY1, double valueX2, double valueY2)
     {
         PlotValues1.Add(new XYPlotModel
@@ -183,7 +199,11 @@ public partial class XYPlot : UserControl, INotifyPropertyChanged
             YValue = valueY2
         });
 
-        SetXAxisLimits(Math.Min(valueX1, valueX2), Math.Max(valueX1, valueX2));
+        if (IsAutoRangeEnabled)
+        {
+            SetXAxisLimits(Math.Min(valueX1, valueX2), Math.Max(valueX1, valueX2));
+            SetYAxisLimits(Math.Min(valueY1, valueY2), Math.Max(valueY1, valueY2));
+        }
 
         if (PlotValues1.Count > MAX_NUMBER_OF_VALUES) PlotValues1.RemoveAt(0);
         if (PlotValues2.Count > MAX_NUMBER_OF_VALUES) PlotValues2.RemoveAt(0);
@@ -197,6 +217,9 @@ public partial class XYPlot : UserControl, INotifyPropertyChanged
 
     private void SetXAxisLimits(double min, double max)
     {
+        if (min < 0) min -= 1.0;
+        if (max > 0) max += 1.0;
+
         if (min < XAxisMin)
             XAxisMin = min;
 
@@ -206,8 +229,14 @@ public partial class XYPlot : UserControl, INotifyPropertyChanged
 
     private void SetYAxisLimits(double min, double max)
     {
-        YAxisMax = max;
-        YAxisMin = min;
+        if (min < 0) min -= 1.0;
+        if (max > 0) max += 1.0;
+
+        if (min < YAxisMin)
+            YAxisMin = min;
+
+        if (max > YAxisMax)
+            YAxisMax = max;
     }
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null!)
