@@ -124,6 +124,7 @@ public partial class DeviceCalibrationWindow : Window
 
         string mfPrefix = "MultiplicationFactorA";
         string offPrefix = "OffsetA";
+        string resPrefix = "ResistorValue";
 
         //- Let's match prefix
 
@@ -135,6 +136,10 @@ public partial class DeviceCalibrationWindow : Window
         {
             prefix = offPrefix;
         }
+        else if (name.StartsWith(resPrefix))
+        {
+            prefix = resPrefix;
+        }
         else
         {
             throw new NotImplementedException(
@@ -142,9 +147,10 @@ public partial class DeviceCalibrationWindow : Window
                 $" handling {name}");
         }
 
-        //- Let's get the index
+        //- Let's get the index for series of inputs only
 
-        if (prefix != null)
+        if (prefix != null &&
+            (prefix == mfPrefix || prefix == offPrefix))
         {
             if (int.TryParse(name.Substring(prefix.Length), out index) &&
                 index >= 1 && index <= 16)
@@ -171,6 +177,17 @@ public partial class DeviceCalibrationWindow : Window
             else if (prefix == offPrefix)
             {
                 _modbusScaling.SetOffset(index, value);
+            }
+            else if (prefix == resPrefix)
+            {
+                if (textBox == ResistorValueFC)
+                {
+                    _dataExchange.FuelCellCurrentMeasurementResistance = value;
+                }
+                else if (textBox == ResistorValueEL)
+                {
+                    _dataExchange.ElectrolyzerCurrentMeasurementResistance = value;
+                }
             }
         }
         else
