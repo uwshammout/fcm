@@ -8,9 +8,9 @@
         Title="Device Calibration"
         FontFamily="Segoe UI Light"
         FontSize="14"
-        MinHeight="450" MinWidth="650"
-        MaxHeight="750" MaxWidth="900"
-        Height="650" Width="700">
+        MinHeight="750" MinWidth="650"
+        MaxHeight="950" MaxWidth="900"
+        Height="750" Width="700">
 
     <Window.Resources>
         <Style TargetType="Label">
@@ -67,7 +67,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/> <!-- Resistors -->
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/> <!-- Message bar -->
         </Grid.RowDefinitions>
 
         <!-- Borders / Backgrounds -->
@@ -200,23 +203,37 @@
 
         <!-- Remarks -->
         <Label Grid.Row="2" Grid.Column="6" Content="Fuel Cell - Total Voltage" />
-        <Label Grid.Row="3" Grid.Column="6" Content="'' - Total Current" />
-        <Label Grid.Row="4" Grid.Column="6" Content="'' - Voltage Cell #1 (near ground)" />
-        <Label Grid.Row="5" Grid.Column="6" Content="'' - Voltage Cell #2" />
-        <Label Grid.Row="6" Grid.Column="6" Content="'' - Voltage Cell #3" />
-        <Label Grid.Row="7" Grid.Column="6" Content="'' - Voltage Cell #4" />
-        <Label Grid.Row="8" Grid.Column="6" Content="'' - Voltage Cell #5" />
-        <Label Grid.Row="9" Grid.Column="6" Content="'' - Voltage Cell #6" />
-        <Label Grid.Row="10" Grid.Column="6" Content="'' - Voltage Cell #7" />
-        <Label Grid.Row="11" Grid.Column="6" Content="'' - Voltage Cell #8" />
-        <Label Grid.Row="12" Grid.Column="6" Content="'' - Voltage Cell #9 (near total voltage)" />
-        <Label Grid.Row="13" Grid.Column="6" Content="Electrolyzer - Total Voltage" />
-        <Label Grid.Row="14" Grid.Column="6" Content="'' - Total Current" />
-        <Label Grid.Row="15" Grid.Column="6" Content="-- RESERVED --" />
-        <Label Grid.Row="16" Grid.Column="6" Content="-- RESERVED --" />
+        <Label Grid.Row="3" Grid.Column="6" Content="'' - Total Current (V-hi)" />
+        <Label Grid.Row="4" Grid.Column="6" Content="'' - Total Current (V-lo)" />
+        <Label Grid.Row="5" Grid.Column="6" Content="'' - Voltage Cell #1 (near ground)" />
+        <Label Grid.Row="6" Grid.Column="6" Content="'' - Voltage Cell #2" />
+        <Label Grid.Row="7" Grid.Column="6" Content="'' - Voltage Cell #3" />
+        <Label Grid.Row="8" Grid.Column="6" Content="'' - Voltage Cell #4" />
+        <Label Grid.Row="9" Grid.Column="6" Content="'' - Voltage Cell #5" />
+        <Label Grid.Row="10" Grid.Column="6" Content="'' - Voltage Cell #6" />
+        <Label Grid.Row="11" Grid.Column="6" Content="'' - Voltage Cell #7" />
+        <Label Grid.Row="12" Grid.Column="6" Content="'' - Voltage Cell #8" />
+        <Label Grid.Row="13" Grid.Column="6" Content="'' - Voltage Cell #9 (near total voltage)" />
+        <Label Grid.Row="14" Grid.Column="6" Content="Electrolyzer - Total Voltage" />
+        <Label Grid.Row="15" Grid.Column="6" Content="'' - Total Current (V-hi)" />
+        <Label Grid.Row="16" Grid.Column="6" Content="'' - Total Current (V-lo)" />
         <Label Grid.Row="17" Grid.Column="6" Content="-- RESERVED --" />
 
-        <StatusBar Grid.Row="18" Grid.ColumnSpan="7">
+        <!-- Resistor Settings -->
+        <Label Grid.Row="18" Content="Resistor Settings" FontStyle="Normal" Grid.Column="0" Grid.ColumnSpan="7" Margin="0" />
+
+        <Label Grid.Row="19" Content="R1" FontStyle="Normal" />
+        <TextBox Grid.Row="19" Grid.Column="1" Grid.ColumnSpan="4" x:Name="ResistorValue1" TextChanged="OnTextChanged" />
+        <Label Grid.Row="19" Grid.Column="5" Content="Ohm (Ω)" FontStyle="Normal" />
+        <Label Grid.Row="19" Grid.Column="6" Content="Fuel Cell Current V-hi ~ V-lo" />
+
+        <Label Grid.Row="20" Content="R2" FontStyle="Normal" />
+        <TextBox Grid.Row="20" Grid.Column="1" Grid.ColumnSpan="4" x:Name="ResistorValue2" TextChanged="OnTextChanged" />
+        <Label Grid.Row="20" Grid.Column="5" Content="Ohm (Ω)" FontStyle="Normal" />
+        <Label Grid.Row="20" Grid.Column="6" Content="Electrolyzer Current V-hi ~ V-lo" />
+
+        <!-- Information bar -->
+        <StatusBar Grid.Row="21" Grid.ColumnSpan="7">
             <TextBlock x:Name="StatusMessage"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Stretch"
