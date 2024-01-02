@@ -223,12 +223,12 @@
         <Label Grid.Row="18" Content="Resistor Settings" FontStyle="Normal" Grid.Column="0" Grid.ColumnSpan="7" Margin="0" />
 
         <Label Grid.Row="19" Content="R1" FontStyle="Normal" />
-        <TextBox Grid.Row="19" Grid.Column="1" Grid.ColumnSpan="4" x:Name="ResistorValue1" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="19" Grid.Column="1" Grid.ColumnSpan="4" x:Name="ResistorValueFC" TextChanged="OnTextChanged" />
         <Label Grid.Row="19" Grid.Column="5" Content="Ohm (Ω)" FontStyle="Normal" />
         <Label Grid.Row="19" Grid.Column="6" Content="Fuel Cell Current V-hi ~ V-lo" />
 
         <Label Grid.Row="20" Content="R2" FontStyle="Normal" />
-        <TextBox Grid.Row="20" Grid.Column="1" Grid.ColumnSpan="4" x:Name="ResistorValue2" TextChanged="OnTextChanged" />
+        <TextBox Grid.Row="20" Grid.Column="1" Grid.ColumnSpan="4" x:Name="ResistorValueEL" TextChanged="OnTextChanged" />
         <Label Grid.Row="20" Grid.Column="5" Content="Ohm (Ω)" FontStyle="Normal" />
         <Label Grid.Row="20" Grid.Column="6" Content="Electrolyzer Current V-hi ~ V-lo" />
 
