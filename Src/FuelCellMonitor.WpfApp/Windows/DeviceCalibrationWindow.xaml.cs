@@ -72,6 +72,9 @@ public partial class DeviceCalibrationWindow : Window
             _offInputs[i].Text = ofs[i].ToString();
         }
 
+        ResistorValueFC.Text = _dataExchange.FuelCellCurrentMeasurementResistance.ToString();
+        ResistorValueEL.Text = _dataExchange.ElectrolyzerCurrentMeasurementResistance.ToString();
+
         _modbus.OperationStateChanged += OnDeviceOperationStateChanged;
         OnDeviceOperationStateChanged(_modbus.OperationState);
 
