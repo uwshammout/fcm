@@ -134,17 +134,17 @@ public partial class MainWindow : Window
             //- Fuel Cell
 
             double fcTotalVoltage = values[0];
-            double fcTotalCurrent = values[1];
+            double fcTotalCurrent = Math.Abs(values[1] - values[2]) / _dataExchange.FuelCellCurrentMeasurementResistance;
             double fcTotalPower = fcTotalVoltage * fcTotalCurrent;
-            double fcC1Voltage = values[2];  //- First cell near ground
-            double fcC2Voltage = values[3];  //- 
-            double fcC3Voltage = values[4];  //- 
-            double fcC4Voltage = values[5];  //- 
-            double fcC5Voltage = values[6];  //- 
-            double fcC6Voltage = values[7];  //- 
-            double fcC7Voltage = values[8];  //- 
-            double fcC8Voltage = values[9];  //- 
-            double fcC9Voltage = values[10]; //- Last cell near the total voltage
+            double fcC1Voltage = values[3];  //- First cell near ground
+            double fcC2Voltage = values[4];  //- 
+            double fcC3Voltage = values[5];  //- 
+            double fcC4Voltage = values[6];  //- 
+            double fcC5Voltage = values[7];  //- 
+            double fcC6Voltage = values[8];  //- 
+            double fcC7Voltage = values[9];  //- 
+            double fcC8Voltage = values[10]; //- 
+            double fcC9Voltage = values[11]; //- Last cell near the total voltage
 
             FuelCellVoltageGauge.Dial1Value = fcTotalVoltage;
             FuelCellCurrentGauge.Dial1Value = fcTotalCurrent;
@@ -167,8 +167,8 @@ public partial class MainWindow : Window
 
             //- Electrolyzer
 
-            double elTotalVoltage = values[11];
-            double elTotalCurrent = values[12];
+            double elTotalVoltage = values[12];
+            double elTotalCurrent = Math.Abs(values[13] - values[14]) / _dataExchange.ElectrolyzerCurrentMeasurementResistance;
             double elTotalPower = elTotalVoltage * elTotalCurrent;
 
             ElectrolyzerVoltageGauge.Dial1Value = elTotalVoltage;
