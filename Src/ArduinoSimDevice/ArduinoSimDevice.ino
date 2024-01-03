@@ -1,11 +1,12 @@
 #include "ModbusRTUSlave.h"
 #include "CyclicTaskExecutor.h"
 
+using namespace cblk;
+
 #define SLAVE_ID                  0x0001
 #define TOTAL_HOLDING_REGISTERS   16
 #define BAUD_RATE                 115200
-
-using namespace cblk;
+#define FILL_INTERVAL_MS          200
 
 void fill_holding_registers();
 
@@ -14,7 +15,7 @@ const byte potPins[6] = { A0, A1, A2, A3, A4, A5 };
 uint16_t holdingRegisters[TOTAL_HOLDING_REGISTERS];
 
 ModbusRTUSlave modbus(Serial);
-CyclicTaskExecutor exe_fill_holding_registers(fill_holding_registers, 200);
+CyclicTaskExecutor exe_fill_holding_registers(fill_holding_registers, FILL_INTERVAL_MS);
 
 void setup() {
   pinMode(A0, INPUT);
