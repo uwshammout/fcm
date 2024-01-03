@@ -1,17 +1,20 @@
 #include "ModbusRTUSlave.h"
 #include "CyclicTaskExecutor.h"
 
-#define SLAVE_ID     0x0001
+#define SLAVE_ID                  0x0001
+#define TOTAL_HOLDING_REGISTERS   16
+#define BAUD_RATE                 115200
+
+using namespace cblk;
 
 void fill_holding_registers();
-void fill_input_registers();
 
 const byte potPins[6] = { A0, A1, A2, A3, A4, A5 };
 
-uint16_t holdingRegisters[16];
-uint16_t inputRegisters[16];
+uint16_t holdingRegisters[TOTAL_HOLDING_REGISTERS];
 
 ModbusRTUSlave modbus(Serial);
+CyclicTaskExecutor exe_fill_holding_registers(fill_holding_registers, 200);
 
 void setup() {
   pinMode(A0, INPUT);
@@ -21,17 +24,15 @@ void setup() {
   pinMode(A4, INPUT);
   pinMode(A5, INPUT);
 
-  modbus.configureHoldingRegisters(holdingRegisters, 16);
-  // modbus.configureInputRegisters(inputRegisters, 16);
-  
-  modbus.begin(SLAVE_ID, 115200);
+  modbus.configureHoldingRegisters(holdingRegisters, TOTAL_HOLDING_REGISTERS);
+  modbus.begin(SLAVE_ID, BAUD_RATE);
 }
 
 
-
 void loop() {
-  fill_holding_registers();
-  // fill_input_registers(); 
+  unsigned long currentTime_ms = millis();
+  
+  exe_fill_holding_registers.update(currentTime_ms);
   
   modbus.poll();
 }
@@ -53,23 +54,4 @@ void fill_holding_registers() {
   holdingRegisters[13] = 10;
   holdingRegisters[14] = 0;
   holdingRegisters[15] = 100;
-}
-
-void fill_input_registers() {
-  inputRegisters[0] = map(analogRead(potPins[0]), 0, 1023, 0, 255);
-  inputRegisters[1] = map(analogRead(potPins[1]), 0, 1023, 0, 255);
-  inputRegisters[2] = map(analogRead(potPins[2]), 0, 1023, 0, 255);
-  inputRegisters[3] = map(analogRead(potPins[3]), 0, 1023, 0, 255);
-  inputRegisters[4] = map(analogRead(potPins[4]), 0, 1023, 0, 255);
-  inputRegisters[5] = map(analogRead(potPins[5]), 0, 1023, 0, 255);
-  inputRegisters[6] = 100;
-  inputRegisters[7] = 100;
-  inputRegisters[8] = 1000;
-  inputRegisters[9] = 1000;
-  inputRegisters[10] = 0;
-  inputRegisters[11] = 1;
-  inputRegisters[12] = 0;
-  inputRegisters[13] = 10;
-  inputRegisters[14] = 0;
-  inputRegisters[15] = 100;
 }
