@@ -1,5 +1,6 @@
 #include "ModbusRTUSlave.h"
 #include "CyclicTaskExecutor.h"
+#include "SimData.h"
 
 using namespace cblk;
 
