@@ -1,4 +1,5 @@
 #include "ModbusRTUSlave.h"
+#include "CyclicTaskExecutor.h"
 
 #define SLAVE_ID     0x0001
 
