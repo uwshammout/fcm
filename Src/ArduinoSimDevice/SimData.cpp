@@ -13,9 +13,34 @@
 #define SIM_DATA_TYPE_10               0x0A
 
 #define SIM_DATA_TYPE  SIM_DATA_TYPE_01
+#define GENERIC_DATA
 
 uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 
+//- Mapping
+uint16_t* pFCTotalVoltage = &holding_registers[0];
+uint16_t* pFCTotalCurrentVh = &holding_registers[1];
+uint16_t* pFCTotalCurrentVl = &holding_registers[2];
+uint16_t* pFCCellVl = &holding_registers[3];
+uint16_t* pFCCellV2 = &holding_registers[4];
+uint16_t* pFCCellV3 = &holding_registers[5];
+uint16_t* pFCCellV4 = &holding_registers[6];
+uint16_t* pFCCellV5 = &holding_registers[7];
+uint16_t* pFCCellV6 = &holding_registers[8];
+uint16_t* pFCCellV7 = &holding_registers[9];
+uint16_t* pFCCellV8 = &holding_registers[10];
+uint16_t* pFCCellV9 = &holding_registers[11];
+uint16_t* pELTotalVoltage = &holding_registers[12];
+uint16_t* pELTotalCurrentVh = &holding_registers[13];
+uint16_t* pELTotalCurrentVl = &holding_registers[14];
+
+
+/*************************************************************/
+/* Generic data                                              */
+/*************************************************************/
+#ifdef GENERIC_DATA
+
+#endif
 
 /*************************************************************/
 /* Implementing simulated data                               */
@@ -58,22 +83,21 @@ void fill_sim_data() {
 void init_sim_data() {}
 
 void fill_sim_data() {
-  holding_registers[0] = map(analogRead(pot_pins[0]), 0, 1023, 0, 255);
-  holding_registers[1] = map(analogRead(pot_pins[1]), 0, 1023, 0, 255);
-  holding_registers[2] = map(analogRead(pot_pins[2]), 0, 1023, 0, 255);
-  holding_registers[3] = map(analogRead(pot_pins[3]), 0, 1023, 0, 255);
-  holding_registers[4] = map(analogRead(pot_pins[4]), 0, 1023, 0, 255);
-  holding_registers[5] = map(analogRead(pot_pins[5]), 0, 1023, 0, 255);
-  holding_registers[6] = 100;
-  holding_registers[7] = 100;
-  holding_registers[8] = 1000;
-  holding_registers[9] = 1000;
-  holding_registers[10] = 0;
-  holding_registers[11] = 1;
-  holding_registers[12] = 0;
-  holding_registers[13] = 10;
-  holding_registers[14] = 0;
-  holding_registers[15] = 100;
+  *pFCTotalVoltage = 0;
+  *pFCTotalCurrentVh = 0;
+  *pFCTotalCurrentVl = 0;
+  *pFCCellVl = 0;
+  *pFCCellV2 = 0;
+  *pFCCellV3 = 0;
+  *pFCCellV4 = 0;
+  *pFCCellV5 = 0;
+  *pFCCellV6 = 0;
+  *pFCCellV7 = 0;
+  *pFCCellV8 = 0;
+  *pFCCellV9 = 0;
+  *pELTotalVoltage = 0;
+  *pELTotalCurrentVh = 0;
+  *pELTotalCurrentVl = 0;
 }
 
 #elif  SIM_DATA_TYPE == SIM_DATA_TYPE_02
