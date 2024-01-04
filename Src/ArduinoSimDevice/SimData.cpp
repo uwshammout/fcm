@@ -87,22 +87,34 @@ void fill_sim_data() {
 
 void init_sim_data() {}
 
+static uint16_t data_index = 0;
+static uint16_t data_index2 = 5;
+
 void fill_sim_data() {
-  *pFCTotalVoltage = 0;
-  *pFCTotalCurrentVh = 0;
-  *pFCTotalCurrentVl = 0;
-  *pFCCellVl = 0;
-  *pFCCellV2 = 0;
-  *pFCCellV3 = 0;
-  *pFCCellV4 = 0;
-  *pFCCellV5 = 0;
-  *pFCCellV6 = 0;
-  *pFCCellV7 = 0;
-  *pFCCellV8 = 0;
-  *pFCCellV9 = 0;
-  *pELTotalVoltage = 0;
-  *pELTotalCurrentVh = 0;
-  *pELTotalCurrentVl = 0;
+  FCTotalVoltage = sines[data_index];
+  FCTotalCurrentVh = cosines[data_index];
+  FCTotalCurrentVl = cosines[data_index2];
+  FCCellVl = sines[data_index] / 10;
+  FCCellV2 = sines[data_index] / 10;
+  FCCellV3 = sines[data_index] / 10;
+  FCCellV4 = sines[data_index] / 10;
+  FCCellV5 = sines[data_index] / 10;
+  FCCellV6 = sines[data_index] / 10;
+  FCCellV7 = sines[data_index] / 10;
+  FCCellV8 = sines[data_index] / 10;
+  FCCellV9 = sines[data_index] / 10;
+  ELTotalVoltage = sines[data_index];
+  ELTotalCurrentVh = cosines[data_index];
+  ELTotalCurrentVl = cosines[data_index2];
+
+  data_index++;
+
+  if (data_index >= TOTAL_VALUES) {
+    data_index = 0;
+  }
+  if (data_index2 >= TOTAL_VALUES) {
+    data_index2 = 0;
+  }
 }
 
 #elif  SIM_DATA_TYPE == SIM_DATA_TYPE_02
