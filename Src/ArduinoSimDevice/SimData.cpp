@@ -18,21 +18,21 @@
 uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 
 //- Mapping
-uint16_t* pFCTotalVoltage = &holding_registers[0];
-uint16_t* pFCTotalCurrentVh = &holding_registers[1];
-uint16_t* pFCTotalCurrentVl = &holding_registers[2];
-uint16_t* pFCCellVl = &holding_registers[3];
-uint16_t* pFCCellV2 = &holding_registers[4];
-uint16_t* pFCCellV3 = &holding_registers[5];
-uint16_t* pFCCellV4 = &holding_registers[6];
-uint16_t* pFCCellV5 = &holding_registers[7];
-uint16_t* pFCCellV6 = &holding_registers[8];
-uint16_t* pFCCellV7 = &holding_registers[9];
-uint16_t* pFCCellV8 = &holding_registers[10];
-uint16_t* pFCCellV9 = &holding_registers[11];
-uint16_t* pELTotalVoltage = &holding_registers[12];
-uint16_t* pELTotalCurrentVh = &holding_registers[13];
-uint16_t* pELTotalCurrentVl = &holding_registers[14];
+#define FCTotalVoltage       holding_registers[0]
+#define FCTotalCurrentVh     holding_registers[1]
+#define FCTotalCurrentVl     holding_registers[2]
+#define FCCellVl             holding_registers[3]
+#define FCCellV2             holding_registers[4]
+#define FCCellV3             holding_registers[5]
+#define FCCellV4             holding_registers[6]
+#define FCCellV5             holding_registers[7]
+#define FCCellV6             holding_registers[8]
+#define FCCellV7             holding_registers[9]
+#define FCCellV8             holding_registers[10]
+#define FCCellV9             holding_registers[11]
+#define ELTotalVoltage       holding_registers[12]
+#define ELTotalCurrentVh     holding_registers[13]
+#define ELTotalCurrentVl     holding_registers[14]
 
 
 /*************************************************************/
