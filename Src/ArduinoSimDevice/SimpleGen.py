@@ -7,7 +7,7 @@ total_values = 0
 sine_values = ""
 cosine_values = ""
 
-for deg in range(0,360):
+for deg in range(0, 360, 5):
     rad = deg * pi / 180
     
     sine = sin(rad)
