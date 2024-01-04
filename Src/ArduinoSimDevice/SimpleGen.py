@@ -1,6 +1,6 @@
 from math import sin, cos, pi
 
-offset = 1.0
+offset = 1.1
 scale = 128
 
 total_values = 0
