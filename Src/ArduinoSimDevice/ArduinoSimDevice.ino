@@ -6,7 +6,7 @@ using namespace cblk;
 
 #define SLAVE_ID                  0x0001
 #define BAUD_RATE                 115200
-#define FILL_INTERVAL_MS          200
+#define FILL_INTERVAL_MS          50
 
 ModbusRTUSlave modbus(Serial);
 CyclicTaskExecutor execFill(fill_sim_data, FILL_INTERVAL_MS);
