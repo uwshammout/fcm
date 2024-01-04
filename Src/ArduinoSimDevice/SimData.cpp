@@ -91,18 +91,21 @@ static uint16_t data_index = 0;
 static uint16_t data_index2 = 5;
 
 void fill_sim_data() {
+  
   FCTotalVoltage = sines[data_index];
   FCTotalCurrentVh = cosines[data_index];
   FCTotalCurrentVl = cosines[data_index2];
-  FCCellVl = sines[data_index] / 10;
-  FCCellV2 = sines[data_index] / 10;
-  FCCellV3 = sines[data_index] / 10;
-  FCCellV4 = sines[data_index] / 10;
-  FCCellV5 = sines[data_index] / 10;
-  FCCellV6 = sines[data_index] / 10;
-  FCCellV7 = sines[data_index] / 10;
-  FCCellV8 = sines[data_index] / 10;
-  FCCellV9 = sines[data_index] / 10;
+
+  uint16_t tenth_part = FCTotalVoltage / 10;
+  FCCellVl = FCTotalVoltage - tenth_part * 9;
+  FCCellV2 = FCTotalVoltage - tenth_part * 8;
+  FCCellV3 = FCTotalVoltage - tenth_part * 7;
+  FCCellV4 = FCTotalVoltage - tenth_part * 6;
+  FCCellV5 = FCTotalVoltage - tenth_part * 5;
+  FCCellV6 = FCTotalVoltage - tenth_part * 4;
+  FCCellV7 = FCTotalVoltage - tenth_part * 3;
+  FCCellV8 = FCTotalVoltage - tenth_part * 2;
+  FCCellV9 = FCTotalVoltage - tenth_part;
   ELTotalVoltage = sines[data_index];
   ELTotalCurrentVh = cosines[data_index];
   ELTotalCurrentVl = cosines[data_index2];
