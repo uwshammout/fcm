@@ -108,6 +108,7 @@ void fill_sim_data() {
   ELTotalCurrentVl = cosines[data_index2];
 
   data_index++;
+  data_index2++;
 
   if (data_index >= TOTAL_VALUES) {
     data_index = 0;
