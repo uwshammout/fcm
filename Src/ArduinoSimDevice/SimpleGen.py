@@ -42,9 +42,11 @@ arr_start = "{"
 arr_end = "}"
 
 print()
-print(f"Sines[{total_values}] = {arr_start} {sine_values} {arr_end};")
+print(f"#define TOTAL_VALUES {total_values}")
 print()
-print(f"Cosines[{total_values}] = {arr_start} {cosine_values} {arr_end};")
+print(f"uint16_t const sines[TOTAL_VALUES] = {arr_start} {sine_values} {arr_end};")
+print()
+print(f"uint16_t const cosines[TOTAL_VALUES] = {arr_start} {cosine_values} {arr_end};")
 print()
 
 #- END
