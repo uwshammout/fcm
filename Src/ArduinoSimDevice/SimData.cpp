@@ -42,8 +42,8 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 
 #define TOTAL_VALUES 72
 
-uint16_t const sines[TOTAL_VALUES] = { 128, 139, 150, 161, 171, 182, 192, 201, 210, 218, 226, 232, 238, 244, 248, 251, 254, 255, 256, 255, 254, 251, 248, 244, 238, 232, 226, 218, 210, 201, 192, 182, 171, 161, 150, 139, 128, 116, 105, 94, 84, 73, 63, 54, 45, 37, 29, 23, 17, 11, 7, 4, 1, 0, 0, 0, 1, 4, 7, 11, 17, 23, 29, 37, 45, 54, 63, 73, 84, 94, 105, 116 };
-uint16_t const cosines[TOTAL_VALUES] = { 256, 255, 254, 251, 248, 244, 238, 232, 226, 218, 210, 201, 192, 182, 171, 161, 150, 139, 128, 116, 105, 94, 84, 73, 64, 54, 45, 37, 29, 23, 17, 11, 7, 4, 1, 0, 0, 0, 1, 4, 7, 11, 17, 23, 29, 37, 45, 54, 63, 73, 84, 94, 105, 116, 127, 139, 150, 161, 171, 182, 192, 201, 210, 218, 226, 232, 238, 244, 248, 251, 254, 255 };
+uint16_t const sines[TOTAL_VALUES] = { 140, 151, 163, 173, 184, 194, 204, 214, 223, 231, 238, 245, 251, 256, 261, 264, 266, 268, 268, 268, 266, 264, 261, 256, 251, 245, 238, 231, 223, 214, 204, 194, 184, 173, 163, 151, 140, 129, 118, 107, 97, 86, 76, 67, 58, 50, 42, 35, 29, 24, 20, 17, 14, 13, 12, 13, 14, 17, 20, 24, 29, 35, 42, 50, 58, 67, 76, 86, 97, 107, 118, 129 };
+uint16_t const cosines[TOTAL_VALUES] = { 268, 268, 266, 264, 261, 256, 251, 245, 238, 231, 223, 214, 204, 194, 184, 173, 163, 151, 140, 129, 118, 107, 97, 86, 76, 67, 58, 50, 42, 35, 29, 24, 20, 17, 14, 13, 12, 13, 14, 17, 20, 24, 29, 35, 42, 50, 58, 67, 76, 86, 97, 107, 118, 129, 140, 151, 163, 173, 184, 194, 204, 214, 223, 231, 238, 245, 251, 256, 261, 264, 266, 268 };
 
 #endif
 
@@ -97,16 +97,15 @@ void fill_sim_data() {
   FCTotalCurrentVl = cosines[data_index2];
 
   uint16_t tenth_part = FCTotalVoltage / 10;
-  FCCellVl = tenth_part * 1;
-  FCCellV2 = tenth_part * 2;
-  FCCellV3 = tenth_part * 3;
-  FCCellV4 = tenth_part * 4;
-  FCCellV5 = tenth_part * 5;
-  FCCellV6 = tenth_part * 6;
-  FCCellV7 = tenth_part * 7;
-  FCCellV8 = tenth_part * 8;
-  FCCellV9 = tenth_part * 9;
-
+  FCCellVl = FCTotalVoltage - tenth_part * 9;
+  FCCellV2 = FCTotalVoltage - tenth_part * 8;
+  FCCellV3 = FCTotalVoltage - tenth_part * 7;
+  FCCellV4 = FCTotalVoltage - tenth_part * 6;
+  FCCellV5 = FCTotalVoltage - tenth_part * 5;
+  FCCellV6 = FCTotalVoltage - tenth_part * 4;
+  FCCellV7 = FCTotalVoltage - tenth_part * 3;
+  FCCellV8 = FCTotalVoltage - tenth_part * 2;
+  FCCellV9 = FCTotalVoltage - tenth_part;
   ELTotalVoltage = sines[data_index];
   ELTotalCurrentVh = cosines[data_index];
   ELTotalCurrentVl = cosines[data_index2];
