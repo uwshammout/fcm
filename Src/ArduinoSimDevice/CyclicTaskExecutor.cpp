@@ -10,7 +10,7 @@ cblk::CyclicTaskExecutor::CyclicTaskExecutor(exec_func_t func_ptr, unsigned int 
   change_interval(calling_interval_ms, call_on_zero);
 }
 
-void cblk::CyclicTaskExecutor::change_interval(unsigned int calling_interval_ms, bool call_on_zero = false) {
+void cblk::CyclicTaskExecutor::change_interval(unsigned int calling_interval_ms, bool call_on_zero) {
   callingInterval_ms = calling_interval_ms;
   
   if (call_on_zero) {
