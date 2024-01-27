@@ -1,5 +1,7 @@
 #include "SimData.h"
 
+#include <Arduino.h>
+
 #define SIM_DATA_TYPE_ANALOG_READ      0x00
 #define SIM_DATA_TYPE_01               0x01
 #define SIM_DATA_TYPE_02               0x02
