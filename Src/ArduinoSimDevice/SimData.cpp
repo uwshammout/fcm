@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 
+
 #define DATA_ANALOG_READ_ESP32      0x00
 #define DATA_ANALOG_READ_SIMPLE     0x01
 #define DATA_GENERIC                0x02
