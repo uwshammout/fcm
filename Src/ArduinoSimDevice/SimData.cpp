@@ -37,13 +37,16 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 #define ADC_VAL_TO_VOLT     ADC_MAX_VOLTAGE / ADC_QNT_NUMBERS
 #define VOLTAGE_SCALING     1000
 #define SET_REGISTER(__n,__pin) {               \
+                                                \
                pinMode(__pin, INPUT);           \
+                                                \
                holding_registers[__n] =         \
-                   (uint16_t)(                  \
+                 (uint16_t)(                    \
                       analogRead(__pin) *       \
                           ADC_VAL_TO_VOLT *     \
                           VOLTAGE_SCALING       \
                       );                        \
+                                                \
                pinMode(__pin, INPUT_PULLUP);    \
         }
 
