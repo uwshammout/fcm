@@ -39,19 +39,19 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 #define DELAY_READS_MS      10
 #define SET_REGISTER(__n,__pin) {               \
                                                 \
-               pinMode(__pin, INPUT);           \
+            pinMode(__pin, INPUT);              \
                                                 \
-               holding_registers[__n] =         \
-                 (uint16_t)(analogRead(__pin)); \
+            holding_registers[__n] =            \
+              (uint16_t)(analogRead(__pin));    \
                                                 \
-               delay(DELAY_READS_MS);           \
+            delay(DELAY_READS_MS);              \
                                                 \
-               holding_registers[__n] =         \
-                 (uint16_t)(                    \
-                      analogRead(__pin) *       \
-                          ADC_VAL_TO_VOLT *     \
-                          VOLTAGE_SCALING       \
-                      );                        \
+            holding_registers[__n] =            \
+              (uint16_t)(                       \
+                   analogRead(__pin) *          \
+                       ADC_VAL_TO_VOLT *        \
+                       VOLTAGE_SCALING          \
+                   );                           \
         }
 
 void init_sim_data() {}
