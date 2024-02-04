@@ -37,6 +37,10 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 #define ADC_VAL_TO_VOLT     ADC_MAX_VOLTAGE / ADC_QNT_NUMBERS
 #define VOLTAGE_SCALING     1000
 #define DELAY_READS_MS      10
+#define SET_REGISTER_ZERO(__n) {                \
+            holding_registers[__n] =            \
+              (uint16_t)(0);                    \
+        }
 #define SET_REGISTER(__n,__pin) {               \
                                                 \
             pinMode(__pin, INPUT);              \
@@ -56,7 +60,7 @@ void init_sim_data() {}
 void fill_sim_data() {
   SET_REGISTER(0, 36);
   SET_REGISTER(1, 39);
-  SET_REGISTER(2, 34);
+  SET_REGISTER_ZERO(2);
   SET_REGISTER(3, 35);
   SET_REGISTER(4, 32);
   SET_REGISTER(5, 33);
@@ -68,7 +72,7 @@ void fill_sim_data() {
   SET_REGISTER(11, 13);
   SET_REGISTER(12, 15);
   SET_REGISTER(13, 2);
-  SET_REGISTER(14, 4);
+  SET_REGISTER_ZERO(14);
 }
 
 #elif SIM_DATA_TYPE == DATA_ANALOG_READ_SIMPLE
