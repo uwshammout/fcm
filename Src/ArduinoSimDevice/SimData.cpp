@@ -54,7 +54,7 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
                                                 \
             pinMode(__pin, INPUT_PULLDOWN);     \
         }
-#define ACS712_ZERO_POINT             ADC_MAX_VOLTAGE / 2.0
+#define ACS712_ZERO_POINT             2.5
 #define ACS712_SENSITIVITY            0.1
 #define ACS712_TOTAL_SAMPLES          5
 #define ACS712_SAMPLING_DELAY_MS      3
