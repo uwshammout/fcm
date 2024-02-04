@@ -54,12 +54,38 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
                                                 \
             pinMode(__pin, INPUT_PULLDOWN);     \
         }
+#define ACS712_ZERO_POINT             ADC_MAX_VOLTAGE / 2.0
+#define ACS712_SENSITIVITY            0.1
+#define ACS712_TOTAL_SAMPLES          5
+#define ACS712_SAMPLING_DELAY_MS      3
+#define SET_REGISTER_ACS712(__n,__pin) {                                  \
+                                                                          \
+            double value = 0.0;                                           \
+                                                                          \
+            for (int __ind = 0; __ind < ACS712_TOTAL_SAMPLES; __ind++) {  \
+                                                                          \
+                value += analogRead(__pin) * ADC_VAL_TO_VOLT;             \
+                                                                          \
+                if (__ind != ACS712_TOTAL_SAMPLES - 1) {                  \
+                    delay(ACS712_SAMPLING_DELAY_MS);                      \
+                }                                                         \
+            }                                                             \
+                                                                          \
+            value /= ACS712_TOTAL_SAMPLES;                                \
+            value -= ACS712_ZERO_POINT;                                   \
+                                                                          \
+            if (value < 0) value *= -1;                                   \
+                                                                          \
+            holding_registers[__n] = (uint16_t)(                          \
+                    (value / ACS712_SENSITIVITY) * VOLTAGE_SCALING        \
+                );                                                        \
+        }
 
 void init_sim_data() {}
 
 void fill_sim_data() {
   SET_REGISTER(0, 36);
-  SET_REGISTER(1, 39);
+  SET_REGISTER_ACS712(1, 39);
   SET_REGISTER_ZERO(2);
   SET_REGISTER(3, 35);
   SET_REGISTER(4, 32);
@@ -71,7 +97,7 @@ void fill_sim_data() {
   SET_REGISTER(10, 12);
   SET_REGISTER(11, 13);
   SET_REGISTER(12, 15);
-  SET_REGISTER(13, 2);
+  SET_REGISTER_ACS712(13, 2);
   SET_REGISTER_ZERO(14);
 }
 
