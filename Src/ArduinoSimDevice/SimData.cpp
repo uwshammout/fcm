@@ -64,7 +64,8 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
                                                                           \
             for (int __ind = 0; __ind < ACS712_TOTAL_SAMPLES; __ind++) {  \
                                                                           \
-                value += analogRead(__pin) * ADC_VAL_TO_VOLT;             \
+                value += (analogRead(__pin) * ADC_VAL_TO_VOLT) -          \
+                             ACS712_ZERO_POINT;                           \
                                                                           \
                 if (__ind != ACS712_TOTAL_SAMPLES - 1) {                  \
                     delay(ACS712_SAMPLING_DELAY_MS);                      \
@@ -72,7 +73,6 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
             }                                                             \
                                                                           \
             value /= ACS712_TOTAL_SAMPLES;                                \
-            value -= ACS712_ZERO_POINT;                                   \
                                                                           \
             if (value < 0) value *= -1;                                   \
                                                                           \
