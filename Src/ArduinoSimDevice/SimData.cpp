@@ -38,8 +38,8 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 #define VOLTAGE_SCALING               1000
 #define ACS712_ZERO_POINT             2.5
 #define ACS712_SENSITIVITY            0.1
-#define SAMPLES_PER_INPUT             5
-#define SAMPLING_DELAY_MS             3
+#define SAMPLES_PER_INPUT             10
+#define SAMPLING_DELAY_MS             1
 
 #define SET_REGISTER_ZERO(__reg) { holding_registers[__reg] = 0; }
 #define SET_REGISTER(__reg,__pin) {                                        \
