@@ -201,6 +201,8 @@ public partial class DeviceCalibrationWindow : Window
     protected override void OnClosed(EventArgs e)
     {
         _modbusScaling.SaveValuesToFile();
+        _passwordFile.SaveFile();
+
         base.OnClosed(e);
     }
 
