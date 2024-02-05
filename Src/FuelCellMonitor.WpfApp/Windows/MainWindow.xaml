@@ -51,6 +51,7 @@
                 <MenuItem Header="Measurement Settings" Click="OnMenuItemClicked" />
                 <MenuItem Header="Calibrate" Click="OnMenuItemClicked" />
             </MenuItem>
+            <MenuItem Header="About" Click="OnMenuItemClicked" />
         </Menu>
 
         <TabControl Grid.Row="1" Margin="2">
