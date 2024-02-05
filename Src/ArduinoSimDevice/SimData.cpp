@@ -36,7 +36,6 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 #define ADC_QNT_NUMBERS               4096
 #define ADC_VAL_TO_VOLT               ADC_MAX_VOLTAGE / ADC_QNT_NUMBERS
 #define VOLTAGE_SCALING               1000
-#define ACS712_ZERO_POINT             2.3
 #define ACS712_SENSITIVITY            0.1
 #define SAMPLES_PER_INPUT             10
 #define SAMPLING_DELAY_MS             1
@@ -65,14 +64,14 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
                                                                            \
         pinMode(__pin, INPUT_PULLDOWN);                                    \
     }
-#define SET_REGISTER_ACS712(__reg,__pin) {                                 \
+#define SET_REGISTER_ACS712(__reg,__pin,__zero_point) {                    \
                                                                            \
         double __value = 0.0;                                              \
                                                                            \
         for (int __count = 0; __count < SAMPLES_PER_INPUT; __count++) {    \
                                                                            \
             __value += (analogRead(__pin) * ADC_VAL_TO_VOLT) -             \
-                           ACS712_ZERO_POINT;                              \
+                           __zero_point;                                   \
                                                                            \
             if (__count != SAMPLES_PER_INPUT - 1) {                        \
                 delay(SAMPLING_DELAY_MS);                                  \
@@ -113,21 +112,21 @@ void fill_sim_data() {
   static InputState input_state = INPUT_STATE_A01;
 
   switch (input_state) {
-    case INPUT_STATE_A01: SET_REGISTER(0, 36);           break;
-    case INPUT_STATE_A02: SET_REGISTER_ACS712(1, 39);    break;
-    case INPUT_STATE_A03: SET_REGISTER_ZERO(2);          break;
-    case INPUT_STATE_A04: SET_REGISTER(3, 32);           break;
-    case INPUT_STATE_A05: SET_REGISTER(4, 33);           break;
-    case INPUT_STATE_A06: SET_REGISTER(5, 25);           break;
-    case INPUT_STATE_A07: SET_REGISTER(6, 26);           break;
-    case INPUT_STATE_A08: SET_REGISTER(7, 27);           break;
-    case INPUT_STATE_A09: SET_REGISTER(8, 14);           break;
-    case INPUT_STATE_A10: SET_REGISTER(9, 12);           break;
-    case INPUT_STATE_A11: SET_REGISTER(10, 13);          break;
-    case INPUT_STATE_A12: SET_REGISTER(11, 15);          break;
-    case INPUT_STATE_A13: SET_REGISTER(12, 2);           break;
-    case INPUT_STATE_A14: SET_REGISTER_ACS712(13, 4);    break;
-    case INPUT_STATE_A15: SET_REGISTER_ZERO(14);         break;
+    case INPUT_STATE_A01: SET_REGISTER(0, 36);     break;
+    case INPUT_STATE_A02: SET_REGISTER_ACS712(1, 39, 2.3);    break;
+    case INPUT_STATE_A03: SET_REGISTER_ZERO(2);    break;
+    case INPUT_STATE_A04: SET_REGISTER(3, 32);     break;
+    case INPUT_STATE_A05: SET_REGISTER(4, 33);     break;
+    case INPUT_STATE_A06: SET_REGISTER(5, 25);     break;
+    case INPUT_STATE_A07: SET_REGISTER(6, 26);     break;
+    case INPUT_STATE_A08: SET_REGISTER(7, 27);     break;
+    case INPUT_STATE_A09: SET_REGISTER(8, 14);     break;
+    case INPUT_STATE_A10: SET_REGISTER(9, 12);     break;
+    case INPUT_STATE_A11: SET_REGISTER(10, 13);    break;
+    case INPUT_STATE_A12: SET_REGISTER(11, 15);    break;
+    case INPUT_STATE_A13: SET_REGISTER(12, 2);     break;
+    case INPUT_STATE_A14: SET_REGISTER_ACS712(13, 4, 2.3);    break;
+    case INPUT_STATE_A15: SET_REGISTER_ZERO(14);   break;
   }
 
   input_state = (InputState)(((int)input_state) + 1);
