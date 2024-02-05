@@ -51,5 +51,6 @@ internal static class ConfigureServices
                 );
         });
         services.AddTransient<Windows.MeasurementSettingsWindow>();
+        services.AddTransient<Windows.AboutWindow>();
     }
 }
