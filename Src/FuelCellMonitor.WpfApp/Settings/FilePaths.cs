@@ -10,6 +10,7 @@ internal static class FilePaths
         $"{Path.DirectorySeparatorChar}FuelCellMonitor" +
         $"{Path.DirectorySeparatorChar}";
 
+    public static readonly string PasswordFilename = $"{FilesDirectory}Pwd.ini";
     public static readonly string DataScalingFilename = $"{FilesDirectory}ScalingFactors.ini";
     public static readonly string DataExchangeSvcFilename = $"{FilesDirectory}CommonData.ini";
     public static readonly string CsvDumpFilename = $"{FilesDirectory}temp.csv";
