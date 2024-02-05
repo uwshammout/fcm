@@ -41,9 +41,7 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 #define SAMPLES_PER_INPUT             5
 #define SAMPLING_DELAY_MS             3
 
-#define SET_REGISTER_ZERO(__reg) {                                         \
-        holding_registers[__reg] = (uint16_t)(0);                          \
-    }
+#define SET_REGISTER_ZERO(__reg) { holding_registers[__reg] = 0; }
 #define SET_REGISTER(__reg,__pin) {                                        \
                                                                            \
         pinMode(__pin, INPUT);                                             \
