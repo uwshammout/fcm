@@ -12,6 +12,8 @@ namespace CronBlocks.FuelCellMonitor.Windows;
 
 public partial class DeviceCalibrationWindow : Window
 {
+    private readonly string _passwordKey = "Admin/PWD";
+
     private readonly ISerialModbusClientService _modbus;
     private readonly ISerialModbusDataScalingService _modbusScaling;
     private readonly DataExchangeService _dataExchange;
@@ -204,6 +206,16 @@ public partial class DeviceCalibrationWindow : Window
         _passwordFile.SaveFile();
 
         base.OnClosed(e);
+    }
+
+    private string GetPasswordHash()
+    {
+        return _passwordFile.GetString(_passwordKey, ValueConstants.DefaultPasswordHash);
+    }
+    private void SetPasswordHash(string newHash)
+    {
+        _passwordFile.SetString(_passwordKey, newHash);
+        _passwordFile.SaveFile();
     }
 
     private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
