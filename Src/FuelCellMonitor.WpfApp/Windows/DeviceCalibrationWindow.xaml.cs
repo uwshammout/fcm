@@ -201,4 +201,17 @@ public partial class DeviceCalibrationWindow : Window
         _modbusScaling.SaveValuesToFile();
         base.OnClosed(e);
     }
+
+    private void PasswordInput_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(PasswordInput.Password))
+        {
+            string password = PasswordInput.Password;
+
+            if (password == "admin")
+            {
+                PasswordInputPanel.Visibility = Visibility.Hidden;
+            }
+        }
+    }
 }
