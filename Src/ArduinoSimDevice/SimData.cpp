@@ -88,24 +88,53 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
             );                                                             \
     }
 
+enum InputState : int {
+  INPUT_STATE_A01 = 0,
+  INPUT_STATE_A02,
+  INPUT_STATE_A03,
+  INPUT_STATE_A04,
+  INPUT_STATE_A05,
+  INPUT_STATE_A06,
+  INPUT_STATE_A07,
+  INPUT_STATE_A08,
+  INPUT_STATE_A09,
+  INPUT_STATE_A10,
+  INPUT_STATE_A11,
+  INPUT_STATE_A12,
+  INPUT_STATE_A13,
+  INPUT_STATE_A14,
+  INPUT_STATE_A15,
+  INPUT_STATE_MAX
+};
+
 void init_sim_data() {}
 
 void fill_sim_data() {
-  SET_REGISTER(0, 36);
-  SET_REGISTER_ACS712(1, 39);
-  SET_REGISTER_ZERO(2);
-  SET_REGISTER(3, 35);
-  SET_REGISTER(4, 32);
-  SET_REGISTER(5, 33);
-  SET_REGISTER(6, 25);
-  SET_REGISTER(7, 26);
-  SET_REGISTER(8, 27);
-  SET_REGISTER(9, 14);
-  SET_REGISTER(10, 12);
-  SET_REGISTER(11, 13);
-  SET_REGISTER(12, 15);
-  SET_REGISTER_ACS712(13, 2);
-  SET_REGISTER_ZERO(14);
+  static InputState input_state = INPUT_STATE_A01;
+
+  switch (input_state) {
+    case INPUT_STATE_A01: SET_REGISTER(0, 36);           break;
+    case INPUT_STATE_A02: SET_REGISTER_ACS712(1, 39);    break;
+    case INPUT_STATE_A03: SET_REGISTER_ZERO(2);          break;
+    case INPUT_STATE_A04: SET_REGISTER(3, 35);           break;
+    case INPUT_STATE_A05: SET_REGISTER(4, 32);           break;
+    case INPUT_STATE_A06: SET_REGISTER(5, 33);           break;
+    case INPUT_STATE_A07: SET_REGISTER(6, 25);           break;
+    case INPUT_STATE_A08: SET_REGISTER(7, 26);           break;
+    case INPUT_STATE_A09: SET_REGISTER(8, 27);           break;
+    case INPUT_STATE_A10: SET_REGISTER(9, 14);           break;
+    case INPUT_STATE_A11: SET_REGISTER(10, 12);          break;
+    case INPUT_STATE_A12: SET_REGISTER(11, 13);          break;
+    case INPUT_STATE_A13: SET_REGISTER(12, 15);          break;
+    case INPUT_STATE_A14: SET_REGISTER_ACS712(13, 2);    break;
+    case INPUT_STATE_A15: SET_REGISTER_ZERO(14);         break;
+  }
+
+  input_state = (InputState)(((int)input_state) + 1);
+
+  if (input_state >= INPUT_STATE_MAX) {
+    input_state = INPUT_STATE_A01;
+  }
 }
 
 #elif SIM_DATA_TYPE == DATA_ANALOG_READ_SIMPLE
