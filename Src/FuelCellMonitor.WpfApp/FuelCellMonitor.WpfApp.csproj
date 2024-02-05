@@ -12,7 +12,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\FuelCellMonitor.png" />
+    <None Remove="Resources\ttech.png" />
+    <None Remove="Resources\ttech2.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Resources\FuelCellMonitor.ico" />
+    <Content Include="Resources\FuelCellMonitor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ttech.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ttech2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
