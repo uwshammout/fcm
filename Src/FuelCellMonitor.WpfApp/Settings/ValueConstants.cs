@@ -1,4 +1,6 @@
-﻿namespace CronBlocks.FuelCellMonitor.Settings;
+﻿using CronBlocks.Helpers.Extensions;
+
+namespace CronBlocks.FuelCellMonitor.Settings;
 
 internal static class ValueConstants
 {
@@ -7,4 +9,6 @@ internal static class ValueConstants
 
     public readonly static double FuelCellCurrentMeasurementResistanceOhm = 1;
     public readonly static double ElectrolyzerCurrentMeasurementResistanceOhm = 1;
+
+    public readonly static string DefaultPasswordHash = "admin".Hash();
 }
