@@ -39,7 +39,17 @@ internal static class ConfigureServices
         //- Windows
         services.AddSingleton<Windows.MainWindow>();
         services.AddTransient<Windows.DeviceConnectionWindow>();
-        services.AddTransient<Windows.DeviceCalibrationWindow>();
+        services.AddTransient<Windows.DeviceCalibrationWindow>((sp) =>
+        {
+            return new Windows.DeviceCalibrationWindow(
+                sp.GetRequiredService<ISerialModbusClientService>(),
+                sp.GetRequiredService<ISerialModbusDataScalingService>(),
+                sp.GetRequiredService<DataExchangeService>(),
+                new IniConfigIO(
+                    FilePaths.PasswordFilename,
+                    sp.GetRequiredService<ILogger<IniConfigIO>>())
+                );
+        });
         services.AddTransient<Windows.MeasurementSettingsWindow>();
     }
 }

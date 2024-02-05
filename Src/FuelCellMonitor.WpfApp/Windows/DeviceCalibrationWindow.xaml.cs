@@ -1,5 +1,6 @@
 ﻿using CronBlocks.FuelCellMonitor.InternalServices;
 using CronBlocks.FuelCellMonitor.Settings;
+using CronBlocks.Helpers;
 using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
 using System.Collections.Immutable;
@@ -14,7 +15,7 @@ public partial class DeviceCalibrationWindow : Window
     private readonly ISerialModbusClientService _modbus;
     private readonly ISerialModbusDataScalingService _modbusScaling;
     private readonly DataExchangeService _dataExchange;
-
+    private readonly IniConfigIO _passwordFile;
     private readonly TextBox[] _mfInputs;
     private readonly TextBox[] _offInputs;
     private readonly TextBlock[] _outputs;
@@ -24,14 +25,15 @@ public partial class DeviceCalibrationWindow : Window
     public DeviceCalibrationWindow(
         ISerialModbusClientService modbus,
         ISerialModbusDataScalingService modbusScaling,
-        DataExchangeService dataExchange)
+        DataExchangeService dataExchange,
+        IniConfigIO passwordFile)
     {
         InitializeComponent();
 
         _modbus = modbus;
         _modbusScaling = modbusScaling;
         _dataExchange = dataExchange;
-
+        _passwordFile = passwordFile;
         _originalTextBoxBg = MultiplicationFactorA1.Background;
 
         _mfInputs =
