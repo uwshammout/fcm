@@ -1,6 +1,7 @@
 ﻿using CronBlocks.FuelCellMonitor.InternalServices;
 using CronBlocks.FuelCellMonitor.Settings;
 using CronBlocks.Helpers;
+using CronBlocks.Helpers.Extensions;
 using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
 using System.Collections.Immutable;
@@ -224,10 +225,18 @@ public partial class DeviceCalibrationWindow : Window
         {
             string password = PasswordInput.Password;
 
-            if (password == "admin")
+            if (password.Hash() == GetPasswordHash())
             {
                 PasswordInputPanel.Visibility = Visibility.Hidden;
             }
+            else
+            {
+                PasswordInputValidityMessage.Visibility = Visibility.Visible;
+            }
+        }
+        else
+        {
+            PasswordInputValidityMessage.Visibility = Visibility.Hidden;
         }
     }
 }
