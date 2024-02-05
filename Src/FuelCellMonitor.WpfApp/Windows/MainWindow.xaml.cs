@@ -27,8 +27,13 @@ public partial class MainWindow : Window
     private readonly Timer _timer;
     private DateTime _experimentStartTime = DateTime.MinValue;
 
+    private bool _isCurrentOverrideEnabled = false;
+    private double _currentOverrideValue = 0.0;
+
     private readonly string _csvDumpFilename;
     private StreamWriter _csvDumpFile = null!;
+
+    private Brush _currentOverrideValueInitialColor;
 
     private Brush _fuelCellStartButtonInitialColor;
     private Brush _fuelCellSeriesStartButtonInitialColor;
@@ -59,6 +64,10 @@ public partial class MainWindow : Window
 
         _csvDumpFilename = FilePaths.CsvDumpFilename;
         _csvDumpFilename.CreateFoldersForRelativeFilename();
+
+        EnableCurrentOverride.IsChecked = _isCurrentOverrideEnabled;
+        CurrentOverrideValue.Text = _currentOverrideValue.ToString();
+        _currentOverrideValueInitialColor = CurrentOverrideValue.Background;
 
         _fuelCellStartButtonInitialColor = FuelCellStartButton.Background;
         _fuelCellSeriesStartButtonInitialColor = FuelCellSeriesStartButton.Background;
@@ -135,6 +144,10 @@ public partial class MainWindow : Window
 
             double fcTotalVoltage = values[0];
             double fcTotalCurrent = Math.Abs(values[1] - values[2]) / _dataExchange.FuelCellCurrentMeasurementResistance;
+            if (_isCurrentOverrideEnabled)
+            {
+                fcTotalCurrent = _currentOverrideValue;
+            }
             double fcTotalPower = fcTotalVoltage * fcTotalCurrent;
             double fcC1Voltage = values[3];  //- First cell near ground
             double fcC2Voltage = values[4];  //- 
@@ -169,6 +182,10 @@ public partial class MainWindow : Window
 
             double elTotalVoltage = values[12];
             double elTotalCurrent = Math.Abs(values[13] - values[14]) / _dataExchange.ElectrolyzerCurrentMeasurementResistance;
+            if (_isCurrentOverrideEnabled)
+            {
+                elTotalCurrent = _currentOverrideValue;
+            }
             double elTotalPower = elTotalVoltage * elTotalCurrent;
 
             ElectrolyzerVoltageGauge.Dial1Value = elTotalVoltage;
@@ -541,6 +558,53 @@ public partial class MainWindow : Window
                 if (window != null)
                 {
                     window.ShowDialog();
+                }
+            }
+        }
+        else if (sender is CheckBox cb)
+        {
+            if (cb == EnableCurrentOverride)
+            {
+                _isCurrentOverrideEnabled = cb.IsChecked == true;
+            }
+        }
+    }
+
+    private void OnMenuItemTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (sender is TextBox tb)
+        {
+            if (tb == CurrentOverrideValue)
+            {
+                if (double.TryParse(tb.Text, out double _))
+                {
+                    tb.Background = _currentOverrideValueInitialColor;
+                }
+                else
+                {
+                    tb.Background = DisplayColors.ErrorBg;
+                }
+            }
+        }
+    }
+
+    private void OnMenuItemTextKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Enter)
+        {
+            if (sender is TextBox tb)
+            {
+                if (tb == CurrentOverrideValue)
+                {
+                    if (double.TryParse(tb.Text, out double value))
+                    {
+                        _currentOverrideValue = value;
+                        tb.Background = _currentOverrideValueInitialColor;
+                    }
+                    else
+                    {
+                        tb.Background = DisplayColors.ErrorBg;
+                    }
                 }
             }
         }

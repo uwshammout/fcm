@@ -49,6 +49,12 @@
             <MenuItem Header="Connect / Disconnect" Click="OnMenuItemClicked" />
             <MenuItem Header="Settings">
                 <MenuItem Header="Measurement Settings" Click="OnMenuItemClicked" />
+
+                <Separator />
+                <CheckBox x:Name="EnableCurrentOverride" Content="Enable Current Override" Click="OnMenuItemClicked" />
+                <TextBox x:Name="CurrentOverrideValue" IsEnabled="{Binding Path=IsChecked, ElementName=EnableCurrentOverride}" Text="" MinWidth="120" MinHeight="28" Margin="15,6,6,3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="OnMenuItemTextKeyDown" TextChanged="OnMenuItemTextChanged" />
+
+                <Separator />
                 <MenuItem Header="Calibrate" Click="OnMenuItemClicked" />
             </MenuItem>
             <MenuItem Header="About" Click="OnMenuItemClicked" />
