@@ -48,12 +48,22 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
                                                                            \
         pinMode(__pin, INPUT);                                             \
                                                                            \
-        holding_registers[__reg] =                                         \
-          (uint16_t)(                                                      \
-               analogRead(__pin) *                                         \
-                   ADC_VAL_TO_VOLT *                                       \
-                   VOLTAGE_SCALING                                         \
-               );                                                          \
+        double __value = 0.0;                                              \
+                                                                           \
+        for (int __count = 0; __count < SAMPLES_PER_INPUT; __count++) {    \
+                                                                           \
+            __value += analogRead(__pin) * ADC_VAL_TO_VOLT;                \
+                                                                           \
+            if (__count != SAMPLES_PER_INPUT - 1) {                        \
+                delay(SAMPLING_DELAY_MS);                                  \
+            }                                                              \
+        }                                                                  \
+                                                                           \
+        __value /= SAMPLES_PER_INPUT;                                      \
+                                                                           \
+        if (__value < 0) __value *= -1;                                    \
+                                                                           \
+        holding_registers[__reg] = (uint16_t)(__value * VOLTAGE_SCALING);  \
                                                                            \
         pinMode(__pin, INPUT_PULLDOWN);                                    \
     }
