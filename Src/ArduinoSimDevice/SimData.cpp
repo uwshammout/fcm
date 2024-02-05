@@ -32,54 +32,52 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 
 #if SIM_DATA_TYPE == DATA_ANALOG_READ_ESP32
 
-#define ADC_MAX_VOLTAGE     3.3
-#define ADC_QNT_NUMBERS     4096
-#define ADC_VAL_TO_VOLT     ADC_MAX_VOLTAGE / ADC_QNT_NUMBERS
-#define VOLTAGE_SCALING     1000
-#define DELAY_READS_MS      10
-#define SET_REGISTER_ZERO(__n) {                \
-            holding_registers[__n] =            \
-              (uint16_t)(0);                    \
-        }
-#define SET_REGISTER(__n,__pin) {               \
-                                                \
-            pinMode(__pin, INPUT);              \
-                                                \
-            holding_registers[__n] =            \
-              (uint16_t)(                       \
-                   analogRead(__pin) *          \
-                       ADC_VAL_TO_VOLT *        \
-                       VOLTAGE_SCALING          \
-                   );                           \
-                                                \
-            pinMode(__pin, INPUT_PULLDOWN);     \
-        }
+#define ADC_MAX_VOLTAGE               3.3
+#define ADC_QNT_NUMBERS               4096
+#define ADC_VAL_TO_VOLT               ADC_MAX_VOLTAGE / ADC_QNT_NUMBERS
+#define VOLTAGE_SCALING               1000
 #define ACS712_ZERO_POINT             2.5
 #define ACS712_SENSITIVITY            0.1
-#define ACS712_TOTAL_SAMPLES          5
-#define ACS712_SAMPLING_DELAY_MS      3
-#define SET_REGISTER_ACS712(__n,__pin) {                                  \
-                                                                          \
-            double value = 0.0;                                           \
-                                                                          \
-            for (int __ind = 0; __ind < ACS712_TOTAL_SAMPLES; __ind++) {  \
-                                                                          \
-                value += (analogRead(__pin) * ADC_VAL_TO_VOLT) -          \
-                             ACS712_ZERO_POINT;                           \
-                                                                          \
-                if (__ind != ACS712_TOTAL_SAMPLES - 1) {                  \
-                    delay(ACS712_SAMPLING_DELAY_MS);                      \
-                }                                                         \
-            }                                                             \
-                                                                          \
-            value /= ACS712_TOTAL_SAMPLES;                                \
-                                                                          \
-            if (value < 0) value *= -1;                                   \
-                                                                          \
-            holding_registers[__n] = (uint16_t)(                          \
-                    (value / ACS712_SENSITIVITY) * VOLTAGE_SCALING        \
-                );                                                        \
-        }
+#define SAMPLES_PER_INPUT             5
+#define SAMPLING_DELAY_MS             3
+#define SET_REGISTER_ZERO(__n) {                                      \
+        holding_registers[__n] = (uint16_t)(0);                       \
+    }
+#define SET_REGISTER(__n,__pin) {                                     \
+                                                                      \
+        pinMode(__pin, INPUT);                                        \
+                                                                      \
+        holding_registers[__n] =                                      \
+          (uint16_t)(                                                 \
+               analogRead(__pin) *                                    \
+                   ADC_VAL_TO_VOLT *                                  \
+                   VOLTAGE_SCALING                                    \
+               );                                                     \
+                                                                      \
+        pinMode(__pin, INPUT_PULLDOWN);                               \
+    }
+#define SET_REGISTER_ACS712(__n,__pin) {                              \
+                                                                      \
+        double value = 0.0;                                           \
+                                                                      \
+        for (int __ind = 0; __ind < SAMPLES_PER_INPUT; __ind++) {     \
+                                                                      \
+            value += (analogRead(__pin) * ADC_VAL_TO_VOLT) -          \
+                         ACS712_ZERO_POINT;                           \
+                                                                      \
+            if (__ind != SAMPLES_PER_INPUT - 1) {                     \
+                delay(SAMPLING_DELAY_MS);                             \
+            }                                                         \
+        }                                                             \
+                                                                      \
+        value /= SAMPLES_PER_INPUT;                                   \
+                                                                      \
+        if (value < 0) value *= -1;                                   \
+                                                                      \
+        holding_registers[__n] = (uint16_t)(                          \
+                (value / ACS712_SENSITIVITY) * VOLTAGE_SCALING        \
+            );                                                        \
+    }
 
 void init_sim_data() {}
 
