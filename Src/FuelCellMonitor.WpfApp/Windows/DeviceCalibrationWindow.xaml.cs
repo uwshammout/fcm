@@ -240,5 +240,52 @@ public partial class DeviceCalibrationWindow : Window
             PasswordInputValidityMessage.Visibility = Visibility.Hidden;
         }
     }
+
+    private void PasswordNew_PasswordChanged(object sender, RoutedEventArgs e)
+    {
+        string p1 = PasswordNew.Password;
+        string p2 = PasswordNewRepeat.Password;
+
+        if (!string.IsNullOrEmpty(p1) && !string.IsNullOrEmpty(p2))
+        {
+            if (p1 == p2)
+            {
+                PasswordNewValidationMessage.Text = "";
+                PasswordNewUpdateButton.IsEnabled = true;
+            }
+            else
+            {
+                PasswordNewValidationMessage.Text = "Passwords do not match";
+                PasswordNewUpdateButton.IsEnabled = false;
+            }
+        }
+        else
+        {
+            PasswordNewValidationMessage.Text = "Provide matching password in both the fields";
+            PasswordNewUpdateButton.IsEnabled = false;
+        }
+    }
+
+    private void PasswordNewUpdateButton_Click(object sender, RoutedEventArgs e)
+    {
+        string p1 = PasswordNew.Password;
+        string p2 = PasswordNewRepeat.Password;
+
+        if (!string.IsNullOrEmpty(p1) && !string.IsNullOrEmpty(p2) && p1 == p2)
+        {
+            PasswordNew.Password = "";
+            PasswordNewRepeat.Password = "";
+            PasswordNewValidationMessage.Text = "";
+            PasswordNewUpdateButton.IsEnabled = false;
+
+            SetPasswordHash(p1.Hash());
+
+            MessageBox.Show("Password updated", "Success", MessageBoxButton.OK);
+        }
+        else
+        {
+            MessageBox.Show("Invalid operation", "Password not provided", MessageBoxButton.OK);
+        }
+    }
     #endregion
 }
