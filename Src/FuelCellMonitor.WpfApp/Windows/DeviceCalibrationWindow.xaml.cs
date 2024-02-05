@@ -209,6 +209,7 @@ public partial class DeviceCalibrationWindow : Window
         base.OnClosed(e);
     }
 
+    #region Password
     private string GetPasswordHash()
     {
         return _passwordFile.GetString(_passwordKey, ValueConstants.DefaultPasswordHash);
@@ -239,4 +240,5 @@ public partial class DeviceCalibrationWindow : Window
             PasswordInputValidityMessage.Visibility = Visibility.Hidden;
         }
     }
+    #endregion
 }
