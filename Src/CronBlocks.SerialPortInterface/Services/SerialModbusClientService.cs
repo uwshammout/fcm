@@ -1,4 +1,5 @@
-﻿using CronBlocks.SerialPortInterface.Configuration;
+﻿using CronBlocks.Helpers;
+using CronBlocks.SerialPortInterface.Configuration;
 using CronBlocks.SerialPortInterface.Entities;
 using CronBlocks.SerialPortInterface.Interfaces;
 using FluentModbus;
@@ -14,6 +15,7 @@ public class SerialModbusClientService : ISerialModbusClientService
     public OperationState OperationState { get { return _operationState; } }
 
     private readonly ILogger<SerialModbusClientService> _logger;
+    private readonly IniConfigIO _configFile;
 
     //- Timer
 
@@ -45,13 +47,16 @@ public class SerialModbusClientService : ISerialModbusClientService
 
     private double[] _valuesReceived;
 
-    public SerialModbusClientService(ILogger<SerialModbusClientService> logger)
+    public SerialModbusClientService(
+        ILogger<SerialModbusClientService> logger,
+        IniConfigIO configFile = null!)
     {
         _isRunning = false;
         _operationState = OperationState.Stopped;
         _timer = new Timer(AcquireData, null, TimeSpan.FromMilliseconds(-1), TimeSpan.FromMilliseconds(-1));
 
         _logger = logger;
+        _configFile = configFile;
 
         _settingsProvided = false;
         _client = null!;

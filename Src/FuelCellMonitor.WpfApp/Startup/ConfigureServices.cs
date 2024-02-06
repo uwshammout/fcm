@@ -18,7 +18,14 @@ internal static class ConfigureServices
 
         //- Serial Port Services
         services.AddSingleton<ISerialPortsDiscoveryService, SerialPortsDiscoveryService>();
-        services.AddSingleton<ISerialModbusClientService, SerialModbusClientService>();
+        services.AddSingleton<ISerialModbusClientService, SerialModbusClientService>((sp) =>
+        {
+            return new SerialModbusClientService(
+                sp.GetRequiredService<ILogger<SerialModbusClientService>>(),
+                new IniConfigIO(
+                    FilePaths.ModbusSvcFilename,
+                    sp.GetRequiredService<ILogger<IniConfigIO>>()));
+        });
         services.AddSingleton<ISerialOptionsService, SerialOptionsService>();
         services.AddSingleton<ISerialModbusDataScalingService>((sp) =>
         {
