@@ -47,14 +47,18 @@
                 <MenuItem Header="Save CSV" x:Name="SaveCsvMenuItem" IsEnabled="False" Click="OnMenuItemClicked" />
             </MenuItem>
             <MenuItem Header="Connect / Disconnect" Click="OnMenuItemClicked" />
+            <MenuItem Header="Measurement">
+                <MenuItem Header="Fuel Cell Current">
+                    <RadioButton x:Name="FuelCellCurrentDisableOverride" Content="Automatic" IsChecked="True" Click="OnMenuItemClicked" />
+                    <RadioButton x:Name="FuelCellCurrentEnableOverride" Content="Regulated" Click="OnMenuItemClicked" />
+                </MenuItem>
+                <MenuItem Header="Electrolyzer Current">
+                    <RadioButton x:Name="ElectrolyzerCurrentDisableOverride" Content="Automatic" IsChecked="True" Click="OnMenuItemClicked" />
+                    <RadioButton x:Name="ElectrolyzerCurrentEnableOverride" Content="Regulated" Click="OnMenuItemClicked" />
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Settings">
                 <MenuItem Header="Measurement Settings" Click="OnMenuItemClicked" />
-
-                <Separator />
-                <CheckBox x:Name="EnableCurrentOverride" Content="Enable Current Override" Click="OnMenuItemClicked" />
-                <TextBox x:Name="CurrentOverrideValue" IsEnabled="{Binding Path=IsChecked, ElementName=EnableCurrentOverride}" Text="" MinWidth="120" MinHeight="28" Margin="15,6,6,3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="OnMenuItemTextKeyDown" TextChanged="OnMenuItemTextChanged" />
-
-                <Separator />
                 <MenuItem Header="Calibrate" Click="OnMenuItemClicked" />
             </MenuItem>
             <MenuItem Header="About" Click="OnMenuItemClicked" />
@@ -116,6 +120,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <cblk3pd:ThreePointerDial x:Name="FuelCellVoltageGauge"
@@ -154,7 +159,16 @@
                                                   GaugeMinValue="0" GaugeMaxValue="10"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
-                        <Button Grid.Row="3"
+                        <Grid Grid.Row="3" Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Current: " VerticalAlignment="Center" />
+                            <TextBox Grid.Column="1" x:Name="FuelCellCurrentOverrideValue" IsEnabled="{Binding Path=IsChecked, ElementName=FuelCellCurrentEnableOverride}" Text="" Margin="2,5" MinHeight="28" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="OnCurrentOverrideTextKeyDown" TextChanged="OnCurrentOverrideTextChanged" />
+                        </Grid>
+                        
+                        <Button Grid.Row="4"
                                 Margin="3" MinHeight="30"
                                 Content="Start"
                                 x:Name="FuelCellStartButton"
@@ -287,6 +301,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <cblk3pd:ThreePointerDial x:Name="FuelCellSeriesVoltageGauge"
@@ -325,7 +340,16 @@
                                       GaugeMinValue="0" GaugeMaxValue="10"
                                       Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
-                        <Button Grid.Row="3"
+                        <Grid Grid.Row="3" Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Current" VerticalAlignment="Center" />
+                            <TextBox Grid.Column="1" x:Name="FuelCellSeriesCurrentOverrideValue" IsEnabled="{Binding Path=IsChecked, ElementName=FuelCellCurrentEnableOverride}" Text="" Margin="2,5" MinHeight="28" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="OnCurrentOverrideTextKeyDown" TextChanged="OnCurrentOverrideTextChanged" />
+                        </Grid>
+
+                        <Button Grid.Row="4"
                                 Margin="3" MinHeight="30"
                                 Content="Start"
                                 x:Name="FuelCellSeriesStartButton"
@@ -358,6 +382,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
@@ -397,7 +422,16 @@
                                                   GaugeMinValue="0" GaugeMaxValue="10"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
-                        <Button Grid.Row="3"
+                        <Grid Grid.Row="3" Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Current" VerticalAlignment="Center" />
+                            <TextBox Grid.Column="1" x:Name="ElectrolyzerCurrentOverrideValue" IsEnabled="{Binding Path=IsChecked, ElementName=ElectrolyzerCurrentEnableOverride}" Text="" Margin="2,5" MinHeight="28" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" KeyDown="OnCurrentOverrideTextKeyDown" TextChanged="OnCurrentOverrideTextChanged" />
+                        </Grid>
+
+                        <Button Grid.Row="4"
                                 Margin="3" MinHeight="30"
                                 Content="Start"
                                 x:Name="ElectrolyzerStartButton"

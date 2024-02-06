@@ -27,8 +27,10 @@ public partial class MainWindow : Window
     private readonly Timer _timer;
     private DateTime _experimentStartTime = DateTime.MinValue;
 
-    private bool _isCurrentOverrideEnabled = false;
-    private double _currentOverrideValue = 0.0;
+    private bool _isFuelCellCurrentOverrideEnabled = false;
+    private bool _isElectrolyzerCurrentOverrideEnabled = false;
+    private double _fuelCellCurrentOverrideValue = 0.0;
+    private double _electrolyzerCurrentOverrideValue = 0.0;
 
     private readonly string _csvDumpFilename;
     private StreamWriter _csvDumpFile = null!;
@@ -65,9 +67,14 @@ public partial class MainWindow : Window
         _csvDumpFilename = FilePaths.CsvDumpFilename;
         _csvDumpFilename.CreateFoldersForRelativeFilename();
 
-        EnableCurrentOverride.IsChecked = _isCurrentOverrideEnabled;
-        CurrentOverrideValue.Text = _currentOverrideValue.ToString();
-        _currentOverrideValueInitialColor = CurrentOverrideValue.Background;
+        FuelCellCurrentEnableOverride.IsChecked = _isFuelCellCurrentOverrideEnabled;
+        ElectrolyzerCurrentEnableOverride.IsChecked = _isElectrolyzerCurrentOverrideEnabled;
+
+        FuelCellCurrentOverrideValue.Text = _fuelCellCurrentOverrideValue.ToString();
+        FuelCellSeriesCurrentOverrideValue.Text = _fuelCellCurrentOverrideValue.ToString();
+        ElectrolyzerCurrentOverrideValue.Text = _electrolyzerCurrentOverrideValue.ToString();
+
+        _currentOverrideValueInitialColor = FuelCellCurrentOverrideValue.Background;
 
         _fuelCellStartButtonInitialColor = FuelCellStartButton.Background;
         _fuelCellSeriesStartButtonInitialColor = FuelCellSeriesStartButton.Background;
@@ -144,9 +151,9 @@ public partial class MainWindow : Window
 
             double fcTotalVoltage = values[0];
             double fcTotalCurrent = Math.Abs(values[1] - values[2]) / _dataExchange.FuelCellCurrentMeasurementResistance;
-            if (_isCurrentOverrideEnabled)
+            if (_isFuelCellCurrentOverrideEnabled)
             {
-                fcTotalCurrent = _currentOverrideValue;
+                fcTotalCurrent = _fuelCellCurrentOverrideValue;
             }
             double fcTotalPower = fcTotalVoltage * fcTotalCurrent;
             double fcC1Voltage = values[3];  //- First cell near ground
@@ -182,9 +189,9 @@ public partial class MainWindow : Window
 
             double elTotalVoltage = values[12];
             double elTotalCurrent = Math.Abs(values[13] - values[14]) / _dataExchange.ElectrolyzerCurrentMeasurementResistance;
-            if (_isCurrentOverrideEnabled)
+            if (_isElectrolyzerCurrentOverrideEnabled)
             {
-                elTotalCurrent = _currentOverrideValue;
+                elTotalCurrent = _electrolyzerCurrentOverrideValue;
             }
             double elTotalPower = elTotalVoltage * elTotalCurrent;
 
@@ -561,20 +568,28 @@ public partial class MainWindow : Window
                 }
             }
         }
-        else if (sender is CheckBox cb)
+        else if (sender is RadioButton rb)
         {
-            if (cb == EnableCurrentOverride)
+            if (rb == FuelCellCurrentEnableOverride ||
+                rb == FuelCellCurrentDisableOverride)
             {
-                _isCurrentOverrideEnabled = cb.IsChecked == true;
+                _isFuelCellCurrentOverrideEnabled = FuelCellCurrentEnableOverride.IsChecked == true;
+            }
+            else if (rb == ElectrolyzerCurrentEnableOverride ||
+                rb == ElectrolyzerCurrentDisableOverride)
+            {
+                _isElectrolyzerCurrentOverrideEnabled = ElectrolyzerCurrentEnableOverride.IsChecked == true;
             }
         }
     }
 
-    private void OnMenuItemTextChanged(object sender, TextChangedEventArgs e)
+    private void OnCurrentOverrideTextChanged(object sender, TextChangedEventArgs e)
     {
         if (sender is TextBox tb)
         {
-            if (tb == CurrentOverrideValue)
+            if (tb == FuelCellCurrentOverrideValue ||
+                tb == FuelCellSeriesCurrentOverrideValue ||
+                tb == ElectrolyzerCurrentOverrideValue)
             {
                 if (double.TryParse(tb.Text, out double _))
                 {
@@ -588,17 +603,36 @@ public partial class MainWindow : Window
         }
     }
 
-    private void OnMenuItemTextKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    private void OnCurrentOverrideTextKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == System.Windows.Input.Key.Enter)
         {
             if (sender is TextBox tb)
             {
-                if (tb == CurrentOverrideValue)
+                if (tb == FuelCellCurrentOverrideValue ||
+                    tb == FuelCellSeriesCurrentOverrideValue)
                 {
                     if (double.TryParse(tb.Text, out double value))
                     {
-                        _currentOverrideValue = value;
+                        _fuelCellCurrentOverrideValue = value;
+
+                        FuelCellCurrentOverrideValue.Text = value.ToString();
+                        FuelCellSeriesCurrentOverrideValue.Text = value.ToString();
+
+                        FuelCellCurrentOverrideValue.Background = _currentOverrideValueInitialColor;
+                        FuelCellSeriesCurrentOverrideValue.Background = _currentOverrideValueInitialColor;
+                    }
+                    else
+                    {
+                        tb.Background = DisplayColors.ErrorBg;
+                    }
+                }
+                else if (tb == ElectrolyzerCurrentOverrideValue)
+                {
+                    if (double.TryParse(tb.Text, out double value))
+                    {
+                        _electrolyzerCurrentOverrideValue = value;
+                        tb.Text = value.ToString();
                         tb.Background = _currentOverrideValueInitialColor;
                     }
                     else
