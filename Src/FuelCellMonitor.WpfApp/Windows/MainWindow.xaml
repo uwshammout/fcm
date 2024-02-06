@@ -395,7 +395,7 @@
                                                   Dial1Color="{StaticResource ElectrolyzerTpdDial1Color}" Dial1BorderColor="{StaticResource ElectrolyzerTpdDial1BorderColor}"
                                                   Dial2Color="{StaticResource ElectrolyzerTpdDial2Color}" Dial2BorderColor="{StaticResource ElectrolyzerTpdDial2BorderColor}"
                                                   Dial3Color="{StaticResource ElectrolyzerTpdDial3Color}" Dial3BorderColor="{StaticResource ElectrolyzerTpdDial3BorderColor}"
-                                                  GaugeMinValue="0" GaugeMaxValue="4"
+                                                  GaugeMinValue="0" GaugeMaxValue="5"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
                         <cblk3pd:ThreePointerDial x:Name="ElectrolyzerCurrentGauge"
@@ -407,7 +407,7 @@
                                                   Dial1Color="{StaticResource ElectrolyzerTpdDial1Color}" Dial1BorderColor="{StaticResource ElectrolyzerTpdDial1BorderColor}"
                                                   Dial2Color="{StaticResource ElectrolyzerTpdDial2Color}" Dial2BorderColor="{StaticResource ElectrolyzerTpdDial2BorderColor}"
                                                   Dial3Color="{StaticResource ElectrolyzerTpdDial3Color}" Dial3BorderColor="{StaticResource ElectrolyzerTpdDial3BorderColor}"
-                                                  GaugeMinValue="0" GaugeMaxValue="3"
+                                                  GaugeMinValue="0" GaugeMaxValue="5"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
                         <cblk3pd:ThreePointerDial x:Name="ElectrolyzerPowerGauge"
@@ -419,7 +419,7 @@
                                                   Dial1Color="{StaticResource ElectrolyzerTpdDial1Color}" Dial1BorderColor="{StaticResource ElectrolyzerTpdDial1BorderColor}"
                                                   Dial2Color="{StaticResource ElectrolyzerTpdDial2Color}" Dial2BorderColor="{StaticResource ElectrolyzerTpdDial2BorderColor}"
                                                   Dial3Color="{StaticResource ElectrolyzerTpdDial3Color}" Dial3BorderColor="{StaticResource ElectrolyzerTpdDial3BorderColor}"
-                                                  GaugeMinValue="0" GaugeMaxValue="10"
+                                                  GaugeMinValue="0" GaugeMaxValue="20"
                                                   Dial1Value="0" Dial2Value="0" Dial3Value="0"/>
 
                         <Grid Grid.Row="3" Margin="2">
