@@ -153,6 +153,8 @@ public class SerialModbusClientService : ISerialModbusClientService
             nameof(milliseconds));
 
         _dataAcquisitionInterval = milliseconds;
+
+        SaveSettings();
     }
 
     public double GetDataAcquisitionInterval()
