@@ -1,6 +1,7 @@
 ﻿using CronBlocks.Helpers;
 using CronBlocks.SerialPortInterface.Configuration;
 using CronBlocks.SerialPortInterface.Entities;
+using CronBlocks.SerialPortInterface.Extensions;
 using CronBlocks.SerialPortInterface.Interfaces;
 using FluentModbus;
 using Microsoft.Extensions.Logging;
@@ -64,6 +65,36 @@ public class SerialModbusClientService : ISerialModbusClientService
         _valuesReceived = new double[Constants.TotalRegisters];
 
         _dataAcquisitionInterval = Constants.DefaultDataAcquisitionIntervalMS;
+
+        LoadSettings();
+    }
+
+    private void LoadSettings()
+    {
+        if (_configFile == null) return;
+
+        _deviceAddress = _configFile.GetInteger("MODBUS/DeviceAddress", Constants.DefaultDeviceAddress);
+        _registersStartAddress = _configFile.GetInteger("MODBUS/RegAddress", Convert.ToInt32(Constants.DefaultRegistersStartAddressHexStr, 16));
+        _baudRate = _configFile.GetString("MODBUS/BR", Constants.DefaultBaudRate.ToDisplayString()).FromDisplayString<BaudRate>();
+        _dataBits = _configFile.GetString("MODBUS/DB", Constants.DefaultDataBits.ToDisplayString()).FromDisplayString<DataBits>();
+        _parity = _configFile.GetString("MODBUS/PR", Constants.DefaultParity.ToDisplayString()).FromDisplayString<Parity>();
+        _stopBits = _configFile.GetString("MODBUS/SB", Constants.DefaultStopBits.ToDisplayString()).FromDisplayString<StopBits>();
+        _dataAcquisitionInterval = _configFile.GetDouble("MODBUS/Interval", Constants.DefaultDataAcquisitionIntervalMS);
+    }
+
+    private void SaveSettings()
+    {
+        if (_configFile == null) return;
+
+        _configFile.SetInteger("MODBUS/DeviceAddress", _deviceAddress);
+        _configFile.SetInteger("MODBUS/RegAddress", _registersStartAddress);
+        _configFile.SetString("MODBUS/BR", _baudRate.ToDisplayString());
+        _configFile.SetString("MODBUS/DB", _dataBits.ToDisplayString());
+        _configFile.SetString("MODBUS/PR", _parity.ToDisplayString());
+        _configFile.SetString("MODBUS/SB", _stopBits.ToDisplayString());
+        _configFile.SetDouble("MODBUS/Interval", _dataAcquisitionInterval);
+
+        _configFile.SaveFile();
     }
 
     public void SetComSettings(SerialModbusClientSettings portSettings)
@@ -90,6 +121,8 @@ public class SerialModbusClientService : ISerialModbusClientService
                 _stopBits = portSettings.StopBits;
             }
         }
+
+        SaveSettings();
     }
 
     public SerialModbusClientSettings GetComSettings()
