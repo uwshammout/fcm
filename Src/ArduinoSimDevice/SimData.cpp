@@ -1,14 +1,10 @@
 #include "SimData.h"
 
-#include <Arduino.h>
-
-
 #define DATA_ANALOG_READ_ESP32      0x00
 #define DATA_ANALOG_READ_SIMPLE     0x01
 #define DATA_GENERIC                0x02
 
 #define SIM_DATA_TYPE  DATA_ANALOG_READ_ESP32
-
 
 uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 
@@ -32,13 +28,17 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
 
 #if SIM_DATA_TYPE == DATA_ANALOG_READ_ESP32
 
+#include <algorithm>
+
 #define ADC_MAX_VOLTAGE               3.3
 #define ADC_QNT_NUMBERS               4096
 #define ADC_VAL_TO_VOLT               ADC_MAX_VOLTAGE / ADC_QNT_NUMBERS
 #define VOLTAGE_SCALING               1000
 #define ACS712_SENSITIVITY            0.1
-#define SAMPLES_PER_INPUT             10
-#define SAMPLING_DELAY_MS             1
+#define SAMPLES_PER_INPUT             50
+#define SAMPLING_DELAY_MS             0
+
+static uint16_t samples_buff[SAMPLES_PER_INPUT];
 
 #define SET_REGISTER_ZERO(__reg) { holding_registers[__reg] = 0; }
 #define SET_REGISTER(__reg,__pin) {                                        \
@@ -49,16 +49,18 @@ uint16_t holding_registers[TOTAL_HOLDING_REGISTERS];
                                                                            \
         for (int __count = 0; __count < SAMPLES_PER_INPUT; __count++) {    \
                                                                            \
-            __value += analogRead(__pin) * ADC_VAL_TO_VOLT;                \
+            samples_buff[__count] = analogRead(__pin);                     \
                                                                            \
-            if (__count != SAMPLES_PER_INPUT - 1) {                        \
+            if (__count != SAMPLES_PER_INPUT - 1 &&                        \
+                SAMPLING_DELAY_MS > 0) {                                   \
+                                                                           \
                 delay(SAMPLING_DELAY_MS);                                  \
             }                                                              \
         }                                                                  \
                                                                            \
-        __value /= SAMPLES_PER_INPUT;                                      \
+        std::sort(samples_buff, samples_buff + SAMPLES_PER_INPUT);         \
                                                                            \
-        if (__value < 0) __value *= -1;                                    \
+        __value = samples_buff[SAMPLES_PER_INPUT / 2] * ADC_VAL_TO_VOLT    \
                                                                            \
         holding_registers[__reg] = (uint16_t)(__value * VOLTAGE_SCALING);  \
                                                                            \
