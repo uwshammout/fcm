@@ -60,7 +60,7 @@ static uint16_t samples_buff[SAMPLES_PER_INPUT];
                                                                            \
         std::sort(samples_buff, samples_buff + SAMPLES_PER_INPUT);         \
                                                                            \
-        __value = samples_buff[SAMPLES_PER_INPUT / 2] * ADC_VAL_TO_VOLT    \
+        __value = samples_buff[SAMPLES_PER_INPUT / 2] * ADC_VAL_TO_VOLT;   \
                                                                            \
         holding_registers[__reg] = (uint16_t)(__value * VOLTAGE_SCALING);  \
                                                                            \
