@@ -125,12 +125,18 @@ void fill_sim_data() {
     case INPUT_STATE_A15: SET_REGISTER_ZERO(14);   break;
   }
 
+
   input_state = (InputState)(((int)input_state) + 1);
 
   if (input_state >= INPUT_STATE_MAX) {
     input_state = INPUT_STATE_A01;
   }
 }
+
+
+
+
+
 
 #elif SIM_DATA_TYPE == DATA_ANALOG_READ_SIMPLE
 
