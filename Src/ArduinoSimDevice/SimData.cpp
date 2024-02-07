@@ -72,15 +72,19 @@ static uint16_t samples_buff[SAMPLES_PER_INPUT];
                                                                            \
         for (int __count = 0; __count < SAMPLES_PER_INPUT; __count++) {    \
                                                                            \
-            __value += (analogRead(__pin) * ADC_VAL_TO_VOLT) -             \
-                           __zero_point;                                   \
+            samples_buff[__count] = analogRead(__pin);                     \
                                                                            \
-            if (__count != SAMPLES_PER_INPUT - 1) {                        \
+            if (__count != SAMPLES_PER_INPUT - 1 &&                        \
+                SAMPLING_DELAY_MS > 0) {                                   \
+                                                                           \
                 delay(SAMPLING_DELAY_MS);                                  \
             }                                                              \
         }                                                                  \
                                                                            \
-        __value /= SAMPLES_PER_INPUT;                                      \
+        std::sort(samples_buff, samples_buff + SAMPLES_PER_INPUT);         \
+                                                                           \
+        __value = samples_buff[SAMPLES_PER_INPUT / 2] * ADC_VAL_TO_VOLT -  \
+                           __zero_point;                                   \
                                                                            \
         if (__value < 0) __value *= -1;                                    \
                                                                            \
