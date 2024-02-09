@@ -58,6 +58,7 @@
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Set Zero Current" Click="OnMenuItemClicked" />
+                <MenuItem Header="Unset Zero Current" Click="OnMenuItemClicked" />
             </MenuItem>
             <MenuItem Header="Settings">
                 <MenuItem Header="Measurement Settings" Click="OnMenuItemClicked" />

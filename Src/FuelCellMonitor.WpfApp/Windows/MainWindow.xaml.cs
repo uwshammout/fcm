@@ -577,6 +577,12 @@ public partial class MainWindow : Window
                         _isSetZeroCurrentRequested = true;
                         break;
 
+                    case "Unset Zero Current":
+                        _isSetZeroCurrentRequested = false;
+                        _fuelCellZeroCurrent = 0.0;
+                        _electrolyzerZeroCurrent = 0.0;
+                        break;
+
                     case "Measurement Settings":
                         window = _app.GetInstance<MeasurementSettingsWindow>();
                         break;
