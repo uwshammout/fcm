@@ -27,6 +27,8 @@ public partial class MainWindow : Window
     private readonly Timer _timer;
     private DateTime _experimentStartTime = DateTime.MinValue;
 
+    private bool _isSetZeroCurrentRequested = false;
+
     private bool _isFuelCellCurrentOverrideEnabled = false;
     private bool _isElectrolyzerCurrentOverrideEnabled = false;
     private double _fuelCellCurrentOverrideValue = 0.0;
@@ -547,6 +549,10 @@ public partial class MainWindow : Window
 
                     case "Connect / Disconnect":
                         window = _app.GetInstance<DeviceConnectionWindow>();
+                        break;
+
+                    case "Set Zero Current":
+                        _isSetZeroCurrentRequested = true;
                         break;
 
                     case "Measurement Settings":
