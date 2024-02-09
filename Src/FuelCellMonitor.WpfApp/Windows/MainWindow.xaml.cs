@@ -156,7 +156,10 @@ public partial class MainWindow : Window
             double fcTotalVoltage = values[0];
             double fcTotalCurrent = Math.Abs(values[1] - values[2]) / _dataExchange.FuelCellCurrentMeasurementResistance;
 
-            if (_isSetZeroCurrentRequested) { _fuelCellZeroCurrent = fcTotalCurrent; }
+            if (_isSetZeroCurrentRequested)
+            {
+                _fuelCellZeroCurrent = fcTotalCurrent;
+            }
             fcTotalCurrent -= _fuelCellZeroCurrent;
             if (fcTotalCurrent < 0) { fcTotalCurrent = 0; }
             
@@ -200,7 +203,10 @@ public partial class MainWindow : Window
             double elTotalVoltage = values[12];
             double elTotalCurrent = Math.Abs(values[13] - values[14]) / _dataExchange.ElectrolyzerCurrentMeasurementResistance;
 
-            if (_isSetZeroCurrentRequested) { _electrolyzerZeroCurrent = elTotalCurrent; }
+            if (_isSetZeroCurrentRequested)
+            {
+                _electrolyzerZeroCurrent = elTotalCurrent;
+            }
             elTotalCurrent -= _electrolyzerZeroCurrent;
             if (elTotalCurrent < 0) { elTotalCurrent = 0; }
 
