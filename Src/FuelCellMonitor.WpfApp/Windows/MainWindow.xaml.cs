@@ -28,6 +28,8 @@ public partial class MainWindow : Window
     private DateTime _experimentStartTime = DateTime.MinValue;
 
     private bool _isSetZeroCurrentRequested = false;
+    private double _fuelCellZeroCurrent = 0.0;
+    private double _electrolyzerZeroCurrent = 0.0;
 
     private bool _isFuelCellCurrentOverrideEnabled = false;
     private bool _isElectrolyzerCurrentOverrideEnabled = false;
