@@ -13,6 +13,6 @@ FCM allows communicating with hardware to gather analog to digitally converted v
   - Selectable time for experiment
   - Export experiment data to *CSV* file
   - Voltage, Current and Power gauges with instantaneous, maximum and maximum power point display
-  - Plotting PV, IV, PI charts in real-time
+  - Plotting PV, IV, PI and Power over Time charts in real-time
 
 
