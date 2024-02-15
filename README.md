@@ -9,6 +9,7 @@ FCM allows communicating with hardware to gather analog to digitally converted v
 
   - MODBUS communication over COM port
   - Applying *Mx+C* equation to each data value for scaling and offsetting
+  - 02 current reading and multiple voltage reading channels
   - Selectable communication periodicity
   - Selectable time for experiment
   - Export experiment data to *CSV* file
