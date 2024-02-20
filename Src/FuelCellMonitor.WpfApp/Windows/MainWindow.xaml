@@ -182,7 +182,7 @@
             </TabItem>
 
             <!-- Fuel Cell Series -->
-            <TabItem Header="Fuel Cell - Series" x:Name="FuelCellSeriesTabItem">
+            <TabItem Visibility="Collapsed" Header="Fuel Cell - Series" x:Name="FuelCellSeriesTabItem">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2.5*" />
